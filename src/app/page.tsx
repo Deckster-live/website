@@ -14,7 +14,6 @@ import { SolutionsSection } from "@/components/SolutionsSection";
 export default function Home() {
   return (
     <>
-      <Navbar />
       <Hero />
       <Marquee />
       <Metrics />
@@ -25,7 +24,6 @@ export default function Home() {
       <ServicesGrid />
       <OldVsNew />
       <ContactSection />
-      <Footer />
     </>
   );
 }

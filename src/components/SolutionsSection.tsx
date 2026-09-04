@@ -105,7 +105,7 @@ function Card({
       >
         <div className="flex items-center gap-2.5">
           <span
-            className="inline-flex items-center rounded-full px-3 py-1 text-[11px] font-medium"
+            className="inline-flex items-center rounded-full px-3 py-1 text-md font-medium"
             style={{
               backgroundColor:
                 "color-mix(in oklab, " + fg + " 16%, transparent)",
@@ -115,24 +115,14 @@ function Card({
           </span>
         </div>
 
-        <h3 className="font-display mt-4 shrink-0 text-2xl leading-[1.12] font-semibold sm:text-[28px]">
-          {title}
-        </h3>
-
-        <div className="mt-6 flex h-full flex-col gap-6 md:mt-8 md:flex-row md:gap-10">
+        <div className="mt-6 flex h-full flex-col gap-6 md:mt-8 md:flex-row md:gap-12">
           <div className="md:w-[40%]">
-            <p className="text-[14px] leading-relaxed opacity-80 sm:text-[15px]">
+            <h3 className="font-display my-4 shrink-0 text-2xl leading-[1.12] font-semibold sm:text-3xl">
+              {title}
+            </h3>
+            <p className="text-md leading-relaxed opacity-80 sm:text-lg">
               {description}
             </p>
-            <span className="mt-4 inline-flex items-center gap-2">
-              <a
-                href="#cta"
-                className="cursor-pointer text-sm underline underline-offset-4"
-              >
-                Learn more
-              </a>
-              <ArrowRight className="h-3.5 w-3.5" strokeWidth={2} />
-            </span>
           </div>
 
           <div

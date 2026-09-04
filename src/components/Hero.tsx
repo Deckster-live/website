@@ -142,7 +142,13 @@ function CommentsChart({ className = "" }: { className?: string }) {
           />
         </div>
         <div className="absolute top-6 left-[22%] hidden rounded-xl border border-line bg-card px-3 py-2.5 shadow-(--shadow-float) sm:block">
-          <p className="text-[11px] font-medium">26 Aug 26</p>
+          <p className="text-[11px] font-medium">
+            {new Date(Date.now() - 86400000).toLocaleDateString("en-GB", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+            })}
+          </p>
           <p className="text-[10.5px] text-slate">Total Comments</p>
           <div className="mt-1.5 flex items-center gap-2">
             <IconBrandInstagram className="h-4 w-4 text-pink-400" />
@@ -280,7 +286,7 @@ export function Hero() {
             Discover creators, manage campaigns, track performance and make
             better decisions — all in one place.
           </p>
-          <div className="animate-rise mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <div className="animate-rise mt-8 flex items-center justify-center gap-3 flex-row">
             <a
               href="#cta"
               className="w-full rounded-full bg-ink px-6 py-3 text-center text-sm font-medium text-paper transition-colors hover:bg-green-dark sm:w-auto"
@@ -291,7 +297,7 @@ export function Hero() {
               href="#product"
               className="w-full rounded-full border border-line-strong px-6 py-3 text-center text-sm font-medium transition-colors hover:bg-mist sm:w-auto"
             >
-              See the product
+              Explore More
             </a>
           </div>
         </div>

@@ -19,13 +19,13 @@ export function OldVsNew() {
   return (
     <Section id="old-vs-new">
       <div className="mx-auto max-w-2xl text-center">
-        <p className="eyebrow">The old way vs. the new way</p>
+        <p className="eyebrow">The old way v/s the new way</p>
         <h2 className="mt-4 text-[clamp(1.85rem,4.6vw,3.15rem)] font-semibold leading-[1.06]">
           A smarter way to work with creators
         </h2>
         <p className="mt-5 text-[15px] leading-relaxed text-slate md:text-base">
-          See how we simplify the process, so you can focus on partnerships
-          that actually move the needle.
+          See how we simplify the process, so you can focus on partnerships that
+          actually move the needle.
         </p>
       </div>
 
@@ -36,9 +36,9 @@ export function OldVsNew() {
           </h3>
           <ul className="mt-8 space-y-5">
             {oldWay.map((item) => (
-              <li key={item} className="flex items-start gap-3">
+              <li key={item} className="flex items-center gap-3">
                 <X
-                  className="mt-0.5 h-4 w-4 shrink-0 text-slate"
+                  className="mt-0.5 h-4 w-4 shrink-0 text-red-600"
                   strokeWidth={1.75}
                 />
                 <span className="text-[14.5px] leading-relaxed text-slate md:text-[15px]">
@@ -55,7 +55,7 @@ export function OldVsNew() {
           </h3>
           <ul className="mt-8 space-y-5">
             {newWay.map((item) => (
-              <li key={item} className="flex items-start gap-3">
+              <li key={item} className="flex items-center gap-3">
                 <Check
                   className="mt-0.5 h-4 w-4 shrink-0 text-green-dark"
                   strokeWidth={2}

@@ -62,7 +62,7 @@ export function ServicesGrid() {
           "linear-gradient(135deg, color-mix(in oklab, var(--green-dark) 88%, var(--paper)) 0%, var(--ink) 100%)",
       }}
     >
-      <div className="relative mx-auto max-w-[1240px]">
+      <div className="relative mx-auto max-w-310">
         <h2 className="font-display max-w-xl text-[clamp(1.9rem,4.6vw,3rem)] leading-[1.1] font-medium text-paper">
           Everything you need to run creator campaigns
         </h2>
@@ -70,10 +70,7 @@ export function ServicesGrid() {
         <div className="mt-16 grid grid-cols-2 gap-x-6 gap-y-12 md:mt-20 md:grid-cols-4 md:gap-x-8 md:gap-y-16">
           {services.map((s) => (
             <div key={s.t}>
-              <s.icon
-                className="h-7 w-7 text-paper/90"
-                strokeWidth={1.25}
-              />
+              <s.icon className="h-10 w-10 text-paper" strokeWidth={1.5} />
               <h3 className="font-display mt-5 text-[16px] leading-snug font-medium text-paper md:text-[17px]">
                 {s.t}
               </h3>
