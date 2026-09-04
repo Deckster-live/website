@@ -63,6 +63,7 @@ export function ServicesGrid() {
       }}
     >
       <div className="relative mx-auto max-w-310">
+        <p className="eyebrow text-white/90 mb-4">WHAT WE COVER</p>
         <h2 className="font-display max-w-xl text-[clamp(1.9rem,4.6vw,3rem)] leading-[1.1] font-medium text-paper">
           Everything you need to run creator campaigns
         </h2>
@@ -74,7 +75,7 @@ export function ServicesGrid() {
               <h3 className="font-display mt-5 text-[16px] leading-snug font-medium text-paper md:text-[17px]">
                 {s.t}
               </h3>
-              <p className="mt-2 text-[13px] leading-relaxed text-paper/60 md:text-[13.5px]">
+              <p className="mt-2 text-[13px] leading-relaxed text-paper/70 md:text-base">
                 {s.d}
               </p>
             </div>
