@@ -119,7 +119,7 @@ body {
 
   /* Fonts */
   --font-display:
-    var(--font-space-grotesk),
+    var(--font-libre-baskerville),
     ui-sans-serif,
     system-ui,
     sans-serif;
@@ -318,8 +318,6 @@ body {
   h3,
   h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.03em;
-    text-wrap: balance;
   }
 
   ::selection {

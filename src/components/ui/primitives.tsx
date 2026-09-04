@@ -39,7 +39,7 @@ export function SectionHead({
     <div className={alignment}>
       <p className="eyebrow">{eyebrow}</p>
 
-      <h2 className="mt-4 text-[clamp(1.85rem,4.6vw,3.15rem)] font-semibold leading-[1.06]">
+      <h2 className="mt-4 text-[clamp(1.85rem,4.6vw,3.15rem)] font-semibold leading-tight">
         {title}
       </h2>
 

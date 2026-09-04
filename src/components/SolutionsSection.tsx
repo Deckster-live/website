@@ -117,7 +117,7 @@ function Card({
 
         <div className="mt-6 flex h-full flex-col gap-6 md:mt-8 md:flex-row md:gap-12">
           <div className="md:w-[40%]">
-            <h3 className="font-display my-4 shrink-0 text-2xl leading-[1.12] font-semibold sm:text-3xl">
+            <h3 className="font-display my-4 shrink-0 text-2xl leading-tight font-semibold sm:text-3xl">
               {title}
             </h3>
             <p className="text-md leading-relaxed opacity-80 sm:text-lg">

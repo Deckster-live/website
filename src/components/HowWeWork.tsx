@@ -43,9 +43,7 @@ export function HowWeWork() {
             key={s.n}
             className="grid grid-cols-[3.5rem_1fr] items-start gap-4 border-b border-line py-7 sm:grid-cols-[5rem_minmax(0,16rem)_1fr] sm:items-center sm:gap-8 md:py-8"
           >
-            <span className="font-display text-[15px] text-slate">
-              {s.n}
-            </span>
+            <span className="font-display text-[15px] text-slate">{s.n}</span>
             <h3 className="font-display text-[18px] font-semibold sm:text-[20px]">
               {s.t}
             </h3>

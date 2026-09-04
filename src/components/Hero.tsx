@@ -1,8 +1,4 @@
-import {
-  IconArrowUpRight,
-  IconBrandInstagram,
-  IconPlayerPlay,
-} from "@tabler/icons-react";
+import { IconArrowUpRight, IconBrandInstagram } from "@tabler/icons-react";
 import { Sparkline } from "./ui/primitives";
 
 function StatCard({
@@ -173,9 +169,9 @@ function CommentsChart({ className = "" }: { className?: string }) {
 function CreatorRow({ className = "" }: { className?: string }) {
   const rows = [
     {
-      img: "/images/avatar.png",
-      n: "Creator A",
-      h: "@handle_one",
+      img: "/images/avatar2.jpg",
+      n: "Neerya Kapoor",
+      h: "@neerya_creates",
       f: "30K",
       v: "4.4M",
       l: "1.3K",
@@ -184,26 +180,26 @@ function CreatorRow({ className = "" }: { className?: string }) {
       sentiment: [33, 67, 0],
     },
     {
-      img: "/images/avatar.png",
-      n: "Creator B",
-      h: "@handle_two",
-      f: "30K",
+      img: "/images/avatar1.jpg",
+      n: "Lily Chloe",
+      h: "@lily_chloe",
+      f: "270K",
       v: "6.3M",
       l: "3.5K",
       c: "23",
       e: "0.061%",
-      sentiment: [100, 0, 0],
+      sentiment: [65, 30, 5],
     },
     {
       img: "/images/avatar.png",
-      n: "Creator C",
-      h: "@handle_three",
+      n: "Neeraj Bhatia",
+      h: "@coolboy_29",
       f: "30K",
       v: "134.6K",
       l: "-",
       c: "67",
       e: "0.159%",
-      sentiment: [100, 0, 0],
+      sentiment: [42, 27, 31],
     },
   ];
   const columns = [
@@ -233,8 +229,8 @@ function CreatorRow({ className = "" }: { className?: string }) {
             className="grid min-h-16 grid-cols-[1.55fr_.8fr_1.15fr_.7fr_.7fr_.6fr_.65fr_1fr] items-center gap-2 border-b border-line px-4 py-2 last:border-0"
           >
             <div className="flex min-w-0 items-center gap-2">
-              <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-mist">
-                <IconPlayerPlay className="h-3 w-3 text-slate" />
+              <span className="grid h-7 w-7 shrink-0 overflow-hidden place-items-center rounded-full bg-mist">
+                <img src={r.img} />
               </span>
               <div className="min-w-0">
                 <p className="truncate text-[11px] font-medium">{r.n}</p>
@@ -279,7 +275,7 @@ export function Hero() {
       />
       <div className="relative mx-auto max-w-300">
         <div className="mx-auto max-w-3xl text-center">
-          <h1 className="animate-rise mt-6 text-[clamp(2.35rem,7vw,4.6rem)] leading-[0.98] font-semibold">
+          <h1 className="animate-rise mt-6 text-[clamp(2.35rem,7vw,4.6rem)] leading-[1.2] font-semibold">
             Better creators. Better campaigns. Better outcomes.{" "}
           </h1>
           <p className="animate-rise mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-slate md:text-[17px]">
