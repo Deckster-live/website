@@ -1,7 +1,12 @@
 import { Marquee } from "@/components/BrandMarquee";
-import { ContactSection } from "@/components/ContactSection";
+import { CaseStudies } from "@/components/CaseStudies";
+import {
+  ContactSection,
+  ContactSectionClassic,
+} from "@/components/ContactSection";
+import { ContactSectionForm } from "@/components/ContactSectionForm";
 import { Footer } from "@/components/Footer";
-import { Hero } from "@/components/Hero";
+import { Hero } from "@/components/Hero1";
 import { HowWeWork } from "@/components/HowWeWork";
 import { Metrics } from "@/components/Metrics";
 import { Navbar } from "@/components/Navbar";
@@ -9,7 +14,10 @@ import { OldVsNew } from "@/components/OldVsNew";
 import { ProblemsSection } from "@/components/ProblemsSection";
 import { ServicesGrid } from "@/components/ServicesGrid";
 import { ServicesTimeline } from "@/components/ServicesTimeline";
+import { SolutionsProcess } from "@/components/SolutionsProcess";
 import { SolutionsSection } from "@/components/SolutionsSection";
+import { UseCaseNetwork } from "@/components/UseCaseNetwork";
+import { WhyUsSection } from "@/components/WhyUsSection";
 
 export default function Home() {
   return (
@@ -17,13 +25,19 @@ export default function Home() {
       <Hero />
       <Marquee />
       <Metrics />
-      <ProblemsSection />
-      <SolutionsSection />
+      <CaseStudies />
+      <UseCaseNetwork />
+      {/* <ProblemsSection /> */}
+      {/* <SolutionsSection /> */}
+      <WhyUsSection />
       {/* <HowWeWork /> */}
       {/* <ServicesTimeline /> */}
-      <ServicesGrid />
-      <OldVsNew />
+      {/* <ServicesGrid /> */}
+      {/* <OldVsNew /> */}
+      <SolutionsProcess />
       <ContactSection />
+      {/* <ContactSectionForm /> */}
+      {/* <ContactSectionClassic /> */}
     </>
   );
 }

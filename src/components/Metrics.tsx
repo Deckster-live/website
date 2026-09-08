@@ -9,10 +9,10 @@ const stats = [
 
 export function Metrics() {
   return (
-    <Section className="py-7! md:py-10!">
-      <div className="surface-float flex flex-col items-center justify-center rounded-xl">
+    <Section>
+      <div className="surface-float flex flex-col items-center justify-center rounded-3xl">
         <h1 className="mx-auto mt-6 text-center text-[20px] font-bold md:text-[50px]">
-          Numbers say a lot about us
+          Numbers that do the talking{" "}
         </h1>
         <div className="grid grid-cols-2 gap-x-6 gap-y-2 rounded-3xl px-6 py-10 text-center sm:px-10 sm:py-12 md:grid-cols-4 md:gap-x-8 md:px-14 md:py-14">
           {stats.map((s, i) => (

@@ -6,11 +6,14 @@ interface SectionProps {
   className?: string;
 }
 
+/** One rhythm for every section on the page — Hero and the marquee aside. */
+export const SECTION_Y = "py-20 md:py-28 lg:py-32";
+
 export function Section({ id, children, className }: SectionProps) {
   return (
     <section
       id={id}
-      className={`px-5 py-20 md:px-8 md:py-28 lg:py-36 ${className ?? ""}`}
+      className={`px-5 md:px-8 ${SECTION_Y} ${className ?? ""}`}
     >
       <div className="mx-auto max-w-310">{children}</div>
     </section>

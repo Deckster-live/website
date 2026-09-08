@@ -6,10 +6,10 @@ import { Menu, X } from "lucide-react";
 import Image from "next/image";
 
 const links = [
-  { label: "Product", href: "#product" },
-  { label: "How we work", href: "#how-we-work" },
-  { label: "Case Studies", href: "#case-studies" },
-  { label: "About", href: "#about" },
+  { label: "Use cases", href: "/#use-cases" },
+  { label: "How we work", href: "/#solutions" },
+  { label: "Case Studies", href: "/#case-studies" },
+  { label: "About", href: "/about" },
 ] as const;
 
 export function Navbar() {
@@ -43,7 +43,7 @@ export function Navbar() {
       <div className="mx-auto grid min-h-14 max-w-6xl grid-cols-[1fr_auto] items-center gap-3 px-4 py-2.5 sm:px-5 sm:py-3 md:px-8 lg:grid-cols-[1fr_auto_1fr]">
         {/* Logo */}
         <Link
-          href="#top"
+          href="/#top"
           onClick={closeMenu}
           className="flex min-w-0 items-center gap-2"
           aria-label="Deckster home"
@@ -70,7 +70,7 @@ export function Navbar() {
         {/* Actions */}
         <div className="flex items-center justify-end gap-2">
           <Link
-            href="#cta"
+            href="/#cta"
             className="hidden rounded-full bg-ink px-4 py-2 text-[13px] font-medium text-paper transition-colors hover:bg-green-dark sm:inline-flex"
           >
             Get Started
@@ -107,7 +107,7 @@ export function Navbar() {
             ))}
 
             <Link
-              href="#cta"
+              href="/#cta"
               onClick={closeMenu}
               className="mb-3 mt-4 rounded-full bg-ink px-4 py-2.5 text-center text-sm font-medium text-paper transition-colors hover:bg-green-dark"
             >

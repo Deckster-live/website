@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { IconArrowUpRight, IconBrandInstagram } from "@tabler/icons-react";
 import { Sparkline } from "./ui/primitives";
 
@@ -270,37 +271,43 @@ export function Hero() {
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute top-[-18%] left-1/2 h-180 w-300 -translate-x-1/2 rounded-full opacity-70"
+        className="pointer-events-none absolute top-[-18%] left-1/2 h-180 w-500 -translate-x-1/2 rounded-full opacity-70"
         style={{ background: "var(--glow-signal)", filter: "blur(20px)" }}
       />
-      <div className="relative mx-auto max-w-300">
-        <div className="mx-auto max-w-3xl text-center">
-          <h1 className="animate-rise mt-6 text-[clamp(2.35rem,7vw,4.6rem)] leading-[1.2] font-semibold">
-            Better creators. Better campaigns. Better outcomes.{" "}
+      <div className="relative mx-auto max-w-500">
+        <div className="mx-auto max-w-5xl text-center">
+          <h1 className="animate-rise mt-6 text-[clamp(2rem,7vw,5rem)] leading-[1.2] font-semibold">
+            Let the voices people trust sell your story.
           </h1>
-          <p className="animate-rise mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-slate md:text-[17px]">
-            Discover creators, manage campaigns, track performance and make
-            better decisions — all in one place.
+          <p className="animate-rise mx-auto mt-4 max-w-3xl text-[15px] leading-relaxed text-slate md:text-[17px]">
+            Deckster is the place where brands find the right voices — matched
+            by data, not guesswork — where every campaign is planned, executed,
+            tracked under one roof. We bring it all together, from the first
+            brief to the final result.
           </p>
           <div className="animate-rise mt-8 flex items-center justify-center gap-3 flex-row">
-            <a
-              href="#cta"
+            <Link
+              href="/#cta"
               className="w-full rounded-full bg-ink px-6 py-3 text-center text-sm font-medium text-paper transition-colors hover:bg-green-dark sm:w-auto"
             >
               Get Started
-            </a>
-            <a
-              href="#product"
+            </Link>
+            <Link
+              href="/#use-cases"
               className="w-full rounded-full border border-line-strong px-6 py-3 text-center text-sm font-medium transition-colors hover:bg-mist sm:w-auto"
             >
               Explore More
-            </a>
+            </Link>
           </div>
         </div>
 
         {/* Collage */}
-        <div className="relative mx-auto mt-14 max-w-270 md:mt-20">
-          {/* mobile / tablet stack */}
+      </div>
+    </section>
+  );
+}
+{
+  /* <div className="relative mx-auto mt-14 max-w-270 md:mt-20">
           <div className="grid grid-cols-2 gap-3 lg:hidden">
             <StatCard label="Likes" value="93K" />
             <StatCard label="Comments" value="921" />
@@ -310,7 +317,6 @@ export function Hero() {
             <CreatorRow className="col-span-2" />
           </div>
 
-          {/* desktop collage */}
           <div className="relative hidden h-150 lg:block">
             <CommentsChart className=" absolute top-0 left-1/2 w-110 -translate-x-1/2" />
             <StatCard
@@ -358,8 +364,5 @@ export function Hero() {
               />
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-  );
+        </div> */
 }
