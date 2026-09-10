@@ -288,6 +288,55 @@ body {
   }
 }
 
+/* Niche coverage map — the ripple that travels outward through a market's
+   fixed green dots. Bands of dots share the keyframes and are offset by
+   animation-delay, so the wave reads as motion without any dot moving. */
+@keyframes niche-dot-wave {
+
+  0%,
+  100% {
+    opacity: 0.58;
+  }
+
+  14% {
+    opacity: 1;
+  }
+
+  44% {
+    opacity: 0.58;
+  }
+}
+
+/* Expanding ring. Scaled rather than animating `r`, which Safari and Firefox
+   handle inconsistently as a CSS property; --niche-ring sets the end radius. */
+@keyframes niche-ring {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+
+  16% {
+    opacity: 0.55;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(var(--niche-ring, 6));
+  }
+}
+
+@keyframes niche-float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
 /* -------------------------------------------------- */
 /* Custom utilities                                   */
 /* -------------------------------------------------- */

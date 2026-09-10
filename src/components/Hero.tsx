@@ -291,7 +291,7 @@ export function Hero() {
               href="/#cta"
               className="w-full rounded-full bg-ink px-6 py-3 text-center text-sm font-medium text-paper transition-colors hover:bg-green-dark sm:w-auto"
             >
-              Get Started
+              Start a Campaign
             </HashLink>
             <HashLink
               href="/#product"

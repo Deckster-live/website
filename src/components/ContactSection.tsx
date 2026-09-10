@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { HashLink } from "@/components/ui/HashLink";
 import { ArrowUpRight, Check, ChevronDown, Copy, Mail } from "lucide-react";
 import { Section } from "@/components/ui/primitives";
+import { submitBrief } from "@/lib/googleSheets";
 
 const GOALS = [
   "acquire new customers",
@@ -23,7 +24,15 @@ const BUDGETS = [
   "still figuring it out",
 ] as const;
 
-const FIELD_ORDER = ["name", "brand", "goal", "budget", "email"] as const;
+const FIELD_ORDER = [
+  "name",
+  "brand",
+  "goal",
+  "range",
+  "email",
+  "phone",
+  "additional",
+] as const;
 
 type FieldName = (typeof FIELD_ORDER)[number];
 type Brief = Record<FieldName, string>;
@@ -32,19 +41,37 @@ const EMPTY_BRIEF: Brief = {
   name: "",
   brand: "",
   goal: "",
-  budget: "",
+  range: "",
   email: "",
+  phone: "",
+  additional: "",
+};
+
+const OPTIONAL: readonly FieldName[] = ["phone", "additional"];
+
+const AUTOCOMPLETE: Partial<Record<FieldName, string>> = {
+  name: "name",
+  brand: "organization",
+  email: "email",
+  phone: "tel",
 };
 
 const isEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
 function composeBrief(brief: Brief) {
+  const reach = brief.phone
+    ? `Reach me at ${brief.email} or ${brief.phone}.`
+    : `Reach me at ${brief.email}.`;
+
   return [
     "Hi Deckster,",
     "",
-    `I'm ${brief.name} from ${brief.brand}. We're looking to ${brief.goal}, with a budget around ${brief.budget}.`,
+    `I'm ${brief.name} from ${brief.brand}. We're looking to ${brief.goal}, with a budget around ${brief.range}.`,
+    ...(brief.additional
+      ? ["", `Also worth knowing: ${brief.additional}`]
+      : []),
     "",
-    `Reach me at ${brief.email}.`,
+    reach,
   ].join("\n");
 }
 
@@ -62,7 +89,7 @@ interface InlineTextProps {
   name: FieldName;
   value: string;
   placeholder: string;
-  type?: "text" | "email";
+  type?: "text" | "email" | "tel";
   invalid: boolean;
   onChange: (value: string) => void;
   register: (name: FieldName, node: HTMLInputElement | null) => void;
@@ -83,7 +110,6 @@ function InlineText({
         { invalid, filled: value.length > 0 },
       )}`}
     >
-      {/* invisible sizer keeps the blank exactly as wide as its content */}
       <span
         aria-hidden
         className="col-start-1 row-start-1 invisible px-1.5 whitespace-pre"
@@ -98,9 +124,7 @@ function InlineText({
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
         aria-label={placeholder}
-        autoComplete={
-          name === "email" ? "email" : name === "name" ? "name" : "organization"
-        }
+        autoComplete={AUTOCOMPLETE[name] ?? "off"}
         spellCheck={false}
         size={1}
         className="col-start-1 row-start-1 w-full min-w-0 bg-transparent px-1.5 text-paper caret-signal outline-none placeholder:text-paper/35 placeholder:italic"
@@ -137,7 +161,6 @@ function InlineChoice({
   const wrapper = useRef<HTMLSpanElement>(null);
   const popover = useRef<HTMLSpanElement>(null);
 
-  // nudge the popover back inside the viewport when the blank sits near an edge
   useEffect(() => {
     const node = popover.current;
     if (!open || !node) return;
@@ -184,6 +207,7 @@ function InlineChoice({
         <span className={value ? "text-paper" : "text-paper/35 italic"}>
           {value || placeholder}
         </span>
+
         <ChevronDown
           className={`h-3.5 w-3.5 shrink-0 text-paper/45 transition-transform duration-200 ${
             open ? "-scale-y-100" : ""
@@ -219,6 +243,7 @@ function InlineChoice({
                   <span className={selected ? "font-medium" : "text-slate"}>
                     {option}
                   </span>
+
                   {selected && (
                     <Check
                       className="h-3.5 w-3.5 text-signal"
@@ -242,6 +267,7 @@ function InlineChoice({
 export function ContactSection() {
   const [brief, setBrief] = useState<Brief>(EMPTY_BRIEF);
   const [attempted, setAttempted] = useState(false);
+  const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -255,15 +281,16 @@ export function ContactSection() {
   const update = (name: FieldName) => (value: string) =>
     setBrief((previous) => ({ ...previous, [name]: value }));
 
-  const isMissing = (name: FieldName) =>
-    name === "email"
-      ? !isEmail(brief.email.trim())
-      : brief[name].trim().length === 0;
+  const isMissing = (name: FieldName) => {
+    if (OPTIONAL.includes(name)) return false;
+    if (name === "email") return !isEmail(brief.email.trim());
+    return brief[name].trim().length === 0;
+  };
 
   const filledCount = FIELD_ORDER.filter((name) => !isMissing(name)).length;
   const remaining = FIELD_ORDER.length - filledCount;
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setAttempted(true);
 
@@ -274,12 +301,22 @@ export function ContactSection() {
       return;
     }
 
-    const subject = `Brief from ${brief.brand.trim()} — ${brief.goal}`;
-    const mailto = `mailto:hello@deckster.live?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(composeBrief(brief))}`;
+    setSending(true);
 
-    window.location.href = mailto;
+    try {
+      await submitBrief({
+        Name: brief.name,
+        Brand: brief.brand,
+        Goal: brief.goal,
+        Range: brief.range,
+        Email: brief.email,
+        Phone: brief.phone,
+        AdditionalRequirement: brief.additional,
+      });
+    } finally {
+      setSending(false);
+    }
+
     setSent(true);
   };
 
@@ -304,7 +341,6 @@ export function ContactSection() {
             "radial-gradient(70% 55% at 78% 0%, color-mix(in oklab, var(--signal) 30%, transparent) 0%, transparent 72%)",
         }}
       >
-        {/* graph-paper texture — the brief sheet it's written on */}
         <span
           aria-hidden
           className="pointer-events-none absolute inset-0 -z-10"
@@ -325,7 +361,6 @@ export function ContactSection() {
         </p>
 
         <div className="relative grid gap-12 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:items-center lg:gap-16">
-          {/* -------- Left: the ask -------- */}
           <div className="relative">
             <p className="eyebrow text-paper/55">Start a brief</p>
 
@@ -334,72 +369,24 @@ export function ContactSection() {
             </h2>
 
             <p className="mt-5 max-w-md text-[15px] leading-relaxed text-paper/65">
-              Tell us the goal. We&rsquo;ll bring the reach, the right voices,
-              and the results to match.
+              Tell us your goal, and we will build the right strategy to get you
+              there. From finding the right voices to expanding your reach, we
+              connect your brand with the people who matter and deliver results
+              that make an impact.
             </p>
-
-            {/* <div className="mt-9 flex flex-col gap-3 border-t border-paper/12 pt-7">
-              <p className="flex items-center gap-2.5 text-[13px] text-paper/55">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-signal opacity-60" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-signal" />
-                </span>
-                A human reads every brief — usually replies same day
-              </p> 
-
-              <div className="mt-1 flex flex-wrap items-center gap-x-6 gap-y-3">
-                <a
-                  href="mailto:hello@deckster.live"
-                  className="group inline-flex items-center gap-2 text-[14px] text-paper/80 transition-colors hover:text-signal"
-                >
-                  <Mail className="h-4 w-4" strokeWidth={1.75} />
-                  hello@deckster.live
-                </a>
-
-                <a
-                  href="mailto:hello@deckster.live?subject=Book%20a%2020-min%20call"
-                  className="group inline-flex items-center gap-1.5 text-[14px] text-paper/80 transition-colors hover:text-signal"
-                >
-                  Book a 20-min call
-                  <ArrowUpRight
-                    className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    strokeWidth={1.75}
-                  />
-                </a>
-              </div>
-            </div> */}
           </div>
 
-          {/* -------- Right: the brief -------- */}
           <form
             onSubmit={handleSubmit}
             noValidate
             className="rounded-[1.5rem] border border-paper/12 bg-paper/4.5 backdrop-blur-sm sm:rounded-[1.75rem]"
           >
-            {/* document header */}
             <div className="flex items-center justify-between gap-4 border-b border-paper/12 px-5 py-3.5 sm:px-7">
               <p className="eyebrow text-paper/45">
                 {sent ? "Brief · sent" : "Brief · draft"}
               </p>
-
-              {/* <div className="flex items-center gap-2.5">
-                <span className="flex items-center gap-1" aria-hidden>
-                  {FIELD_ORDER.map((name, index) => (
-                    <span
-                      key={name}
-                      className={`h-0.75 w-5 rounded-full transition-colors duration-300 ${
-                        index < filledCount ? "bg-signal" : "bg-paper/18"
-                      }`}
-                    />
-                  ))}
-                </span>
-                <span className="font-sans text-[11px] tabular-nums text-paper/45">
-                  {filledCount}/{FIELD_ORDER.length}
-                </span>
-              </div> */}
             </div>
 
-            {/* the brief itself */}
             {sent ? (
               <div className="px-5 py-9 sm:px-7 sm:py-11">
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-signal/15">
@@ -407,19 +394,12 @@ export function ContactSection() {
                 </span>
 
                 <p className="font-display mt-5 text-[clamp(1.25rem,2.4vw,1.6rem)] leading-snug font-semibold text-paper">
-                  Your brief is ready to send.
+                  Your brief is in.
                 </p>
 
                 <p className="mt-3 max-w-md text-[14px] leading-relaxed text-paper/60">
-                  We&rsquo;ve opened your mail client with it written out. If
-                  nothing happened, copy the brief and send it to{" "}
-                  <a
-                    href="mailto:hello@deckster.live"
-                    className="text-paper underline decoration-signal/60 underline-offset-4"
-                  >
-                    hello@deckster.live
-                  </a>
-                  .
+                  We&rsquo;ve got it — a human reads every brief and usually
+                  replies the same day.
                 </p>
 
                 <pre className="mt-6 overflow-x-auto rounded-2xl border border-paper/12 bg-paper/4 p-4 font-sans text-[12.5px] leading-relaxed whitespace-pre-wrap text-paper/70">
@@ -437,6 +417,7 @@ export function ContactSection() {
                     ) : (
                       <Copy className="h-4 w-4" strokeWidth={2} />
                     )}
+
                     {copied ? "Copied" : "Copy brief"}
                   </button>
 
@@ -451,7 +432,7 @@ export function ContactSection() {
               </div>
             ) : (
               <>
-                <div className="font-display px-5 py-8 text-[clamp(1.05rem,2.1vw,1.4rem)] leading-[2.1] text-paper/45 sm:px-7 sm:py-10">
+                <div className="font-display px-5 py-8 text-[clamp(1rem,2.1vw,1.2rem)] leading-[2.1] text-paper/45 sm:px-7 sm:py-10">
                   Hi Deckster — I&rsquo;m{" "}
                   <InlineText
                     name="name"
@@ -482,12 +463,12 @@ export function ContactSection() {
                   />
                   , with a budget around{" "}
                   <InlineChoice
-                    name="budget"
-                    value={brief.budget}
+                    name="range"
+                    value={brief.range}
                     placeholder="pick a range"
                     options={BUDGETS}
-                    invalid={invalid("budget")}
-                    onSelect={update("budget")}
+                    invalid={invalid("range")}
+                    onSelect={update("range")}
                     register={register}
                   />
                   . Reach me at{" "}
@@ -499,11 +480,39 @@ export function ContactSection() {
                     invalid={invalid("email")}
                     onChange={update("email")}
                     register={register}
+                  />{" "}
+                  or{" "}
+                  <InlineText
+                    name="phone"
+                    type="tel"
+                    value={brief.phone}
+                    placeholder="phone"
+                    invalid={invalid("phone")}
+                    onChange={update("phone")}
+                    register={register}
                   />
                   .
                 </div>
 
-                {/* document footer */}
+                <div className="border-t border-paper/12 px-5 py-5 sm:px-7">
+                  <label className="group block">
+                    <span className="eyebrow text-paper/45">
+                      Anything else we should know?
+                      <span className="text-paper/30"> · optional</span>
+                    </span>
+
+                    <textarea
+                      value={brief.additional}
+                      onChange={(event) =>
+                        update("additional")(event.target.value)
+                      }
+                      rows={2}
+                      placeholder="Timelines, platforms, must-have creators — whatever helps."
+                      className="mt-3 w-full resize-none border-b border-paper/30 bg-transparent pb-1.5 font-sans text-[14px] leading-relaxed text-paper caret-signal outline-none transition-colors placeholder:text-paper/35 placeholder:italic hover:border-paper/55 focus:border-signal"
+                    />
+                  </label>
+                </div>
+
                 <div className="flex flex-col gap-4 border-t border-paper/12 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-7">
                   <p className="order-2 text-[12.5px] text-paper/45 sm:order-1">
                     {attempted && remaining > 0
@@ -513,9 +522,10 @@ export function ContactSection() {
 
                   <button
                     type="submit"
-                    className="order-1 inline-flex shrink-0 items-center justify-center gap-1.5 rounded-full bg-signal px-6 py-3 text-sm font-medium text-ink transition-opacity hover:opacity-90 sm:order-2"
+                    disabled={sending}
+                    className="order-1 inline-flex shrink-0 items-center justify-center gap-1.5 rounded-full bg-signal px-6 py-3 text-sm font-medium text-ink transition-opacity hover:opacity-90 disabled:opacity-60 sm:order-2"
                   >
-                    Send the brief
+                    {sending ? "Sending…" : "Send the brief"}
                     <ArrowUpRight className="h-4 w-4" strokeWidth={2} />
                   </button>
                 </div>
@@ -528,22 +538,21 @@ export function ContactSection() {
   );
 }
 
-/* -------------------------------------------------- */
-/* Variant — the original, form-free CTA slab          */
-/* -------------------------------------------------- */
-
 export function ContactSectionClassic() {
   return (
     <Section id="cta">
       <div className="glow-field relative overflow-hidden rounded-4xl bg-ink px-5 py-16 text-center sm:px-10 md:py-24">
         <p className="eyebrow text-paper/60">Let&rsquo;s work together</p>
+
         <h2 className="font-display mx-auto mt-4 max-w-xl text-[clamp(1.85rem,4.6vw,3rem)] leading-tight font-semibold text-paper">
           Bring your next campaign to a place built for it
         </h2>
+
         <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-paper/70">
           Tell us about your brand and goals — we&rsquo;ll get back with a
           shortlist and a plan within days, not weeks.
         </p>
+
         <div className="mt-9 flex flex-row items-center justify-center gap-2.5 sm:gap-3">
           <a
             href="mailto:hello@deckster.live"
@@ -560,6 +569,7 @@ export function ContactSectionClassic() {
             How it works
           </HashLink>
         </div>
+
         <p className="absolute right-5 bottom-0 font-sans text-6xl font-semibold tracking-[-0.04em] text-transparent bg-linear-to-b from-paper/25 to-transparent bg-clip-text md:text-[110px]">
           deckster<span className="text-signal/50">.</span>
         </p>

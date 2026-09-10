@@ -121,7 +121,7 @@ function CardPanel({ study }: { study: CaseStudy }) {
           gridTemplateColumns: "repeat(auto-fit, minmax(84px, 1fr))",
         }}
       >
-        {study.reels.map((reel, i) => (
+        {study.reels.slice(0, 2).map((reel, i) => (
           <motion.a
             key={reel.cover + i}
             href={reel.link}
@@ -267,17 +267,23 @@ export function CaseStudies() {
                     )}
                     <span className="relative z-10 flex flex-col items-center justify-center gap-1">
                       <span
-                        className="block h-8 w-16 sm:h-9 sm:w-20"
+                        className="block h-7 w-14 overflow-hidden sm:h-9 sm:w-20"
                         style={
                           c.logo_scale
-                            ? { transform: `scale(${c.logo_scale})` }
+                            ? ({
+                                "--logo-scale-mobile": 1 + (c.logo_scale - 1) * 0.4,
+                                "--logo-scale-desktop": c.logo_scale,
+                              } as React.CSSProperties)
                             : undefined
                         }
                       >
                         <img
                           src={c.brand_logo}
                           alt=""
-                          className={`h-full w-full object-contain transition-opacity duration-200 opacity-100
+                          className={`h-full w-full object-contain transition-opacity duration-200 opacity-100 ${
+                            c.logo_scale
+                              ? "scale-(--logo-scale-mobile) sm:scale-(--logo-scale-desktop)"
+                              : ""
                           }`}
                         />
                       </span>

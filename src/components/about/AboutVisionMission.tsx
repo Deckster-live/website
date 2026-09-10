@@ -86,7 +86,7 @@ export function AboutVisionMission() {
       />
 
       <div className={`${HEAD_GAP} lg:mt-20`}>
-        <div className="relative flex flex-col lg:block rounded-4xl lg:aspect-[27/13] overflow-hidden lg:bg-paper">
+        <div className="relative flex flex-col lg:block rounded-4xl lg:aspect-27/13 overflow-hidden lg:bg-paper">
           {panels.map((panel) => (
             <span
               key={`${panel.label}-surface`}

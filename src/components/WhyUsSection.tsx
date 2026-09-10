@@ -120,9 +120,9 @@ const reasons: readonly Reason[] = [
   {
     icon: LayoutGrid,
     badge: "Coverage",
-    title: "Every niche, covered",
+    title: "Every niche, covered. Everywhere",
     description:
-      "Name a niche. We're already there. Beauty, fashion, gaming, fitness, finance, food, travel, tech — our creators run deep in every category brands actually spend against, not just the obvious ones.",
+      "Name a niche. Name a market. We're already there. Beauty, fashion, gaming, fitness, finance, food, travel, tech — our creators run deep in every category. We've worked with brands across India, Australia, the UAE, Canada, the USA, Nigeria, and beyond.",
     bg: "var(--slate)",
     fg: "var(--paper)",
     accent: "var(--signal)",

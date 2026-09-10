@@ -32,6 +32,7 @@ const columns = [
     heading: "Company",
     links: [
       { label: "About", href: "/about" },
+      { label: "Careers", href: "/careers" },
       { label: "Start a brief", href: "/#cta" },
       // { label: "Book a 20-min call", href: "/#cta" },
     ],
@@ -49,7 +50,7 @@ const socials = [
     label: "LinkedIn",
     href: "https://in.linkedin.com/company/deckster-live",
   },
-  { icon: IconBrandX, label: "X", href: "#" },
+  // { icon: IconBrandX, label: "X", href: "#" },
 ] as const;
 
 const legal = [
@@ -120,7 +121,7 @@ export function Footer() {
                     aria-label={s.label}
                     className="grid h-9 w-9 place-items-center rounded-full bg-green-dark text-paper transition-colors hover:bg-ink"
                   >
-                    <s.icon className="h-4 w-4" strokeWidth={1.75} />
+                    <s.icon className="h-5 w-5" strokeWidth={1.5} />
                   </a>
                 ))}
               </div>

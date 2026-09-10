@@ -50,7 +50,7 @@ export default async function CaseStudyPage({
       <section className="relative isolate overflow-hidden px-5 pt-32 pb-16 md:px-8 md:pt-42 md:pb-20">
         <div aria-hidden className="absolute inset-0 -z-10">
           <Image
-            src="/images/wave.webp"
+            src="/images/wave-bg.webp"
             alt=""
             fill
             priority

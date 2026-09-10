@@ -1,7 +1,7 @@
 import { HEAD_GAP, Section } from "@/components/ui/primitives";
 
 const stats = [
-  { label: "Reach", value: "1B+", sub: "Views in a single campaign" },
+  { label: "Reach", value: "1B+", sub: "Powerful Netwok" },
   { label: "Scale", value: "300+", sub: "Campaigns executed" },
   { label: "Network", value: "15K+", sub: "Creators activated" },
   { label: "Trust", value: "50+", sub: "Brand partners" },

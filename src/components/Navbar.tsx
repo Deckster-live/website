@@ -11,6 +11,7 @@ const links = [
   { label: "How we work", href: "/#solutions" },
   { label: "Case Studies", href: "/#case-studies" },
   { label: "About", href: "/about" },
+  // { label: "Careers", href: "/careers" },
 ] as const;
 
 export function Navbar() {
@@ -74,7 +75,7 @@ export function Navbar() {
             href="/#cta"
             className="hidden rounded-full bg-ink px-4 py-2 text-[13px] font-medium text-paper transition-colors hover:bg-green-dark sm:inline-flex"
           >
-            Get Started
+            Start a Campaign
           </HashLink>
 
           <button
@@ -112,7 +113,7 @@ export function Navbar() {
               onClick={closeMenu}
               className="mb-3 mt-4 rounded-full bg-ink px-4 py-2.5 text-center text-sm font-medium text-paper transition-colors hover:bg-green-dark"
             >
-              Get Started
+              Start a Campaign
             </HashLink>
           </nav>
         </div>

@@ -17,9 +17,9 @@ function TeamScreen() {
           </p>
         </div>
 
-        <div className="relative aspect-[1400/729] w-full">
+        <div className="relative aspect-1400/729 w-full">
           <Image
-            src="/images/team.webp"
+            src="/images/team1.webp"
             alt="The Deckster team, dialled in from a video call"
             fill
             sizes="(min-width: 1024px) 44vw, (min-width: 640px) 32rem, 92vw"
