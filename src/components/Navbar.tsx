@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import { HashLink } from "@/components/ui/HashLink";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const links = [
   { label: "Use cases", href: "/#use-cases" },
@@ -48,7 +49,7 @@ export function Navbar() {
           className="flex min-w-0 items-center gap-2"
           aria-label="Deckster home"
         >
-          <img src="/logos/wordmark-ink.png" className="h-8" />
+          <img src="/logos/deckster.png" className="h-8" />
         </Link>
 
         {/* Desktop Navigation */}
@@ -57,24 +58,24 @@ export function Navbar() {
           aria-label="Main navigation"
         >
           {links.map(({ label, href }) => (
-            <Link
+            <HashLink
               key={href}
               href={href}
               className="whitespace-nowrap text-sm font-medium text-slate transition-colors hover:text-foreground xl:text-base"
             >
               {label}
-            </Link>
+            </HashLink>
           ))}
         </nav>
 
         {/* Actions */}
         <div className="flex items-center justify-end gap-2">
-          <Link
+          <HashLink
             href="/#cta"
             className="hidden rounded-full bg-ink px-4 py-2 text-[13px] font-medium text-paper transition-colors hover:bg-green-dark sm:inline-flex"
           >
             Get Started
-          </Link>
+          </HashLink>
 
           <button
             type="button"
@@ -96,23 +97,23 @@ export function Navbar() {
             aria-label="Mobile navigation"
           >
             {links.map(({ label, href }) => (
-              <Link
+              <HashLink
                 key={href}
                 href={href}
                 onClick={closeMenu}
                 className="border-b border-line/70 py-3.5 text-sm font-medium text-slate transition-colors hover:text-foreground"
               >
                 {label}
-              </Link>
+              </HashLink>
             ))}
 
-            <Link
+            <HashLink
               href="/#cta"
               onClick={closeMenu}
               className="mb-3 mt-4 rounded-full bg-ink px-4 py-2.5 text-center text-sm font-medium text-paper transition-colors hover:bg-green-dark"
             >
               Get Started
-            </Link>
+            </HashLink>
           </nav>
         </div>
       </div>

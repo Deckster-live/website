@@ -16,34 +16,34 @@ const FILTERS = [
 const RESULTS = [
   {
     handle: "@aanya",
-    avatar: "/images/avatar1.jpg",
+    avatar: "/images/avatar1.webp",
     keep: true,
     fit: 94,
     sentiment: [72, 20, 8],
     audience: 88,
     cost: "₹₹",
   },
-  { handle: "@rohit", avatar: "/images/avatar.png", keep: false, fit: 41 },
+  { handle: "@rohit", avatar: "/images/avatar.webp", keep: false, fit: 41 },
   {
     handle: "@mehak",
-    avatar: "/images/avatar2.jpg",
+    avatar: "/images/avatar2.webp",
     keep: true,
     fit: 91,
     sentiment: [64, 26, 10],
     audience: 81,
     cost: "₹",
   },
-  { handle: "@dev", avatar: "/images/avatar.png", keep: false, fit: 38 },
+  { handle: "@dev", avatar: "/images/avatar.webp", keep: false, fit: 38 },
   {
     handle: "@ishita",
-    avatar: "/images/avatar2.jpg",
+    avatar: "/images/avatar2.webp",
     keep: true,
     fit: 88,
     sentiment: [58, 28, 14],
     audience: 76,
     cost: "₹₹",
   },
-  { handle: "@kabir", avatar: "/images/avatar1.jpg", keep: false, fit: 29 },
+  { handle: "@kabir", avatar: "/images/avatar1.webp", keep: false, fit: 29 },
 ] as const;
 
 const FILTER_DONE = 4.5;

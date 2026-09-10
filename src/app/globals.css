@@ -327,6 +327,74 @@ body {
   color: var(--slate);
 }
 
+/* Long-form legal copy — bullet/number lists and inline emphasis, since the
+   project has no typography plugin for prose content. */
+@utility legal-copy {
+  & > * + * {
+    margin-top: 0.875rem;
+  }
+
+  & h2 {
+    font-family: var(--font-display);
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 1.15rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--line);
+  }
+
+  & h2:first-child {
+    padding-top: 0;
+    border-top: none;
+  }
+
+  & h3 {
+    font-family: var(--font-display);
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 1.25rem;
+  }
+
+  & ul,
+  & ol {
+    margin-top: 0.5rem;
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  & ul {
+    list-style: disc;
+  }
+
+  & ol {
+    list-style: decimal;
+  }
+
+  & li::marker {
+    color: var(--line-strong);
+  }
+
+  & strong,
+  & b {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  & a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: var(--line-strong);
+  }
+
+  & a:hover {
+    text-decoration-color: var(--ink);
+  }
+}
+
 @utility marquee-mask-y {
   mask-image: linear-gradient(180deg,
       transparent,

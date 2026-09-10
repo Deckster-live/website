@@ -18,6 +18,7 @@ import {
   Workflow,
   type LucideIcon,
 } from "lucide-react";
+import { SectionHead } from "@/components/ui/primitives";
 import { BudgetAllocation } from "./why-us/BudgetAllocation";
 import { CreatorNetwork } from "./why-us/CreatorNetwork";
 import { DeliveryChecklist } from "./why-us/DeliveryChecklist";
@@ -54,7 +55,7 @@ const reasons: readonly Reason[] = [
     stats: [
       { value: "60K+", label: "Creators" },
       { value: "15+", label: "Languages" },
-      { value: "9", label: "Categories" },
+      { value: "10+", label: "Categories" },
     ],
     bg: "var(--green-darkest)",
     fg: "var(--paper)",
@@ -110,7 +111,7 @@ const reasons: readonly Reason[] = [
     badge: "Track record",
     title: "A track record that speaks",
     description:
-      "150+ brands trusted us to deliver — from fast-growing D2C labels to household names. Most don't just come back once; repeat campaigns now make up the majority of what we run.",
+      "50+ brands trusted us to deliver — from fast-growing D2C labels to household names. Most don't just come back once; repeat campaigns now make up the majority of what we run.",
     bg: "var(--green-peacock)",
     fg: "var(--paper)",
     accent: "var(--ink)",
@@ -246,16 +247,13 @@ export function WhyUsSection() {
 
   return (
     <section id="why-us" className="bg-mist/60">
-      <div className="mx-auto max-w-4xl px-5 pt-20 pb-14 text-center md:px-8 md:pt-28 md:pb-16 lg:pt-32">
-        <p className="eyebrow">Why Us</p>
-        <h2 className="mt-4 text-[clamp(1.85rem,4.6vw,3.15rem)] leading-[1.06] font-semibold">
-          Why brands pick Deckster
-        </h2>
-        <p className="mt-5 text-[15px] leading-relaxed text-slate md:text-base">
-          One place for everything creator marketing. From finding the right
-          creators to tracking performance and delivering the final report,
-          Deckster brings the entire campaign together.
-        </p>
+      <div className="px-5 pt-20 pb-12 md:px-8 md:pt-28 md:pb-16 lg:pt-32">
+        <SectionHead
+          align="center"
+          eyebrow="Why Us"
+          title="Why brands pick Deckster"
+          copy="One place for everything creator marketing. From finding the right creators to tracking performance and delivering the final report, Deckster brings the entire campaign together."
+        />
       </div>
 
       <div ref={container} className="relative">

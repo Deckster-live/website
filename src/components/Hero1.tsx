@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { HashLink } from "@/components/ui/HashLink";
 import { IconArrowUpRight, IconBrandInstagram } from "@tabler/icons-react";
 import { Sparkline } from "./ui/primitives";
 
@@ -170,7 +170,7 @@ function CommentsChart({ className = "" }: { className?: string }) {
 function CreatorRow({ className = "" }: { className?: string }) {
   const rows = [
     {
-      img: "/images/avatar2.jpg",
+      img: "/images/avatar2.webp",
       n: "Neerya Kapoor",
       h: "@neerya_creates",
       f: "30K",
@@ -181,7 +181,7 @@ function CreatorRow({ className = "" }: { className?: string }) {
       sentiment: [33, 67, 0],
     },
     {
-      img: "/images/avatar1.jpg",
+      img: "/images/avatar1.webp",
       n: "Lily Chloe",
       h: "@lily_chloe",
       f: "270K",
@@ -192,7 +192,7 @@ function CreatorRow({ className = "" }: { className?: string }) {
       sentiment: [65, 30, 5],
     },
     {
-      img: "/images/avatar.png",
+      img: "/images/avatar.webp",
       n: "Neeraj Bhatia",
       h: "@coolboy_29",
       f: "30K",
@@ -275,29 +275,29 @@ export function Hero() {
         style={{ background: "var(--glow-signal)", filter: "blur(20px)" }}
       />
       <div className="relative mx-auto max-w-500">
-        <div className="mx-auto max-w-5xl text-center">
-          <h1 className="animate-rise mt-6 text-[clamp(2rem,7vw,5rem)] leading-[1.2] font-semibold">
-            Let the voices people trust sell your story.
+        <div className="mx-auto max-w-6xl text-center">
+          <h1 className="animate-rise mt-16 text-[clamp(2rem,7vw,4rem)] leading-none font-bold">
+            Reach your customers through creators they already trust.
           </h1>
-          <p className="animate-rise mx-auto mt-4 max-w-3xl text-[15px] leading-relaxed text-slate md:text-[17px]">
+          <p className="animate-rise mx-auto mt-4 max-w-2xl text-[15px] leading-normal text-slate md:text-[17px]">
             Deckster is the place where brands find the right voices — matched
             by data, not guesswork — where every campaign is planned, executed,
             tracked under one roof. We bring it all together, from the first
             brief to the final result.
           </p>
           <div className="animate-rise mt-8 flex items-center justify-center gap-3 flex-row">
-            <Link
+            <HashLink
               href="/#cta"
               className="w-full rounded-full bg-ink px-6 py-3 text-center text-sm font-medium text-paper transition-colors hover:bg-green-dark sm:w-auto"
             >
               Get Started
-            </Link>
-            <Link
+            </HashLink>
+            <HashLink
               href="/#use-cases"
               className="w-full rounded-full border border-line-strong px-6 py-3 text-center text-sm font-medium transition-colors hover:bg-mist sm:w-auto"
             >
               Explore More
-            </Link>
+            </HashLink>
           </div>
         </div>
 

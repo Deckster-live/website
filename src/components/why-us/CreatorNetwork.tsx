@@ -6,12 +6,12 @@ import { loopFade, tint, useLoop, type VisualProps } from "./useLoop";
 
 const PERIOD = 10400;
 
-const LOGO = "/logos/wordmark-ink.png";
+const LOGO = "/logos/deckster.png";
 
 const AVATARS = [
-  "/images/avatar.png",
-  "/images/avatar1.jpg",
-  "/images/avatar2.jpg",
+  "/images/avatar.webp",
+  "/images/avatar1.webp",
+  "/images/avatar2.webp",
 ];
 
 /**

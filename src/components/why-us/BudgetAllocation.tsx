@@ -12,7 +12,7 @@ const SPLIT = [
   {
     tier: "Macro",
     handle: "@aanya",
-    avatar: "/images/avatar1.jpg",
+    avatar: "/images/avatar1.webp",
     amount: 100000,
     reach: "8.4M reach",
     neon: "#22d3ee",
@@ -21,7 +21,7 @@ const SPLIT = [
   {
     tier: "Micro",
     handle: "@ishita",
-    avatar: "/images/avatar2.jpg",
+    avatar: "/images/avatar2.webp",
     amount: 58000,
     reach: "5.1M reach",
     neon: "#a3e635",
@@ -30,7 +30,7 @@ const SPLIT = [
   {
     tier: "Nano",
     handle: "@kabir",
-    avatar: "/images/avatar.png",
+    avatar: "/images/avatar.webp",
     amount: 42000,
     reach: "3.6M reach",
     neon: "#f472b6",

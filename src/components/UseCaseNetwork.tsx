@@ -11,7 +11,7 @@ import {
 } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { Section } from "@/components/ui/primitives";
+import { HEAD_GAP, Section, SectionHead } from "@/components/ui/primitives";
 import {
   AcquisitionIcon,
   BrandIcon,
@@ -387,7 +387,7 @@ function Hub({
         className={`relative grid ${size} place-items-center rounded-full border border-line bg-card shadow-(--shadow-float)`}
       >
         <img
-          src="/logos/wordmark-ink.png"
+          src="/logos/deckster.png"
           alt="Deckster"
           className="w-[58%] max-w-none"
         />
@@ -732,13 +732,10 @@ export function UseCaseNetwork() {
 
   return (
     <Section id="use-cases">
-      <div
-        ref={card}
-        className="relative lg:px-6"
-      >
+      <div ref={card} className="relative">
         {/* ambient colour — soft washes behind the network, kept inside the
             column so nothing clips into a visible edge */}
-        <span
+        {/* <span
           aria-hidden
           className="pointer-events-none absolute -top-16 left-1/2 h-64 w-[min(44rem,100%)] -translate-x-1/2 rounded-full blur-3xl"
           style={{
@@ -767,25 +764,24 @@ export function UseCaseNetwork() {
               "transparent",
             )}, transparent)`,
           }}
-        />
+        /> */}
 
         <div className="relative">
           {/* ---------- heading ---------- */}
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="eyebrow">Use cases · Solutions</p>
-
-            <h2 className="font-display mt-4 text-[clamp(1.5rem,4.2vw,2.85rem)] leading-[1.1] font-semibold">
-              From goal to execution:
-              <span className="block">Deckster fits in everywhere</span>
-            </h2>
-
-            <p className="mt-4 text-[14.5px] leading-relaxed text-slate md:text-base">
-              Pick a goal — see the formats we&rsquo;d run to get you there.
-            </p>
-          </div>
+          <SectionHead
+            align="center"
+            eyebrow="Use cases · Solutions"
+            title={
+              <>
+                From goal to execution:
+                <span className="block">Deckster fits in everywhere</span>
+              </>
+            }
+            copy="Pick a goal — see the formats we'd run to get you there."
+          />
 
           {/* ---------- desktop: the network ---------- */}
-          <div className="mt-14 hidden lg:block">
+          <div className={`hidden lg:block ${HEAD_GAP}`}>
             <div className={`grid ${columns} items-end`}>
               <ColumnLabel title="Your goals" sub="Use cases" />
               <span />
@@ -854,7 +850,7 @@ export function UseCaseNetwork() {
           </div>
 
           {/* ---------- mobile & tablet: the same route, stacked ---------- */}
-          <div className="mt-11 lg:hidden">
+          <div className={`lg:hidden ${HEAD_GAP}`}>
             <div className="flex items-end justify-between gap-4">
               <ColumnLabel title="Your goals" sub="Use cases" />
               <p className="text-[11px] text-slate/60">Tap to map</p>

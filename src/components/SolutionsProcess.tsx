@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useInView, useReducedMotion } from "framer-motion";
-import { SECTION_Y } from "@/components/ui/primitives";
+import { HEAD_GAP, SECTION_Y, SectionHead } from "@/components/ui/primitives";
 
 const formats = [
   "UGC",
@@ -105,20 +105,14 @@ export function SolutionsProcess() {
       {/* ---------- How we do this — the stepper ---------- */}
       <div className={`px-5 md:px-8 ${SECTION_Y}`}>
         <div className="mx-auto max-w-310">
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="eyebrow">How we do this</p>
+          <SectionHead
+            align="center"
+            eyebrow="How we do this"
+            title="Every brief runs through seven filters"
+            copy="Platform to budget — each step narrows the field, so what reaches your shortlist is already the right fit."
+          />
 
-            <h2 className="font-display mt-4 text-[clamp(1.7rem,4.2vw,2.75rem)] leading-[1.08] font-semibold">
-              Every brief runs through seven filters
-            </h2>
-
-            <p className="mt-5 text-[15px] leading-relaxed text-slate md:text-base">
-              Platform to budget — each step narrows the field, so what reaches
-              your shortlist is already the right fit.
-            </p>
-          </div>
-
-          <div ref={stepper} className="mt-16 md:mt-20">
+          <div ref={stepper} className={HEAD_GAP}>
             {/* Desktop — horizontal stepper */}
             <ol className="hidden grid-cols-7 lg:grid">
               {steps.map((step, index) => (

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HashLink } from "@/components/ui/HashLink";
 import {
   IconBrandInstagram,
   IconBrandLinkedin,
@@ -32,14 +33,22 @@ const columns = [
     links: [
       { label: "About", href: "/about" },
       { label: "Start a brief", href: "/#cta" },
-      { label: "Book a 20-min call", href: "/#cta" },
+      // { label: "Book a 20-min call", href: "/#cta" },
     ],
   },
 ] as const;
 
 const socials = [
-  { icon: IconBrandInstagram, label: "Instagram", href: "#" },
-  { icon: IconBrandLinkedin, label: "LinkedIn", href: "#" },
+  {
+    icon: IconBrandInstagram,
+    label: "Instagram",
+    href: "https://www.instagram.com/decksterlive/",
+  },
+  {
+    icon: IconBrandLinkedin,
+    label: "LinkedIn",
+    href: "https://in.linkedin.com/company/deckster-live",
+  },
   { icon: IconBrandX, label: "X", href: "#" },
 ] as const;
 
@@ -78,12 +87,21 @@ export function Footer() {
                 <ul className="mt-4 space-y-3">
                   {col.links.map((l) => (
                     <li key={l.label}>
-                      <Link
-                        href={l.href}
-                        className="text-[13.5px] text-ink/70 transition-colors hover:text-ink"
-                      >
-                        {l.label}
-                      </Link>
+                      {l.href.startsWith("/#") || l.href.startsWith("#") ? (
+                        <HashLink
+                          href={l.href}
+                          className="text-[13.5px] text-ink/70 transition-colors hover:text-ink"
+                        >
+                          {l.label}
+                        </HashLink>
+                      ) : (
+                        <Link
+                          href={l.href}
+                          className="text-[13.5px] text-ink/70 transition-colors hover:text-ink"
+                        >
+                          {l.label}
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>

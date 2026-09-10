@@ -3,185 +3,15 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, type Transition } from "framer-motion";
-import { SECTION_Y } from "@/components/ui/primitives";
+import { HEAD_GAP, SECTION_Y, SectionHead } from "@/components/ui/primitives";
+import {
+  caseStudies,
+  THEMES,
+  type CaseStudy,
+} from "@/data/mockdata/case-studies";
 
 const ROTATE_MS = 5000;
-const LOGO = "/logos/wordmark-ink.png";
-
-interface Theme {
-  bg: string;
-  fg: string;
-  muted: string;
-  divider: string;
-  pillBg: string;
-  pillFg: string;
-  dot: string;
-  glow: string;
-}
-
-const THEMES = {
-  ink: {
-    bg: "oklch(0.3133 0.0413 180.37)",
-    fg: "text-paper",
-    muted: "text-paper/65",
-    divider: "border-white/15",
-    pillBg: "bg-signal",
-    pillFg: "text-ink",
-    dot: "bg-signal",
-    glow: "var(--signal)",
-  },
-  mint: {
-    bg: "color-mix(in oklab, var(--signal) 16%, var(--paper))",
-    fg: "text-ink",
-    muted: "text-slate",
-    divider: "border-line-strong",
-    pillBg: "bg-green-dark",
-    pillFg: "text-white",
-    dot: "bg-green-dark",
-    glow: "var(--green-dark)",
-  },
-  peach: {
-    bg: "oklch(0.7395 0.058 155.23)",
-    fg: "text-ink",
-    muted: "text-ink/60",
-    divider: "border-black/10",
-    pillBg: "bg-ink",
-    pillFg: "text-paper",
-    dot: "bg-signal",
-    glow: "var(--signal)",
-  },
-  forest: {
-    bg: "var(--green-dark)",
-    fg: "text-paper",
-    muted: "text-paper/65",
-    divider: "border-white/15",
-    pillBg: "bg-signal",
-    pillFg: "text-ink",
-    dot: "bg-white",
-    glow: "var(--signal)",
-  },
-  sand: {
-    bg: "var(--mist)",
-    fg: "text-ink",
-    muted: "text-slate",
-    divider: "border-line-strong",
-    pillBg: "bg-ink",
-    pillFg: "text-paper",
-    dot: "bg-green-dark",
-    glow: "var(--signal)",
-  },
-} as const satisfies Record<string, Theme>;
-
-interface CaseStudy {
-  tab: string;
-  brand: string;
-  usp_metric: string;
-  usp: string;
-  metrics: { label: string; value: string }[];
-  description: string;
-  images: string[];
-  theme: Theme;
-}
-
-const caseStudies: CaseStudy[] = [
-  {
-    tab: "Customer Acquisition",
-    brand: "Bewakoof",
-    usp_metric: "2.4x",
-    usp: "more first-time buyers",
-    metrics: [
-      { label: "Reach", value: "18.6M" },
-      { label: "Creators", value: "64" },
-      { label: "CAC", value: "-32%" },
-    ],
-    description:
-      "An always-on creator funnel replaced one-off influencer spends, turning cold reach into a repeatable acquisition channel.",
-    images: [
-      "/images/avatar1.jpg",
-      "/images/avatar2.jpg",
-      "/images/avatar.png",
-    ],
-    theme: THEMES.sand,
-  },
-  {
-    tab: "Brand Building",
-    brand: "Chumbak",
-    usp_metric: "3.1x",
-    usp: "lift in brand search volume",
-    metrics: [
-      { label: "Reach", value: "22.3M" },
-      { label: "Creators", value: "48" },
-      { label: "Engagement", value: "6.8%" },
-    ],
-    description:
-      "Recurring creator collaborations built consistent brand recall across festive and everyday campaigns alike.",
-    images: [
-      "/images/avatar2.jpg",
-      "/images/avatar.png",
-      "/images/avatar1.jpg",
-    ],
-    theme: THEMES.mint,
-  },
-  {
-    tab: "Product Launch",
-    brand: "Mokobara",
-    usp_metric: "500K+",
-
-    usp: "views in launch week",
-    metrics: [
-      { label: "Reach", value: "12.1M" },
-      { label: "Creators", value: "36" },
-      { label: "Sell-through", value: "91%" },
-    ],
-    description:
-      "A coordinated seeding wave timed to the drop turned a single SKU launch into a category moment.",
-    images: [
-      "/images/avatar.png",
-      "/images/avatar1.jpg",
-      "/images/avatar2.jpg",
-    ],
-    theme: THEMES.peach,
-  },
-  {
-    tab: "Paid Ads",
-    brand: "Snitch",
-    usp_metric: "41%",
-
-    usp: "lower cost per click",
-    metrics: [
-      { label: "Reach", value: "30.4M" },
-      { label: "Creators", value: "72" },
-      { label: "ROAS", value: "4.6x" },
-    ],
-    description:
-      "Creator-shot content fed straight into paid, cutting fatigue and lifting performance across every ad set.",
-    images: [
-      "/images/avatar1.jpg",
-      "/images/avatar.png",
-      "/images/avatar2.jpg",
-    ],
-    theme: THEMES.forest,
-  },
-  {
-    tab: "Store Launch",
-    brand: "Wildcraft",
-    usp_metric: "3.2x",
-    usp: "more store visits",
-    metrics: [
-      { label: "Reach", value: "9.8M" },
-      { label: "Creators", value: "28" },
-      { label: "Footfall", value: "+180%" },
-    ],
-    description:
-      "Hyperlocal creators turned a store opening into a neighbourhood event, not just an announcement.",
-    images: [
-      "/images/avatar2.jpg",
-      "/images/avatar1.jpg",
-      "/images/avatar.png",
-    ],
-    theme: THEMES.ink,
-  },
-];
+const LOGO = "/logos/deckster.png";
 
 const pillSpring: Transition = { type: "spring", stiffness: 380, damping: 30 };
 const cardSpring: Transition = {
@@ -204,7 +34,7 @@ const cardVariants = {
 };
 
 function CardPanel({ study }: { study: CaseStudy }) {
-  const { theme } = study;
+  const theme = THEMES[study.theme];
 
   return (
     <div
@@ -220,7 +50,11 @@ function CardPanel({ study }: { study: CaseStudy }) {
       {/* Left */}
       <div className="relative flex flex-col justify-around p-5 sm:p-7 md:p-8 md:py-20">
         <div className="flex flex-col items-start gap-4">
-          <img src={LOGO} alt="" className="h-14 w-auto object-contain" />
+          <img
+            src={study.brand_logo}
+            alt=""
+            className="h-14 w-auto object-contain"
+          />
           <p
             className={`font-display text-xl font-semibold tracking-[-0.01em] ${theme.fg}`}
           >
@@ -270,7 +104,7 @@ function CardPanel({ study }: { study: CaseStudy }) {
         </p>
 
         <Link
-          href="/#cta"
+          href={`/case-studies/${study.slug}`}
           className={`group mt-5 inline-flex w-fit items-center gap-1.5 text-[14px] font-medium ${theme.fg}`}
         >
           <span className="relative">
@@ -281,18 +115,40 @@ function CardPanel({ study }: { study: CaseStudy }) {
       </div>
 
       {/* Right */}
-      <div className="relative grid grid-cols-3 gap-2.5 p-5 sm:gap-3 sm:p-7 md:grid-cols-3 md:p-8 md:self-center">
-        {study.images.map((src, i) => (
-          <motion.div
-            key={src + i}
-            whileHover={{ scale: 1.04 }}
+      <div
+        className="grid gap-2.5 p-5 sm:gap-3 sm:p-7 md:p-8 md:self-center"
+        style={{
+          gridTemplateColumns: "repeat(auto-fit, minmax(84px, 1fr))",
+        }}
+      >
+        {study.reels.map((reel, i) => (
+          <motion.a
+            key={reel.cover + i}
+            href={reel.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Watch the ${study.brand} reel`}
+            whileHover={{ scale: 1.03 }}
             transition={{ type: "spring", stiffness: 320, damping: 20 }}
-            className={`shadow-(--shadow-soft) aspect-square overflow-hidden rounded-xl bg-white ring-1 ring-black/5 md:rounded-2xl ${
-              i === 2 ? "col-span-2 md:col-span-1" : ""
-            } ${i === 1 ? "md:mt-8" : ""}`}
+            className="group/reel shadow-(--shadow-soft) relative aspect-9/16 min-w-0 overflow-hidden rounded-xl bg-white ring-1 ring-black/5 md:rounded-2xl"
           >
-            <img src={src} alt="" className="h-full w-full object-cover" />
-          </motion.div>
+            <img
+              src={reel.cover}
+              alt=""
+              className="h-full w-full object-cover"
+            />
+            <span className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-200 group-hover/reel:bg-black/15">
+              <span className="grid h-9 w-9 place-items-center rounded-full bg-white/90 opacity-0 shadow-sm transition-opacity duration-200 group-hover/reel:opacity-100">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="ml-0.5 h-4 w-4 fill-ink"
+                  aria-hidden="true"
+                >
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </span>
+            </span>
+          </motion.a>
         ))}
       </div>
     </div>
@@ -372,18 +228,16 @@ export function CaseStudies() {
       className={`scroll-mt-24 px-5 md:flex md:flex-col md:px-8 ${SECTION_Y}`}
     >
       <div className="mx-auto w-full max-w-310 md:flex md:min-h-0 md:flex-1 md:flex-col">
-        <div className="mx-auto max-w-2xl shrink-0 text-center">
-          <p className="eyebrow">Case Studies</p>
-          <h2 className="mt-3 text-[clamp(1.7rem,4vw,2.75rem)] font-semibold leading-[1.06]">
-            Real brands. Real numbers. Real reach.
-          </h2>
-          <p className="mt-3 text-[15px] leading-relaxed text-slate md:text-base">
-            A few places we&apos;ve helped grow — see how it played out.
-          </p>
-        </div>
+        <SectionHead
+          align="center"
+          className="shrink-0"
+          eyebrow="Case Studies"
+          title="Real brands. Real numbers. Real reach."
+          copy="A few places we've helped grow — see how it played out."
+        />
 
         <div
-          className="mt-6 md:mt-6 md:flex md:min-h-0 md:flex-1 md:flex-col"
+          className={`${HEAD_GAP} md:flex md:min-h-0 md:flex-1 md:flex-col`}
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
           onFocus={() => setPaused(true)}
@@ -408,17 +262,25 @@ export function CaseStudies() {
                         transition={
                           reducedMotion ? { duration: 0.15 } : pillSpring
                         }
-                        className="absolute inset-0 rounded-xl bg-green-dark sm:rounded-full"
+                        className="shadow-(--shadow-soft) absolute inset-0 rounded-xl bg-paper ring-1 ring-black/5 sm:rounded-full"
                       />
                     )}
                     <span className="relative z-10 flex flex-col items-center justify-center gap-1">
-                      <img
-                        src={LOGO}
-                        alt=""
-                        className={`h-8 w-auto object-contain transition-[filter] duration-200 sm:h-9 ${
-                          isActive ? "brightness-0 invert" : ""
-                        }`}
-                      />
+                      <span
+                        className="block h-8 w-16 sm:h-9 sm:w-20"
+                        style={
+                          c.logo_scale
+                            ? { transform: `scale(${c.logo_scale})` }
+                            : undefined
+                        }
+                      >
+                        <img
+                          src={c.brand_logo}
+                          alt=""
+                          className={`h-full w-full object-contain transition-opacity duration-200 opacity-100
+                          }`}
+                        />
+                      </span>
                     </span>
                   </motion.button>
                 );

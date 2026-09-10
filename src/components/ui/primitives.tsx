@@ -20,11 +20,15 @@ export function Section({ id, children, className }: SectionProps) {
   );
 }
 
+/** Space between a section's header block and the content under it. */
+export const HEAD_GAP = "mt-12 md:mt-16";
+
 interface SectionHeadProps {
   eyebrow: string;
   title: ReactNode;
   copy?: ReactNode;
   align?: "left" | "center";
+  className?: string;
 }
 
 export function SectionHead({
@@ -32,6 +36,7 @@ export function SectionHead({
   title,
   copy,
   align = "left",
+  className,
 }: SectionHeadProps) {
   const alignment =
     align === "center"
@@ -39,10 +44,10 @@ export function SectionHead({
       : "max-w-2xl text-left";
 
   return (
-    <div className={alignment}>
+    <div className={`${alignment} ${className ?? ""}`}>
       <p className="eyebrow">{eyebrow}</p>
 
-      <h2 className="mt-4 text-[clamp(1.85rem,4.6vw,3.15rem)] font-semibold leading-tight">
+      <h2 className="font-display mt-4 text-[clamp(1.7rem,4.2vw,2.85rem)] leading-[1.08] font-semibold">
         {title}
       </h2>
 

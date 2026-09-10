@@ -1,37 +1,36 @@
-const brands = [
-  "Rare Rabbit",
-  "The Pant Project",
-  "Bewakoof",
-  "Snitch",
-  "Fabindia",
-  "Wildcraft",
-  "Bombay Shaving Co.",
-  "Mokobara",
-  "The Souled Store",
-  "Campus Sutra",
-  "Chumbak",
-  "Third Wave Coffee",
-];
+import Image from "next/image";
+import { brands, type Brand } from "@/components/brands";
 
-function Tile({ name }: { name: string }) {
+
+function Tile({ brand }: { brand: Brand }) {
   return (
-    <span className="surface flex h-20 w-44 shrink-0 items-center justify-center rounded-2xl px-6 md:h-24 md:w-52">
-      <span className="font-display truncate text-[15px] font-medium tracking-[-0.01em] text-slate md:text-[17px]">
-        {name}
+    <span className="flex h-20 w-44 shrink-0 items-center justify-center rounded-xl px-6 py-5 md:h-24 md:w-52 md:px-7 md:py-6">
+      <span
+        className="relative block h-full w-full"
+        style={brand.scale ? { transform: `scale(${brand.scale})` } : undefined}
+      >
+        <Image
+          src={brand.src}
+          alt={brand.name}
+          fill
+          sizes="208px"
+          loading="eager"
+          className={`object-contain object-center${brand.invert ? " invert" : ""}`}
+        />
       </span>
     </span>
   );
 }
 
-function Row({ names, reverse }: { names: string[]; reverse?: boolean }) {
-  const doubled = [...names, ...names];
+function Row({ items, reverse }: { items: Brand[]; reverse?: boolean }) {
+  const doubled = [...items, ...items];
   return (
     <div className="marquee-mask mx-auto max-w-300 overflow-hidden">
       <div
         className={`flex w-max gap-4 md:gap-6 ${reverse ? "animate-marquee-reverse" : "animate-marquee"}`}
       >
-        {doubled.map((name, i) => (
-          <Tile key={i} name={name} />
+        {doubled.map((brand, i) => (
+          <Tile key={`${brand.name}-${i}`} brand={brand} />
         ))}
       </div>
     </div>
@@ -39,8 +38,12 @@ function Row({ names, reverse }: { names: string[]; reverse?: boolean }) {
 }
 
 export function Marquee() {
+  const shuffledBrands = [...brands].sort(() => Math.random() - 0.5);
+  const topRow = shuffledBrands.filter((_, i) => i % 2 === 0);
+  const bottomRow = shuffledBrands.filter((_, i) => i % 2 === 1);
+
   return (
-    <div className="mt-5 relative overflow-hidden py-14 md:py-20">
+    <div className="mt-10 relative overflow-hidden py-14 md:py-18">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 sm:w-24 bg-linear-to-r from-background to-transparent blur-xl md:w-40"
@@ -54,8 +57,8 @@ export function Marquee() {
         Brands who trust Deckster to show up
       </p>
       <div className="mt-9 flex flex-col gap-4 md:gap-6">
-        <Row names={brands.slice(0, 6)} />
-        <Row names={brands.slice(6)} reverse />
+        <Row items={topRow} />
+        <Row items={bottomRow} reverse />
       </div>
     </div>
   );

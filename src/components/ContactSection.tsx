@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import { HashLink } from "@/components/ui/HashLink";
 import { ArrowUpRight, Check, ChevronDown, Copy, Mail } from "lucide-react";
 import { Section } from "@/components/ui/primitives";
 
@@ -329,7 +329,7 @@ export function ContactSection() {
           <div className="relative">
             <p className="eyebrow text-paper/55">Start a brief</p>
 
-            <h2 className="font-display mt-4 text-[clamp(1.9rem,4.4vw,3rem)] leading-[1.1] font-semibold text-paper">
+            <h2 className="font-display mt-4 text-[clamp(1.7rem,4.2vw,2.85rem)] leading-[1.1] font-semibold text-paper">
               Let&rsquo;s build your next campaign
             </h2>
 
@@ -338,14 +338,14 @@ export function ContactSection() {
               and the results to match.
             </p>
 
-            <div className="mt-9 flex flex-col gap-3 border-t border-paper/12 pt-7">
-              {/* <p className="flex items-center gap-2.5 text-[13px] text-paper/55">
+            {/* <div className="mt-9 flex flex-col gap-3 border-t border-paper/12 pt-7">
+              <p className="flex items-center gap-2.5 text-[13px] text-paper/55">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-signal opacity-60" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-signal" />
                 </span>
                 A human reads every brief — usually replies same day
-              </p> */}
+              </p> 
 
               <div className="mt-1 flex flex-wrap items-center gap-x-6 gap-y-3">
                 <a
@@ -367,7 +367,7 @@ export function ContactSection() {
                   />
                 </a>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* -------- Right: the brief -------- */}
@@ -553,12 +553,12 @@ export function ContactSectionClassic() {
             <ArrowUpRight className="h-4 w-4" strokeWidth={2} />
           </a>
 
-          <Link
+          <HashLink
             href="/#solutions"
             className="inline-flex w-auto shrink-0 items-center justify-center rounded-full border border-paper/25 px-4 py-3 text-sm font-medium whitespace-nowrap text-paper transition-colors hover:bg-paper/10 sm:px-6"
           >
             How it works
-          </Link>
+          </HashLink>
         </div>
         <p className="absolute right-5 bottom-0 font-sans text-6xl font-semibold tracking-[-0.04em] text-transparent bg-linear-to-b from-paper/25 to-transparent bg-clip-text md:text-[110px]">
           deckster<span className="text-signal/50">.</span>

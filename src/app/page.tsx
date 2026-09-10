@@ -5,6 +5,7 @@ import {
   ContactSectionClassic,
 } from "@/components/ContactSection";
 import { ContactSectionForm } from "@/components/ContactSectionForm";
+import { FaqSection } from "@/components/FaqSection";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero1";
 import { HowWeWork } from "@/components/HowWeWork";
@@ -35,6 +36,7 @@ export default function Home() {
       {/* <ServicesGrid /> */}
       {/* <OldVsNew /> */}
       <SolutionsProcess />
+      <FaqSection />
       <ContactSection />
       {/* <ContactSectionForm /> */}
       {/* <ContactSectionClassic /> */}

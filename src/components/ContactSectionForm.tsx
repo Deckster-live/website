@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { ArrowUpRight, Check, ChevronDown, Mail } from "lucide-react";
+import { HashLink } from "@/components/ui/HashLink";
 import { Section } from "@/components/ui/primitives";
 
 const BUDGETS = [
@@ -273,12 +274,12 @@ export function ContactSectionForm() {
                   />
                 </button>
 
-                <a
-                  href="#how-we-work"
+                <HashLink
+                  href="/#how-we-work"
                   className="inline-flex shrink-0 items-center justify-center rounded-full border border-line-strong px-6 py-3 text-sm font-medium whitespace-nowrap transition-colors hover:bg-mist"
                 >
                   Book a Call
-                </a>
+                </HashLink>
               </div>
 
               <div className="text-[13px] text-slate">

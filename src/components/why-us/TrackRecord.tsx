@@ -1,55 +1,60 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
+import { brands, type Brand } from "@/components/brands";
 import { CountUp } from "./CountUp";
 import { loopFade, useLoop, type VisualProps } from "./useLoop";
 
 const PERIOD = 10600;
 
-/** Same roster the brand marquee above the fold runs. */
-const BRANDS = [
-  "Rare Rabbit",
-  "Bewakoof",
-  "Mokobara",
-  "Snitch",
-  "The Souled Store",
-  "Fabindia",
-  "Chumbak",
-  "Wildcraft",
-  "Third Wave Coffee",
-  "The Pant Project",
-  "Campus Sutra",
-  "Bombay Shaving Co.",
-] as const;
-
 /** Six tiles per column overflow the well, so the -50% loop stays seamless. */
 const COLUMNS = [
   { offset: 0, duration: "34s" },
-  { offset: 3, duration: "27s" },
-  { offset: 6, duration: "40s" },
-  { offset: 9, duration: "31s" },
-  { offset: 2, duration: "36s" },
+  { offset: 7, duration: "27s" },
+  { offset: 14, duration: "40s" },
+  { offset: 21, duration: "31s" },
+  { offset: 28, duration: "36s" },
 ] as const;
 
 const ROWS = [
   { offset: 0, duration: "30s" },
-  { offset: 5, duration: "24s" },
-  { offset: 8, duration: "36s" },
+  { offset: 11, duration: "24s" },
+  { offset: 22, duration: "36s" },
 ] as const;
 
 const pick = (offset: number, count: number) =>
-  Array.from({ length: count }, (_, i) => BRANDS[(offset + i) % BRANDS.length]);
+  Array.from({ length: count }, (_, i) => brands[(offset + i) % brands.length]);
 
-function Tile({ name, column }: { name: string; column?: boolean }) {
+/**
+ * The roster's `scale` is tuned for the full-size marquee tile; damp it here so
+ * a 1.5x wordmark cannot spill into the neighbouring tile in this small well.
+ */
+const damp = (scale?: number) => (scale ? 1 + (scale - 1) * 0.55 : undefined);
+
+function Tile({ brand, column }: { brand: Brand; column?: boolean }) {
+  const scale = damp(brand.scale);
+
   return (
     <span
-      className={`flex shrink-0 items-center justify-center rounded-xl border border-line bg-white/90 text-center leading-tight text-ink ${
+      className={`flex shrink-0 items-center justify-center rounded-xl border border-line bg-white/90 ${
         column
-          ? "h-12 px-1.5 text-[8.5px] md:h-14 md:text-[9.5px]"
-          : "h-9 w-24 px-1.5 text-[8px] sm:h-11 sm:w-28 sm:text-[9.5px]"
+          ? "h-12 px-2.5 py-2 md:h-14 md:px-3 md:py-2.5"
+          : "h-9 w-24 px-2.5 py-1.5 sm:h-11 sm:w-28 sm:px-3 sm:py-2"
       }`}
     >
-      {name}
+      <span
+        className="relative block h-full w-full"
+        style={scale ? { transform: `scale(${scale})` } : undefined}
+      >
+        <Image
+          src={brand.src}
+          alt={brand.name}
+          fill
+          sizes="112px"
+          className={`object-contain object-center${brand.invert ? " invert" : ""}`}
+        />
+      </span>
     </span>
   );
 }
@@ -73,11 +78,16 @@ export function TrackRecord({ active }: VisualProps) {
               className={`flex flex-col gap-1.5 ${
                 i % 2 === 1 ? "animate-marquee-y-reverse" : "animate-marquee-y"
               }`}
-              style={{ animationDuration: col.duration, animationPlayState: play }}
+              style={{
+                animationDuration: col.duration,
+                animationPlayState: play,
+              }}
             >
-              {[...pick(col.offset, 6), ...pick(col.offset, 6)].map((name, j) => (
-                <Tile key={`${name}-${j}`} name={name} column />
-              ))}
+              {[...pick(col.offset, 6), ...pick(col.offset, 6)].map(
+                (brand, j) => (
+                  <Tile key={`${brand.name}-${j}`} brand={brand} column />
+                ),
+              )}
             </div>
           </div>
         ))}
@@ -91,11 +101,16 @@ export function TrackRecord({ active }: VisualProps) {
               className={`flex w-max gap-2 ${
                 i % 2 === 1 ? "animate-marquee-reverse" : "animate-marquee"
               }`}
-              style={{ animationDuration: row.duration, animationPlayState: play }}
+              style={{
+                animationDuration: row.duration,
+                animationPlayState: play,
+              }}
             >
-              {[...pick(row.offset, 8), ...pick(row.offset, 8)].map((name, j) => (
-                <Tile key={`${name}-${j}`} name={name} />
-              ))}
+              {[...pick(row.offset, 8), ...pick(row.offset, 8)].map(
+                (brand, j) => (
+                  <Tile key={`${brand.name}-${j}`} brand={brand} />
+                ),
+              )}
             </div>
           </div>
         ))}
@@ -112,7 +127,7 @@ export function TrackRecord({ active }: VisualProps) {
         >
           <span className="font-display flex items-baseline text-[clamp(2.2rem,8vw,4.25rem)] leading-none font-semibold tabular-nums text-ink">
             <CountUp
-              to={150}
+              to={50}
               format={(v) => Math.round(v).toString()}
               run={on}
               reduced={reduced}
@@ -122,7 +137,9 @@ export function TrackRecord({ active }: VisualProps) {
             <motion.span
               className="text-green-dark"
               initial={{ opacity: 0, scale: 0.7 }}
-              animate={on ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.7 }}
+              animate={
+                on ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.7 }
+              }
               transition={
                 on
                   ? {
@@ -145,9 +162,7 @@ export function TrackRecord({ active }: VisualProps) {
             initial={{ opacity: 0 }}
             animate={on ? { opacity: 1 } : { opacity: 0 }}
             transition={
-              on
-                ? { duration: 0.5, delay: reduced ? 0 : 4 }
-                : { duration: 0.2 }
+              on ? { duration: 0.5, delay: reduced ? 0 : 4 } : { duration: 0.2 }
             }
           >
             And they came back
