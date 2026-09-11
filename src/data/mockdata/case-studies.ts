@@ -133,19 +133,19 @@ export interface CaseStudy {
 export const caseStudies: CaseStudy[] = [
   {
     slug: "rare-rabbit",
-    tab: "Customer Acquisition",
+    tab: "Product Launch",
     brand_logo: "/logos/brands/rarerabbit.png",
     logo_scale: 1.4,
     brand: "Rare Rabbit",
-    usp_metric: "2.4x",
-    usp: "more first-time buyers",
+    usp_metric: "94.8M",
+    usp: "total campaign reach",
     metrics: [
-      { label: "Reach", value: "18.6M" },
-      { label: "Creators", value: "64" },
-      { label: "CAC", value: "-32%" },
+      { label: "Reach", value: "94.8M" },
+      { label: "Creators", value: "30+" },
+      { label: "Content Pieces", value: "30" },
     ],
     description:
-      "An always-on creator funnel replaced one-off influencer spends, turning cold reach into a repeatable acquisition channel.",
+      "A category-driven creator campaign for the Spring/Summer 2026 launch delivered category-defining engagement and repurposable content at scale.",
     reels: [
       {
         cover: "/images/case_studies/rare_rabbit/thumbnail1.jpg",
@@ -158,23 +158,38 @@ export const caseStudies: CaseStudy[] = [
     ],
     theme: "sand",
     overview:
-      "<p>Rare Rabbit wanted a repeatable way to bring in first-time buyers without leaning on one-off influencer spends that never quite compounded.</p>",
+      "<p>Rare Rabbit needed to drive awareness for the Spring/Summer 2026 collection across all four House of Rare brands through a large-scale creator campaign. The objective was to execute 30 distinct content pieces within a tight 2–3 week timeline while ensuring every piece felt visually distinct and focused on a specific product category.</p>",
     challenge:
-      "<p>Paid acquisition costs were climbing and influencer bursts drove short spikes that faded within days, leaving no durable funnel behind them.</p>",
+      "<p>Executing a collection launch across multiple brands required more than scattered creator posts—every piece needed to feel intentional, category-specific, and visually strong enough to stand out. The tight timeline and need for visual consistency across diverse creators made this particularly complex.</p>",
     approach:
-      "<p>We built an always-on roster of 64 creators publishing on a rolling calendar, mixing try-on hauls with styling content, so new-buyer reach stayed constant instead of campaign-shaped.</p>",
+      "<p>Instead of assigning products randomly, we mapped 30+ creators to specific categories based on their personal style, audience fit, and content strengths. Creators aligned with elevated casual fashion covered polo t-shirts and styling, while others were selected for trousers, check shirts, and statement pieces. We also developed one dedicated campaign piece introducing the entire collection—giving audiences a collection-first perspective before diving into individual categories. Fresh faces were onboarded alongside proven creators to bring newer content formats and creative freshness.</p>",
     results:
-      "<p>First-time buyers grew 2.4x with CAC down 32%, and the always-on cadence gave the brand a acquisition channel it could forecast against.</p>",
+      "<p>The campaign reached 94.8M people with above-benchmark engagement across all activated creators. The category-specific approach ensured every content piece felt authentic and differentiated, while the curated creator mix delivered both reach and aesthetic cohesion. The campaign produced 30 pieces of usable content that extended value far beyond launch week.</p>",
     content: [
       {
         type: "stats",
         heading: "Campaign at a glance",
         stats: [
-          { label: "Reach", value: "18.6M" },
-          { label: "Creators", value: "64" },
-          { label: "CAC", value: "-32%" },
-          { label: "Duration", value: "6 months" },
+          { label: "Total Reach", value: "94.8M" },
+          { label: "Creators Activated", value: "30+" },
+          { label: "Content Pieces", value: "30" },
+          { label: "Timeline", value: "2-3 weeks" },
         ],
+      },
+      {
+        type: "richtext",
+        heading: "The Strategy",
+        html: "<p>We approached the campaign with a <strong>creator-first and category-specific mindset</strong>, ensuring that every piece of content felt distinct while still aligning with the larger Rare Rabbit brand narrative. Rather than assigning products randomly, we carefully mapped creators to categories based on their personal style, audience fit, and content strengths.</p><p>Alongside category-focused content, we developed one dedicated campaign piece that introduced the entire Spring/Summer 2026 collection as a whole—giving audiences an overall collection-first perspective before diving deeper into individual product categories. The focus was not just on reach, but on making every content piece feel intentional, graceful, and differentiated from the rest of the campaign.</p>",
+      },
+      {
+        type: "richtext",
+        heading: "Creator Mix & Execution",
+        html: "<p>We activated a curated mix of mid-tier and macro fashion creators, selected based on audience-brand fit, styling relevance, and content quality rather than just follower count. Each creator was strategically mapped to a specific category to ensure the content felt authentic, visually distinct, and aligned with the product narrative.</p><p>Along with established creators, we experimented with fresh faces based on their potential, aesthetic, and previous content quality. This helped bring freshness to the campaign while also allowing Rare Rabbit to expand beyond a limited set of creators and explore newer creator-audience segments. Ad rights were secured at the brief stage, enabling top-performing pieces to run as paid social amplification post-campaign.</p>",
+      },
+      {
+        type: "quote",
+        quote: "Treating creator content as a paid media engine, not a one-time activation, multiplied campaign value 3-4x. The reach above represents organic only; paid amplification of top-performing pieces extended the campaign window by 90 days.",
+        attribution: "Key Learning from Campaign",
       },
       {
         type: "reels",

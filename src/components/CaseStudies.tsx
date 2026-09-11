@@ -250,7 +250,7 @@ export function CaseStudies() {
                 const isActive = i === active;
                 return (
                   <motion.button
-                    key={c.tab}
+                    key={c.slug}
                     type="button"
                     onClick={() => goTo(i)}
                     whileTap={{ scale: 0.95 }}
