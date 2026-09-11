@@ -444,6 +444,16 @@ body {
   }
 }
 
+/* Case study bullets — the phrase or number carrying the point is marked up
+   with <strong> and highlighted in green rather than just bolded. */
+@utility case-point {
+  & strong,
+  & b {
+    color: var(--green-dark);
+    font-weight: 600;
+  }
+}
+
 @utility marquee-mask-y {
   mask-image: linear-gradient(180deg,
       transparent,

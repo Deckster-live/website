@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, type Transition } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import { HEAD_GAP, SECTION_Y, SectionHead } from "@/components/ui/primitives";
 import {
   caseStudies,
@@ -11,7 +12,6 @@ import {
 } from "@/data/mockdata/case-studies";
 
 const ROTATE_MS = 5000;
-const LOGO = "/logos/deckster.png";
 
 const pillSpring: Transition = { type: "spring", stiffness: 380, damping: 30 };
 const cardSpring: Transition = {
@@ -103,15 +103,32 @@ function CardPanel({ study }: { study: CaseStudy }) {
           {study.description}
         </p>
 
-        <Link
-          href={`/case-studies/${study.slug}`}
-          className={`group mt-5 inline-flex w-fit items-center gap-1.5 text-[14px] font-medium ${theme.fg}`}
-        >
-          <span className="relative">
-            Read the full story
-            <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-signal opacity-0 transition-all duration-300 ease-out group-hover:w-full group-hover:opacity-100" />
-          </span>
-        </Link>
+        <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
+          <Link
+            href={`/case-studies/${study.slug}`}
+            className={`group inline-flex w-fit items-center gap-1.5 text-[14px] font-medium ${theme.fg}`}
+          >
+            <span className="relative">
+              Read the full story
+              <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-signal opacity-0 transition-all duration-300 ease-out group-hover:w-full group-hover:opacity-100" />
+            </span>
+          </Link>
+
+          {study.report_url && (
+            <a
+              href={study.report_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`group/report inline-flex w-fit items-center gap-1 text-[13px] font-medium ${theme.muted} transition-colors hover:${theme.fg}`}
+            >
+              <span className="relative">
+                View live report
+                <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-signal opacity-0 transition-all duration-300 ease-out group-hover/report:w-full group-hover/report:opacity-100" />
+              </span>
+              <ArrowUpRight aria-hidden className="h-3.5 w-3.5" />
+            </a>
+          )}
+        </div>
       </div>
 
       {/* Right */}
@@ -271,7 +288,8 @@ export function CaseStudies() {
                         style={
                           c.logo_scale
                             ? ({
-                                "--logo-scale-mobile": 1 + (c.logo_scale - 1) * 0.4,
+                                "--logo-scale-mobile":
+                                  1 + (c.logo_scale - 1) * 0.4,
                                 "--logo-scale-desktop": c.logo_scale,
                               } as React.CSSProperties)
                             : undefined

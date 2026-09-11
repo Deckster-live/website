@@ -7,6 +7,15 @@ import {
   THEMES,
 } from "@/data/mockdata/case-studies";
 import { CaseStudyBlocks } from "@/components/case-study/CaseStudyBlocks";
+import {
+  CaseStudyApproach,
+  CaseStudyChallenge,
+  CaseStudyLearning,
+  CaseStudyOverview,
+  CaseStudyPlatforms,
+  CaseStudyReels,
+  CaseStudyResults,
+} from "@/components/case-study/CaseStudySections";
 
 export function generateStaticParams() {
   return caseStudies.map((study) => ({ slug: study.slug }));
@@ -38,16 +47,9 @@ export default async function CaseStudyPage({
 
   const theme = THEMES[study.theme];
 
-  const fixedSections = [
-    { heading: "Overview", html: study.overview },
-    { heading: "The Challenge", html: study.challenge },
-    { heading: "Our Approach", html: study.approach },
-    { heading: "The Results", html: study.results },
-  ];
-
   return (
     <>
-      <section className="relative isolate overflow-hidden px-5 pt-32 pb-16 md:px-8 md:pt-42 md:pb-20">
+      <section className="relative isolate overflow-hidden px-5 pt-32 pb-14 md:px-8 md:pt-42 md:pb-16">
         <div aria-hidden className="absolute inset-0 -z-10">
           <Image
             src="/images/wave-bg.webp"
@@ -82,49 +84,34 @@ export default async function CaseStudyPage({
           />
 
           <h1 className="font-display mt-6 text-[clamp(1.75rem,5vw,2.75rem)] leading-[1.1] font-semibold">
-            {study.usp_metric} {study.usp}
+            <span className="text-green-dark">{study.usp_metric}</span>{" "}
+            {study.usp}
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-[15px] text-slate">
             {study.description}
           </p>
 
-          <div className="mx-auto mt-10 grid max-w-md grid-cols-3 gap-3">
-            {study.metrics.map((m, i) => (
-              <div
-                key={m.label}
-                className={`min-w-0 ${i > 0 ? "border-l border-line-strong pl-3" : ""}`}
-              >
-                <p className="font-display text-xl leading-none font-semibold md:text-2xl">
-                  {m.value}
-                </p>
-                <p className="mt-1.5 text-[0.6875rem] tracking-[0.18em] text-slate uppercase">
-                  {m.label}
-                </p>
-              </div>
-            ))}
-          </div>
+          {study.platforms && study.platforms.length > 0 && (
+            <div className="mt-6">
+              <CaseStudyPlatforms platforms={study.platforms} />
+            </div>
+          )}
         </div>
       </section>
 
-      <div className="px-5 pt-16 pb-8 md:px-8 md:pt-20">
+      <div className="px-5 pt-12 pb-24 md:px-8 md:pt-16 md:pb-28">
         <div className="mx-auto max-w-3xl space-y-12 md:space-y-16">
-          {fixedSections.map((section) => (
-            <section key={section.heading}>
-              <h2 className="font-display text-xl font-semibold md:text-2xl">
-                {section.heading}
-              </h2>
-              <div
-                className="legal-copy mt-4 text-[14.5px] leading-relaxed text-slate md:text-[15px]"
-                dangerouslySetInnerHTML={{ __html: section.html }}
-              />
-            </section>
-          ))}
-        </div>
-      </div>
-
-      <div className="px-5 pt-8 pb-24 md:px-8 md:pt-10 md:pb-28">
-        <div className="mx-auto max-w-3xl">
+          <CaseStudyOverview overview={study.overview} />
+          <CaseStudyChallenge points={study.challenge} />
+          <CaseStudyApproach steps={study.approach} />
           <CaseStudyBlocks blocks={study.content} />
+          <CaseStudyReels reels={study.reels} />
+          <CaseStudyResults
+            points={study.results}
+            metrics={study.metrics}
+            reportUrl={study.report_url}
+          />
+          {study.learning && <CaseStudyLearning learning={study.learning} />}
         </div>
       </div>
     </>

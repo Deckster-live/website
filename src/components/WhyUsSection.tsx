@@ -49,7 +49,7 @@ const reasons: readonly Reason[] = [
   {
     icon: Users,
     badge: "Network",
-    title: "Massive creator network",
+    title: "Massive creator Database",
     description:
       "Nano voices for authentic reach, macro names for scale — our roster spans every category, price tier and city, so the right creator is never far away.",
     stats: [
