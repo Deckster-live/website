@@ -1,48 +1,61 @@
 import Link from "next/link";
+import { HashLink } from "@/components/ui/HashLink";
 import {
   IconBrandInstagram,
   IconBrandLinkedin,
   IconBrandX,
+  IconMail,
 } from "@tabler/icons-react";
 
 const columns = [
   {
     heading: "Explore",
     links: [
-      { label: "Overview", href: "#top" },
-      { label: "The problem", href: "#problems" },
-      { label: "How it works", href: "#solutions" },
-      { label: "What we cover", href: "#services" },
+      { label: "Overview", href: "/#top" },
+      { label: "Case studies", href: "/#case-studies" },
+      { label: "Use cases", href: "/#use-cases" },
+      { label: "Why Deckster", href: "/#why-us" },
+      { label: "How we do this", href: "/#solutions" },
+    ],
+  },
+  {
+    heading: "What we run",
+    links: [
+      { label: "UGC", href: "/#use-cases" },
+      { label: "IGC", href: "/#use-cases" },
+      { label: "Paid ads", href: "/#use-cases" },
+      { label: "Whitelisting", href: "/#use-cases" },
+      { label: "Podcast amplification", href: "/#use-cases" },
     ],
   },
   {
     heading: "Company",
     links: [
-      { label: "Old way vs. new way", href: "#old-vs-new" },
-      { label: "Get in touch", href: "#cta" },
-    ],
-  },
-  {
-    heading: "More from Deckster",
-    links: [
-      { label: "Sign in", href: "#" },
-      { label: "Partner with us", href: "#cta" },
-      { label: "Careers", href: "#" },
-      { label: "Contact us", href: "#cta" },
+      { label: "About", href: "/about" },
+      { label: "Careers", href: "/careers" },
+      { label: "Start a brief", href: "/#cta" },
+      // { label: "Book a 20-min call", href: "/#cta" },
     ],
   },
 ] as const;
 
 const socials = [
-  { icon: IconBrandInstagram, label: "Instagram", href: "#" },
-  { icon: IconBrandLinkedin, label: "LinkedIn", href: "#" },
-  { icon: IconBrandX, label: "X", href: "#" },
+  {
+    icon: IconBrandInstagram,
+    label: "Instagram",
+    href: "https://www.instagram.com/decksterlive/",
+  },
+  {
+    icon: IconBrandLinkedin,
+    label: "LinkedIn",
+    href: "https://in.linkedin.com/company/deckster-live",
+  },
+  // { icon: IconBrandX, label: "X", href: "#" },
 ] as const;
 
 const legal = [
-  { label: "Terms of Service", href: "#" },
-  { label: "Privacy Policy", href: "#" },
-  { label: "Accessibility", href: "#" },
+  { label: "Terms of Service", href: "/terms" },
+  { label: "Privacy Policy", href: "/privacy" },
 ] as const;
 
 export function Footer() {
@@ -75,12 +88,21 @@ export function Footer() {
                 <ul className="mt-4 space-y-3">
                   {col.links.map((l) => (
                     <li key={l.label}>
-                      <Link
-                        href={l.href}
-                        className="text-[13.5px] text-ink/70 transition-colors hover:text-ink"
-                      >
-                        {l.label}
-                      </Link>
+                      {l.href.startsWith("/#") || l.href.startsWith("#") ? (
+                        <HashLink
+                          href={l.href}
+                          className="text-[13.5px] text-ink/70 transition-colors hover:text-ink"
+                        >
+                          {l.label}
+                        </HashLink>
+                      ) : (
+                        <Link
+                          href={l.href}
+                          className="text-[13.5px] text-ink/70 transition-colors hover:text-ink"
+                        >
+                          {l.label}
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -99,10 +121,18 @@ export function Footer() {
                     aria-label={s.label}
                     className="grid h-9 w-9 place-items-center rounded-full bg-green-dark text-paper transition-colors hover:bg-ink"
                   >
-                    <s.icon className="h-4 w-4" strokeWidth={1.75} />
+                    <s.icon className="h-5 w-5" strokeWidth={1.5} />
                   </a>
                 ))}
               </div>
+
+              <a
+                href="mailto:hello@deckster.live"
+                className="mt-5 inline-flex items-center gap-2 text-[13.5px] text-ink/70 transition-colors hover:text-ink"
+              >
+                <IconMail className="h-4 w-4 shrink-0" strokeWidth={1.75} />
+                hello@deckster.live
+              </a>
             </div>
           </div>
 

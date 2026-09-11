@@ -1,3 +1,4 @@
+import { HashLink } from "@/components/ui/HashLink";
 import { IconArrowUpRight, IconBrandInstagram } from "@tabler/icons-react";
 import { Sparkline } from "./ui/primitives";
 
@@ -53,7 +54,7 @@ function BarsCard({ className = "" }: { className?: string }) {
         <span
           key={i}
           style={{ height: `${b}%` }}
-          className={`w-3 rounded-[3px] ${i > 4 ? "bg-sky-800" : "bg-sky-800/25"}`}
+          className={`w-3 rounded0.75 ${i > 4 ? "bg-sky-800" : "bg-sky-800/25"}`}
         />
       ))}
     </div>
@@ -109,6 +110,9 @@ function CommentsChart({ className = "" }: { className?: string }) {
     30, 90, 120, 180, 230, 245, 250, 258, 262, 268, 272, 300, 430, 470, 880,
     940,
   ];
+  const previousDay = new Date();
+  previousDay.setDate(previousDay.getDate() - 1);
+
   return (
     <div className={`surface-float rounded-2xl p-4 md:p-5 ${className}`}>
       <div className="flex items-center justify-between gap-3">
@@ -139,7 +143,7 @@ function CommentsChart({ className = "" }: { className?: string }) {
         </div>
         <div className="absolute top-6 left-[22%] hidden rounded-xl border border-line bg-card px-3 py-2.5 shadow-(--shadow-float) sm:block">
           <p className="text-[11px] font-medium">
-            {new Date(Date.now() - 86400000).toLocaleDateString("en-GB", {
+            {previousDay.toLocaleDateString("en-GB", {
               day: "numeric",
               month: "short",
               year: "numeric",
@@ -169,7 +173,7 @@ function CommentsChart({ className = "" }: { className?: string }) {
 function CreatorRow({ className = "" }: { className?: string }) {
   const rows = [
     {
-      img: "/images/avatar2.jpg",
+      img: "/images/avatar2.webp",
       n: "Neerya Kapoor",
       h: "@neerya_creates",
       f: "30K",
@@ -180,7 +184,7 @@ function CreatorRow({ className = "" }: { className?: string }) {
       sentiment: [33, 67, 0],
     },
     {
-      img: "/images/avatar1.jpg",
+      img: "/images/avatar1.webp",
       n: "Lily Chloe",
       h: "@lily_chloe",
       f: "270K",
@@ -191,7 +195,7 @@ function CreatorRow({ className = "" }: { className?: string }) {
       sentiment: [65, 30, 5],
     },
     {
-      img: "/images/avatar.png",
+      img: "/images/avatar.webp",
       n: "Neeraj Bhatia",
       h: "@coolboy_29",
       f: "30K",
@@ -283,18 +287,18 @@ export function Hero() {
             better decisions — all in one place.
           </p>
           <div className="animate-rise mt-8 flex items-center justify-center gap-3 flex-row">
-            <a
-              href="#cta"
+            <HashLink
+              href="/#cta"
               className="w-full rounded-full bg-ink px-6 py-3 text-center text-sm font-medium text-paper transition-colors hover:bg-green-dark sm:w-auto"
             >
-              Get Started
-            </a>
-            <a
-              href="#product"
+              Start a Campaign
+            </HashLink>
+            <HashLink
+              href="/#product"
               className="w-full rounded-full border border-line-strong px-6 py-3 text-center text-sm font-medium transition-colors hover:bg-mist sm:w-auto"
             >
               Explore More
-            </a>
+            </HashLink>
           </div>
         </div>
 

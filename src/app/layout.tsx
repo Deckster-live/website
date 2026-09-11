@@ -20,8 +20,12 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  title: "Deckster",
-  description: "Deckster",
+  title: {
+    default: "Deckster — Creator marketing, end to end",
+    template: "%s · Deckster",
+  },
+  description:
+    "Deckster matches brands with the right creators — by data, not guesswork — then plans, runs, tracks and reports the whole campaign under one roof.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

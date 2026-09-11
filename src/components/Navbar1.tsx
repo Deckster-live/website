@@ -76,7 +76,7 @@ export function Navbar() {
             href="#cta"
             className="hidden rounded-full bg-ink px-4 py-2 text-base font-medium text-paper transition-opacity hover:opacity-85 sm:inline-flex"
           >
-            Get Started
+            Start a Campaign
           </Link>
 
           <button
@@ -114,7 +114,7 @@ export function Navbar() {
               onClick={closeMenu}
               className="mb-3 mt-3 rounded-full bg-ink px-4 py-2.5 text-center text-sm font-medium text-paper"
             >
-              Get Started
+              Start a Campaign
             </Link>
           </nav>
         </div>

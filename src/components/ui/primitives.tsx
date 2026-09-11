@@ -6,22 +6,29 @@ interface SectionProps {
   className?: string;
 }
 
+/** One rhythm for every section on the page — Hero and the marquee aside. */
+export const SECTION_Y = "py-20 md:py-28 lg:py-32";
+
 export function Section({ id, children, className }: SectionProps) {
   return (
     <section
       id={id}
-      className={`px-5 py-20 md:px-8 md:py-28 lg:py-36 ${className ?? ""}`}
+      className={`px-5 md:px-8 ${SECTION_Y} ${className ?? ""}`}
     >
       <div className="mx-auto max-w-310">{children}</div>
     </section>
   );
 }
 
+/** Space between a section's header block and the content under it. */
+export const HEAD_GAP = "mt-12 md:mt-16";
+
 interface SectionHeadProps {
   eyebrow: string;
   title: ReactNode;
   copy?: ReactNode;
   align?: "left" | "center";
+  className?: string;
 }
 
 export function SectionHead({
@@ -29,6 +36,7 @@ export function SectionHead({
   title,
   copy,
   align = "left",
+  className,
 }: SectionHeadProps) {
   const alignment =
     align === "center"
@@ -36,10 +44,10 @@ export function SectionHead({
       : "max-w-2xl text-left";
 
   return (
-    <div className={alignment}>
+    <div className={`${alignment} ${className ?? ""}`}>
       <p className="eyebrow">{eyebrow}</p>
 
-      <h2 className="mt-4 text-[clamp(1.85rem,4.6vw,3.15rem)] font-semibold leading-tight">
+      <h2 className="font-display mt-4 text-[clamp(1.7rem,4.2vw,2.85rem)] leading-[1.08] font-semibold">
         {title}
       </h2>
 
