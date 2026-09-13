@@ -2,8 +2,23 @@
 
 import { useEffect, useRef, useState } from "react";
 import { HashLink } from "@/components/ui/HashLink";
-import { ArrowUpRight, Check, ChevronDown, Copy, Mail } from "lucide-react";
+import {
+  ArrowUpRight,
+  Check,
+  ChevronDown,
+  Copy,
+  Mail,
+  Phone,
+} from "lucide-react";
+import { IconBrandWhatsapp } from "@tabler/icons-react";
 import { Section } from "@/components/ui/primitives";
+import {
+  EMAIL_ADDRESS,
+  EMAIL_HREF,
+  PHONE_HREF,
+  PHONE_NUMBER,
+  WHATSAPP_HREF,
+} from "@/lib/contact";
 import { submitBrief } from "@/lib/googleSheets";
 
 const GOALS = [
@@ -374,6 +389,40 @@ export function ContactSection() {
               connect your brand with the people who matter and deliver results
               that make an impact.
             </p>
+
+            <div className="mt-8 flex flex-col gap-3">
+              <a
+                href={EMAIL_HREF}
+                className="group inline-flex w-fit items-center gap-3 text-[14px] text-paper/70 transition-colors hover:text-paper"
+              >
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-paper/15 bg-paper/6 transition-colors group-hover:border-signal/50 group-hover:text-signal">
+                  <Mail className="h-4 w-4" strokeWidth={1.75} />
+                </span>
+                {EMAIL_ADDRESS}
+              </a>
+
+              {/* <a
+                href={PHONE_HREF}
+                className="group inline-flex w-fit items-center gap-3 text-[14px] text-paper/70 transition-colors hover:text-paper"
+              >
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-paper/15 bg-paper/6 transition-colors group-hover:border-signal/50 group-hover:text-signal">
+                  <Phone className="h-4 w-4" strokeWidth={1.75} />
+                </span>
+                {PHONE_NUMBER}
+              </a> */}
+
+              <a
+                href={WHATSAPP_HREF}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex w-fit items-center gap-3 text-[14px] text-paper/70 transition-colors hover:text-paper"
+              >
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-paper/15 bg-paper/6 transition-colors group-hover:border-[#25D366]/60 group-hover:text-[#25D366]">
+                  <IconBrandWhatsapp className="h-4.5 w-4.5" />
+                </span>
+                WhatsApp us
+              </a>
+            </div>
           </div>
 
           <form

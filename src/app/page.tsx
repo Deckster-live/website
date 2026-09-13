@@ -18,6 +18,7 @@ import { ServicesTimeline } from "@/components/ServicesTimeline";
 import { SolutionsProcess } from "@/components/SolutionsProcess";
 import { SolutionsSection } from "@/components/SolutionsSection";
 import { UseCaseNetwork } from "@/components/UseCaseNetwork";
+import { WhatsappFloat } from "@/components/WhatsappFloat";
 import { WhyUsSection } from "@/components/WhyUsSection";
 
 export default function Home() {
@@ -40,6 +41,7 @@ export default function Home() {
       <ContactSection />
       {/* <ContactSectionForm /> */}
       {/* <ContactSectionClassic /> */}
+      <WhatsappFloat />
     </>
   );
 }

@@ -3,9 +3,18 @@ import { HashLink } from "@/components/ui/HashLink";
 import {
   IconBrandInstagram,
   IconBrandLinkedin,
+  IconBrandWhatsapp,
   IconBrandX,
   IconMail,
+  IconPhone,
 } from "@tabler/icons-react";
+import {
+  EMAIL_ADDRESS,
+  EMAIL_HREF,
+  PHONE_HREF,
+  PHONE_NUMBER,
+  WHATSAPP_HREF,
+} from "@/lib/contact";
 
 const columns = [
   {
@@ -49,6 +58,11 @@ const socials = [
     icon: IconBrandLinkedin,
     label: "LinkedIn",
     href: "https://in.linkedin.com/company/deckster-live",
+  },
+  {
+    icon: IconBrandWhatsapp,
+    label: "WhatsApp",
+    href: WHATSAPP_HREF,
   },
   // { icon: IconBrandX, label: "X", href: "#" },
 ] as const;
@@ -118,6 +132,8 @@ export function Footer() {
                   <a
                     key={s.label}
                     href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     aria-label={s.label}
                     className="grid h-9 w-9 place-items-center rounded-full bg-green-dark text-paper transition-colors hover:bg-ink"
                   >
@@ -126,13 +142,33 @@ export function Footer() {
                 ))}
               </div>
 
-              <a
-                href="mailto:hello@deckster.live"
-                className="mt-5 inline-flex items-center gap-2 text-[13.5px] text-ink/70 transition-colors hover:text-ink"
-              >
-                <IconMail className="h-4 w-4 shrink-0" strokeWidth={1.75} />
-                hello@deckster.live
-              </a>
+              <div className="mt-5 flex flex-col gap-2.5">
+                <a
+                  href={EMAIL_HREF}
+                  className="inline-flex w-fit items-center gap-2 text-[13.5px] text-ink/70 transition-colors hover:text-ink"
+                >
+                  <IconMail className="h-4 w-4 shrink-0" strokeWidth={1.75} />
+                  {EMAIL_ADDRESS}
+                </a>
+
+                <a
+                  href={PHONE_HREF}
+                  className="inline-flex w-fit items-center gap-2 text-[13.5px] text-ink/70 transition-colors hover:text-ink"
+                >
+                  <IconPhone className="h-4 w-4 shrink-0" strokeWidth={1.75} />
+                  {PHONE_NUMBER}
+                </a>
+
+                {/* <a
+                  href={WHATSAPP_HREF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-fit items-center gap-2 text-[13.5px] text-ink/70 transition-colors hover:text-ink"
+                >
+                  <IconBrandWhatsapp className="h-4 w-4 shrink-0" />
+                  WhatsApp us
+                </a> */}
+              </div>
             </div>
           </div>
 
