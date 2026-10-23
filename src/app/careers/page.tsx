@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/site";
 import { ArrowUpRight } from "lucide-react";
 import { CareerHero } from "@/components/careers/CareerHero";
 import { WhyWorkWithUs } from "@/components/careers/WhyWorkWithUs";
 import { OpenRoles } from "@/components/careers/OpenRoles";
 import { Section } from "@/components/ui/primitives";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Careers",
   description:
     "Open roles at Deckster — join a small, fast-moving team building the way brands run creator marketing.",
-};
+  path: "/careers",
+});
 
 export default function CareersPage() {
   return (

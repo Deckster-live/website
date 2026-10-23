@@ -192,6 +192,8 @@ export function MatchingAnimation({ active }: VisualProps) {
                     <img
                       src={r.avatar}
                       alt=""
+                      loading="lazy"
+                      decoding="async"
                       className="h-full w-full object-cover"
                     />
                   </span>

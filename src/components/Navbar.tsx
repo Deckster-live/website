@@ -50,7 +50,13 @@ export function Navbar() {
           className="flex min-w-0 items-center gap-2"
           aria-label="Deckster home"
         >
-          <img src="/logos/deckster.png" className="h-8" />
+          <img
+            src="/logos/deckster.webp"
+            alt="Deckster"
+            width={472}
+            height={161}
+            className="h-8 w-auto"
+          />
         </Link>
 
         {/* Desktop Navigation */}

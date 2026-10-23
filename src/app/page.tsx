@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Marquee } from "@/components/BrandMarquee";
 import { CaseStudies } from "@/components/CaseStudies";
 import {
@@ -20,10 +21,30 @@ import { SolutionsSection } from "@/components/SolutionsSection";
 import { UseCaseNetwork } from "@/components/UseCaseNetwork";
 import { WhatsappFloat } from "@/components/WhatsappFloat";
 import { WhyUsSection } from "@/components/WhyUsSection";
+import { FAQS } from "@/data/faqs";
+import { jsonLd } from "@/lib/site";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
 
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd(faqJsonLd)}
+      />
       <Hero />
       <Marquee />
       <Metrics />

@@ -107,7 +107,7 @@ export function NicheCoverage({ active, fg, accent }: VisualProps) {
       <div className="flex shrink-0 items-baseline gap-2">
         <p
           className="text-[6.5px] font-semibold tracking-[0.18em] uppercase @sm:text-[8px]"
-          style={{ color: tint(fg, 60) }}
+          style={{ color: tint(fg, 92) }}
         >
           Every niche, every market
         </p>

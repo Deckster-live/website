@@ -57,7 +57,7 @@ export function BudgetAllocation({ active }: VisualProps) {
         <span className="text-[6.5px] font-semibold tracking-[0.18em] text-paper/55 uppercase sm:text-[8px]">
           Optimised mix
         </span>
-        <span className="ml-auto text-[6.5px] tracking-[0.12em] text-paper/45 uppercase sm:text-[8px]">
+        <span className="ml-auto text-[6.5px] tracking-[0.12em] text-paper/60 uppercase sm:text-[8px]">
           3 tiers · 17.1M reach
         </span>
       </div>
@@ -173,7 +173,7 @@ export function BudgetAllocation({ active }: VisualProps) {
                 className="h-5 w-5 shrink-0 overflow-hidden rounded-full sm:h-7 sm:w-7"
                 style={{ border: `1px solid ${s.neon}` }}
               >
-                <img src={s.avatar} alt="" className="h-full w-full object-cover" />
+                <img src={s.avatar} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover" />
               </span>
 
               <span className="min-w-0 flex-1">

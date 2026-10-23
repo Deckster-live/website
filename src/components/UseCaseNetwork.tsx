@@ -325,7 +325,7 @@ function ColumnLabel({
       }
     >
       <p className="eyebrow">{title}</p>
-      <p className="mt-1 text-[11.5px] text-slate/60">({sub})</p>
+      <p className="mt-1 text-[11.5px] text-slate/80">({sub})</p>
     </div>
   );
 }
@@ -387,7 +387,7 @@ function Hub({
         className={`relative grid ${size} place-items-center rounded-full border border-line bg-card shadow-(--shadow-float)`}
       >
         <img
-          src="/logos/deckster.png"
+          src="/logos/deckster.webp"
           alt="Deckster"
           className="w-[58%] max-w-none"
         />
@@ -853,7 +853,7 @@ export function UseCaseNetwork() {
           <div className={`lg:hidden ${HEAD_GAP}`}>
             <div className="flex items-end justify-between gap-4">
               <ColumnLabel title="Your goals" sub="Use cases" />
-              <p className="text-[11px] text-slate/60">Tap to map</p>
+              <p className="text-[11px] text-slate/80">Tap to map</p>
             </div>
 
             <div
@@ -887,7 +887,7 @@ export function UseCaseNetwork() {
 
             <div className="mt-4 flex items-end justify-between gap-4">
               <ColumnLabel title="Our formats" sub="Solutions" />
-              <p className="text-[11px] text-slate/60">
+              <p className="text-[11px] text-slate/80">
                 {goal.formats.length} of {FORMATS.length} matched
               </p>
             </div>

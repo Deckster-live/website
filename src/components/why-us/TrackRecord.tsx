@@ -120,7 +120,7 @@ export function TrackRecord({ active }: VisualProps) {
       <div className="pointer-events-none absolute inset-0 grid place-items-center">
         <motion.div
           key={cycle}
-          className="flex flex-col items-center rounded-2xl border border-white/60 bg-white/45 px-4 py-2.5 backdrop-blur-md sm:px-6 sm:py-3.5"
+          className="flex flex-col items-center rounded-2xl border border-white/60 bg-white/60 px-4 py-2.5 backdrop-blur-md sm:px-6 sm:py-3.5"
           initial={{ opacity: 0 }}
           animate={on && !reduced ? fade.animate : { opacity: 1 }}
           transition={on && !reduced ? fade.transition : { duration: 0.3 }}
@@ -158,7 +158,7 @@ export function TrackRecord({ active }: VisualProps) {
             Brands delivered for
           </span>
           <motion.span
-            className="mt-0.5 text-[7px] font-semibold tracking-[0.14em] text-green-dark uppercase sm:text-[8.5px]"
+            className="mt-0.5 text-[7px] font-semibold tracking-[0.14em] text-green-darkest uppercase sm:text-[8.5px]"
             initial={{ opacity: 0 }}
             animate={on ? { opacity: 1 } : { opacity: 0 }}
             transition={

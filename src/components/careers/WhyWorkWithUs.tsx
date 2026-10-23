@@ -16,9 +16,10 @@ function OwnershipCard({ className }: { className?: string }) {
       style={{ background: "oklch(0.3133 0.0413 180.37)" }}
     >
       <Image
-        src="/images/careers/working.png"
+        src="/images/careers/working.webp"
         fill
         alt=""
+        sizes="(min-width: 768px) 50vw, 100vw"
         className="object-cover object-top"
       />
       <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
@@ -87,9 +88,10 @@ function GrowCard({ className }: { className?: string }) {
       {/* Image */}
       <div className="relative h-64 -mb-15 w-1/2">
         <Image
-          src="/images/careers/grow.png"
+          src="/images/careers/grow.webp"
           fill
           alt=""
+          sizes="256px"
           className="object-contain object-right"
         />
       </div>

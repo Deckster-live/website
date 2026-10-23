@@ -187,7 +187,7 @@ function Card({
           <span
             className="text-md inline-flex items-center gap-2 rounded-full px-3 py-1 font-medium"
             style={{
-              backgroundColor: `color-mix(in oklab, ${fg} 16%, transparent)`,
+              backgroundColor: `color-mix(in oklab, ${fg} 8%, transparent)`,
             }}
           >
             <Icon className="h-3.5 w-3.5" strokeWidth={1.75} />
@@ -211,7 +211,7 @@ function Card({
                     >
                       {s.value}
                     </p>
-                    <p className="mt-1 text-[10px] tracking-[0.12em] uppercase opacity-60 sm:text-[11px]">
+                    <p className="mt-1 text-[10px] tracking-[0.12em] uppercase opacity-90 sm:text-[11px]">
                       {s.label}
                     </p>
                   </div>
@@ -219,7 +219,7 @@ function Card({
               </div>
             )}
 
-            <p className="mt-4 text-[13.5px] leading-relaxed opacity-80 sm:mt-5 sm:text-[15px] md:text-[13.5px] lg:text-base">
+            <p className="mt-4 text-[13.5px] leading-relaxed opacity-90 sm:mt-5 sm:text-[15px] md:text-[13.5px] lg:text-base">
               {description}
             </p>
           </div>

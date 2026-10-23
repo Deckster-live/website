@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/site";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
@@ -18,7 +19,13 @@ export async function generateMetadata({
   const role = getRoleBySlug(slug);
   if (!role) return {};
 
-  return { title: `Apply — ${role.name}` };
+  // The JD page is the one to rank; the form is kept out of the index.
+  return pageMetadata({
+    title: `Apply — ${role.name}`,
+    description: `Apply for the ${role.name} role at Deckster. ${role.summary}`,
+    path: `/careers/${role.slug}/apply`,
+    noindex: true,
+  });
 }
 
 export default async function ApplyPage({

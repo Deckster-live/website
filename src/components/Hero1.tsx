@@ -231,7 +231,7 @@ function CreatorRow({ className = "" }: { className?: string }) {
           >
             <div className="flex min-w-0 items-center gap-2">
               <span className="grid h-7 w-7 shrink-0 overflow-hidden place-items-center rounded-full bg-mist">
-                <img src={r.img} />
+                <img src={r.img} alt="" width={28} height={28} className="h-full w-full object-cover" />
               </span>
               <div className="min-w-0">
                 <p className="truncate text-[11px] font-medium">{r.n}</p>
@@ -276,7 +276,7 @@ export function Hero() {
       />
       <div className="relative mx-auto max-w-500">
         <div className="mx-auto max-w-6xl text-center">
-          <h1 className="animate-rise mt-16 text-[clamp(2rem,7vw,4rem)] leading-none font-bold">
+          <h1 className="animate-rise-lcp mt-16 text-[clamp(2rem,7vw,4rem)] leading-none font-bold">
             Reach your customers through creators they already trust.
           </h1>
           <p className="animate-rise mx-auto mt-4 max-w-2xl text-[15px] leading-normal text-slate md:text-[17px]">

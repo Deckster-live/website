@@ -27,7 +27,7 @@ export function Metrics() {
                   : ""
               }`}
             >
-              <p className="eyebrow text-signal font-bold text-[14px]">
+              <p className="eyebrow text-green-dark font-bold text-[14px]">
                 {s.label}
               </p>
               <p className="font-display mt-3 text-[clamp(2rem,5vw,3rem)] leading-none font-semibold tracking-[-0.02em]">

@@ -6,7 +6,7 @@ import { loopFade, tint, useLoop, type VisualProps } from "./useLoop";
 
 const PERIOD = 10400;
 
-const LOGO = "/logos/deckster.png";
+const LOGO = "/logos/deckster.webp";
 
 const AVATARS = [
   "/images/avatar.webp",

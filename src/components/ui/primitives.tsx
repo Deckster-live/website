@@ -29,6 +29,8 @@ interface SectionHeadProps {
   copy?: ReactNode;
   align?: "left" | "center";
   className?: string;
+  /** Heading level — "h1" when the section head is the page title. */
+  as?: "h1" | "h2";
 }
 
 export function SectionHead({
@@ -37,6 +39,7 @@ export function SectionHead({
   copy,
   align = "left",
   className,
+  as: Heading = "h2",
 }: SectionHeadProps) {
   const alignment =
     align === "center"
@@ -47,9 +50,9 @@ export function SectionHead({
     <div className={`${alignment} ${className ?? ""}`}>
       <p className="eyebrow">{eyebrow}</p>
 
-      <h2 className="font-display mt-4 text-[clamp(1.7rem,4.2vw,2.85rem)] leading-[1.08] font-semibold">
+      <Heading className="font-display mt-4 text-[clamp(1.7rem,4.2vw,2.85rem)] leading-[1.08] font-semibold">
         {title}
-      </h2>
+      </Heading>
 
       {copy && (
         <p className="mt-5 text-[15px] leading-relaxed text-slate md:text-base">

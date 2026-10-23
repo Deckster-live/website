@@ -8,7 +8,7 @@ export function AboutHero() {
           src="/images/green-bg.webp"
           alt=""
           fill
-          priority
+          preload
           sizes="100vw"
           className="object-cover"
         />

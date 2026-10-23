@@ -12,9 +12,11 @@ export function CareerHero() {
     <section id="top" className="px-5 pt-32 pb-16 md:px-8 md:pt-42 md:pb-20">
       <div aria-hidden className="absolute inset-0 -z-10">
         <Image
-          src="/images/bg3.jpg"
+          src="/images/bg3.webp"
           alt=""
           fill
+          preload
+          sizes="100vw"
           className="object-cover object-bottom"
         />
         <div className="absolute inset-0 bg-linear-to-b from-paper/45 via-paper/55 to-paper" />

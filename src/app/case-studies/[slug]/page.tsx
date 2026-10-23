@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/site";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
@@ -30,10 +31,12 @@ export async function generateMetadata({
   const study = getCaseStudyBySlug(slug);
   if (!study) return {};
 
-  return {
+  return pageMetadata({
     title: `${study.brand} Case Study`,
     description: study.description,
-  };
+    path: `/case-studies/${study.slug}`,
+    type: "article",
+  });
 }
 
 export default async function CaseStudyPage({
@@ -55,7 +58,7 @@ export default async function CaseStudyPage({
             src="/images/wave-bg.webp"
             alt=""
             fill
-            priority
+            preload
             sizes="100vw"
             className="object-cover"
           />
@@ -74,7 +77,7 @@ export default async function CaseStudyPage({
 
           <img
             src={study.brand_logo}
-            alt={study.brand}
+            alt={`${study.brand} logo`}
             className="mx-auto mt-6 h-12 w-auto object-contain"
             style={
               study.logo_scale

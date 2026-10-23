@@ -53,6 +53,8 @@ function CardPanel({ study }: { study: CaseStudy }) {
           <img
             src={study.brand_logo}
             alt=""
+            loading="lazy"
+            decoding="async"
             className="h-14 w-auto object-contain"
           />
           <p
@@ -144,7 +146,7 @@ function CardPanel({ study }: { study: CaseStudy }) {
             href={reel.link}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`Watch the ${study.brand} reel`}
+            aria-label={`Watch ${study.brand} reel ${i + 1}`}
             whileHover={{ scale: 1.03 }}
             transition={{ type: "spring", stiffness: 320, damping: 20 }}
             className="group/reel shadow-(--shadow-soft) relative aspect-9/16 min-w-0 overflow-hidden rounded-xl bg-white ring-1 ring-black/5 md:rounded-2xl"
@@ -152,6 +154,10 @@ function CardPanel({ study }: { study: CaseStudy }) {
             <img
               src={reel.cover}
               alt=""
+              width={480}
+              height={853}
+              loading="lazy"
+              decoding="async"
               className="h-full w-full object-cover"
             />
             <span className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-200 group-hover/reel:bg-black/15">
@@ -270,6 +276,8 @@ export function CaseStudies() {
                     key={c.slug}
                     type="button"
                     onClick={() => goTo(i)}
+                    aria-label={`Show the ${c.brand} case study`}
+                    aria-pressed={isActive}
                     whileTap={{ scale: 0.95 }}
                     className="relative min-w-0 flex-1 rounded-xl px-1.5 py-2 sm:rounded-full sm:px-2.5 sm:py-2.5"
                   >
@@ -298,6 +306,8 @@ export function CaseStudies() {
                         <img
                           src={c.brand_logo}
                           alt=""
+                          loading="lazy"
+                          decoding="async"
                           className={`h-full w-full object-contain transition-opacity duration-200 opacity-100 ${
                             c.logo_scale
                               ? "scale-(--logo-scale-mobile) sm:scale-(--logo-scale-desktop)"

@@ -7,15 +7,24 @@ import type { CaseStudyReel } from "@/data/mockdata/case-studies";
 /** Beyond this, the rest collapse behind a "Show more" toggle. */
 const VISIBLE = 4;
 
-function ReelCard({ reel }: { reel: CaseStudyReel }) {
+function ReelCard({ reel, n }: { reel: CaseStudyReel; n: number }) {
   return (
     <a
       href={reel.link}
       target="_blank"
       rel="noopener noreferrer"
+      aria-label={`Watch reel ${n}`}
       className="group/reel relative aspect-9/16 overflow-hidden rounded-xl bg-mist ring-1 ring-black/5 md:rounded-2xl"
     >
-      <img src={reel.cover} alt="" className="h-full w-full object-cover" />
+      <img
+        src={reel.cover}
+        alt=""
+        width={480}
+        height={853}
+        loading="lazy"
+        decoding="async"
+        className="h-full w-full object-cover"
+      />
       <span className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-200 group-hover/reel:bg-black/15">
         <span className="grid h-9 w-9 place-items-center rounded-full bg-white/90 opacity-0 shadow-sm transition-opacity duration-200 group-hover/reel:opacity-100">
           <svg
@@ -44,7 +53,7 @@ export function CaseStudyReelsGrid({ reels }: { reels: CaseStudyReel[] }) {
     <>
       <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4 md:gap-4">
         {shown.map((reel, i) => (
-          <ReelCard key={reel.cover + i} reel={reel} />
+          <ReelCard key={reel.cover + i} reel={reel} n={i + 1} />
         ))}
       </div>
 
@@ -64,7 +73,11 @@ export function CaseStudyReelsGrid({ reels }: { reels: CaseStudyReel[] }) {
                 }`}
               >
                 {rest.map((reel, i) => (
-                  <ReelCard key={reel.cover + i} reel={reel} />
+                  <ReelCard
+                    key={reel.cover + i}
+                    reel={reel}
+                    n={VISIBLE + i + 1}
+                  />
                 ))}
               </div>
             </div>

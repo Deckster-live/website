@@ -81,7 +81,9 @@ function CaseStudyBlockView({ block }: { block: CaseStudyBlock }) {
               >
                 <img
                   src={image.src}
-                  alt={image.caption ?? ""}
+                  alt={image.alt ?? ""}
+                  loading="lazy"
+                  decoding="async"
                   className="aspect-square w-full object-cover"
                 />
                 {image.caption && (

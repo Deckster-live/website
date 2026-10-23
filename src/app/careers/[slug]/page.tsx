@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { jsonLd, pageMetadata, SITE_NAME, SITE_URL } from "@/lib/site";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
@@ -17,10 +18,11 @@ export async function generateMetadata({
   const role = getRoleBySlug(slug);
   if (!role) return {};
 
-  return {
+  return pageMetadata({
     title: role.name,
     description: role.summary,
-  };
+    path: `/careers/${role.slug}`,
+  });
 }
 
 export default async function RolePage({
@@ -34,8 +36,43 @@ export default async function RolePage({
 
   const meta = [role.experience, role.location, role.type];
 
+  const EMPLOYMENT_TYPE = {
+    "Full-time": "FULL_TIME",
+    "Part-time": "PART_TIME",
+    Contract: "CONTRACTOR",
+  } as const;
+
+  // Google for Jobs listing. Every current role is remote within India; an
+  // office-based role would need `jobLocation` with a PostalAddress instead.
+  const jobPostingJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    title: role.name,
+    description: role.jd.trim(),
+    datePosted: role.postedOn,
+    employmentType: EMPLOYMENT_TYPE[role.type],
+    hiringOrganization: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      sameAs: SITE_URL,
+      logo: `${SITE_URL}/icon.png`,
+    },
+    ...(role.location === "Remote" && {
+      jobLocationType: "TELECOMMUTE",
+      applicantLocationRequirements: { "@type": "Country", name: "India" },
+    }),
+    directApply: true,
+    url: `${SITE_URL}/careers/${role.slug}`,
+  };
+
   return (
     <>
+      {role.open && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={jsonLd(jobPostingJsonLd)}
+        />
+      )}
       <section className="px-5 pt-32 pb-10 md:px-8 md:pt-42 md:pb-14">
         <div className="mx-auto max-w-3xl">
           <Link

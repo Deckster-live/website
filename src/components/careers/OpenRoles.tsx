@@ -9,6 +9,8 @@ interface OpenRolesProps {
   eyebrow?: string;
   title?: string;
   copy?: string;
+  /** "h1" when the list is the page itself (/careers/openings). */
+  headingAs?: "h1" | "h2";
 }
 
 function RoleCard({ role }: { role: CareerRole }) {
@@ -45,6 +47,7 @@ export function OpenRoles({
   eyebrow = "Careers",
   title = "Open positions",
   copy = "Every role that's open right now — apply directly, no recruiter middleman.",
+  headingAs,
 }: OpenRolesProps) {
   const roles = getOpenRoles();
   const shown = limit ? roles.slice(0, limit) : roles;
@@ -52,7 +55,12 @@ export function OpenRoles({
 
   return (
     <Section id="openings">
-      <SectionHead eyebrow={eyebrow} title={title} copy={copy} />
+      <SectionHead
+        eyebrow={eyebrow}
+        title={title}
+        copy={copy}
+        as={headingAs}
+      />
 
       <div className="mt-12 space-y-4 md:mt-16">
         {shown.length === 0 ? (

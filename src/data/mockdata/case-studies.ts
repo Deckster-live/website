@@ -99,7 +99,9 @@ export type CaseStudyBlock =
   | {
       type: "gallery";
       heading?: string;
-      images: { src: string; caption?: string }[];
+      /** `alt` describes the image; `caption` is shown under it, so leave
+       * `alt` out when the caption already says the same thing. */
+      images: { src: string; alt?: string; caption?: string }[];
     };
 
 /** One bullet on a case study page. Inline `<strong>` is highlighted in
@@ -154,7 +156,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "rare-rabbit",
     tab: "Product Launch",
-    brand_logo: "/logos/brands/rarerabbit.png",
+    brand_logo: "/logos/brands/rarerabbit.webp",
     logo_scale: 1.4,
     brand: "Rare Rabbit",
     usp_metric: "116.5M",
@@ -257,7 +259,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "policybazaar-uae",
     tab: "Brand Building",
-    brand_logo: "/logos/brands/policybazar-ae.png",
+    brand_logo: "/logos/brands/policybazar-ae.webp",
     logo_scale: 1,
     brand: "Policy Bazaar– UAE",
     usp_metric: "1.34%",
@@ -351,7 +353,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "blissclub",
     tab: "Product Launch",
-    brand_logo: "/logos/brands/blissclub.png",
+    brand_logo: "/logos/brands/blissclub.webp",
     logo_scale: 1,
     brand: "BlissClub",
     usp_metric: "4.46%",
@@ -565,7 +567,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "mahina",
     tab: "Category Launch",
-    brand_logo: "/logos/brands/mahina.png",
+    brand_logo: "/logos/brands/mahina.webp",
     logo_scale: 1.05,
     brand: "Mahina",
     usp_metric: "100",
