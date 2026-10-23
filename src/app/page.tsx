@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Marquee } from "@/components/BrandMarquee";
 import { CaseStudies } from "@/components/CaseStudies";
+import { CreatorInvoicing } from "@/components/CreatorInvoicing";
 import {
   ContactSection,
   ContactSectionClassic,
@@ -53,6 +54,7 @@ export default function Home() {
       {/* <ProblemsSection /> */}
       {/* <SolutionsSection /> */}
       <WhyUsSection />
+      <CreatorInvoicing />
       {/* <HowWeWork /> */}
       {/* <ServicesTimeline /> */}
       {/* <ServicesGrid /> */}

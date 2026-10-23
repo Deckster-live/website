@@ -73,6 +73,13 @@ export function Navbar() {
               {label}
             </HashLink>
           ))}
+          <HashLink
+            href="/#invoicing"
+            className="flex items-center gap-1.5 whitespace-nowrap text-sm font-medium text-slate transition-colors hover:text-foreground xl:text-base"
+          >
+            Invoicing
+            <NewTag />
+          </HashLink>
         </nav>
 
         {/* Actions */}
@@ -113,6 +120,14 @@ export function Navbar() {
                 {label}
               </HashLink>
             ))}
+            <HashLink
+              href="/#invoicing"
+              onClick={closeMenu}
+              className="flex items-center gap-2 border-b border-line/70 py-3.5 text-sm font-medium text-slate transition-colors hover:text-foreground"
+            >
+              Invoicing for creators
+              <NewTag />
+            </HashLink>
 
             <HashLink
               href="/#cta"
@@ -125,5 +140,14 @@ export function Navbar() {
         </div>
       </div>
     </header>
+  );
+}
+
+/** Small "New" tag next to the invoicing link. */
+function NewTag() {
+  return (
+    <span className="rounded-full bg-green-darkest px-1.5 py-[3px] text-[10px] font-semibold uppercase leading-none tracking-wide text-paper">
+      New
+    </span>
   );
 }

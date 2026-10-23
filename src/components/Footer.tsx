@@ -15,6 +15,12 @@ import {
   PHONE_NUMBER,
   WHATSAPP_HREF,
 } from "@/lib/contact";
+import {
+  INVOICE_CREATE_URL,
+  INVOICE_LOGIN_URL,
+  INVOICE_SIGNUP_URL,
+  INVOICE_URL,
+} from "@/lib/invoice";
 
 const columns = [
   {
@@ -35,6 +41,15 @@ const columns = [
       { label: "Paid ads", href: "/#use-cases" },
       { label: "Whitelisting", href: "/#use-cases" },
       { label: "Podcast amplification", href: "/#use-cases" },
+    ],
+  },
+  {
+    heading: "For creators",
+    links: [
+      { label: "Deckster Invoice", href: INVOICE_URL },
+      { label: "Create a free invoice", href: INVOICE_CREATE_URL },
+      { label: "Sign up", href: INVOICE_SIGNUP_URL },
+      { label: "Log in", href: INVOICE_LOGIN_URL },
     ],
   },
   {
@@ -93,7 +108,7 @@ export function Footer() {
         className="px-5 pb-8 md:px-8"
       >
         <div className="mx-auto max-w-310">
-          <div className="grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-3 lg:grid-cols-5">
             {columns.map((col) => (
               <div key={col.heading}>
                 <p className="font-display text-[13px] font-semibold text-ink">
@@ -123,7 +138,7 @@ export function Footer() {
               </div>
             ))}
 
-            <div className="col-span-2 sm:col-span-1">
+            <div className="col-span-2 sm:col-span-2 lg:col-span-1">
               <p className="font-display text-[13px] font-semibold text-ink">
                 Follow us
               </p>
