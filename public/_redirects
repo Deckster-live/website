@@ -1,0 +1,14 @@
+# Old-site URLs that Google still crawls (they 404 today). Read by Netlify and Cloudflare Pages.
+/about-us       /about    301
+/contact        /         301
+/contact/       /         301
+/services       /         301
+/services/      /         301
+/platform       /         301
+/platform/      /         301
+/work           /         301
+/work/          /         301
+/insights       /         301
+/insights/      /         301
+/creators/*     /         301
+/content/*      /         301

@@ -9,7 +9,7 @@ import { AboutValues } from "@/components/about/AboutValues";
 import { AboutVisionMission } from "@/components/about/AboutVisionMission";
 
 export const metadata: Metadata = pageMetadata({
-  title: "About",
+  title: "About Us: The Creator Marketing Team",
   description:
     "Deckster is a technology-driven place for brands to plan, launch and scale influencer-led campaigns — matched by data, not guesswork.",
   path: "/about",

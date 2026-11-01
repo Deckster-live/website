@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/site";
+import { jsonLd, pageMetadata, SITE_URL } from "@/lib/site";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
@@ -32,8 +32,9 @@ export async function generateMetadata({
   if (!study) return {};
 
   return pageMetadata({
-    title: `${study.brand} Case Study`,
-    description: study.description,
+    title: `${study.brand} Influencer Marketing Case Study`,
+    // Lead with the headline number so the snippet shows the result.
+    description: `${study.usp_metric} ${study.usp}. ${study.description}`,
     path: `/case-studies/${study.slug}`,
     type: "article",
   });
@@ -49,9 +50,37 @@ export default async function CaseStudyPage({
   if (!study) notFound();
 
   const theme = THEMES[study.theme];
+  const url = `${SITE_URL}/case-studies/${study.slug}`;
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: `${study.brand}: ${study.usp_metric} ${study.usp}`,
+      description: study.description,
+      url,
+      image: `${SITE_URL}${study.brand_logo}`,
+      mainEntityOfPage: url,
+      // The client brand the campaign was for.
+      about: { "@type": "Brand", name: study.brand },
+      author: { "@id": `${SITE_URL}/#organization` },
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+        { "@type": "ListItem", position: 2, name: `${study.brand} Case Study`, item: url },
+      ],
+    },
+  ];
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd(structuredData)}
+      />
       <section className="relative isolate overflow-hidden px-5 pt-32 pb-14 md:px-8 md:pt-42 md:pb-16">
         <div aria-hidden className="absolute inset-0 -z-10">
           <Image
