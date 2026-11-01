@@ -34,8 +34,10 @@ export function Navbar() {
   const closeMenu = () => setOpen(false);
 
   return (
+    // sm:rounded-[2rem] is half the closed bar's height, so it reads as a pill but keeps proper corners when the menu opens
+    // (rounded-full would clip the open menu into an oval).
     <header
-      className={`fixed left-3 right-3 top-3 z-50 mx-auto max-w-300 overflow-hidden rounded-2xl transition-all duration-500 sm:left-4 sm:right-4 sm:top-4 sm:rounded-full ${
+      className={`fixed left-3 right-3 top-3 z-50 mx-auto max-w-300 overflow-hidden rounded-2xl transition-all duration-500 sm:left-4 sm:right-4 sm:top-4 sm:rounded-[2rem] ${
         scrolled
           ? "border border-line bg-background/75 backdrop-blur-xl"
           : "border border-transparent bg-(--footer-minty)"
