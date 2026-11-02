@@ -3,6 +3,8 @@
 {
   "name": "website",
   "compatibility_date": "2026-06-01",
+  // Served only on deckster.live (custom domain), so the *.workers.dev copy can't be indexed as a duplicate.
+  "workers_dev": false,
   "assets": {
     "directory": "./out",
     // Serve out/404.html (with a 404 status) for unknown paths.
