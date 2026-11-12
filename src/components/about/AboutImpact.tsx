@@ -9,7 +9,7 @@ const stats = [
 
 export function AboutImpact() {
   return (
-    <Section id="impact" className="pt-10 md:pt-14 lg:pt-16">
+    <Section id="impact">
       <h2 className="font-display mx-auto max-w-2xl text-center text-[clamp(1.7rem,4.2vw,2.85rem)] leading-[1.08] font-semibold">
         Where we stand today
       </h2>

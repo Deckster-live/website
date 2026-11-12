@@ -68,6 +68,70 @@ export function pageMetadata({
   };
 }
 
+/**
+ * Founder, shown on /about and linked from the Organization schema. Every
+ * press item is a page that quotes him by name.
+ */
+export const FOUNDER = {
+  name: "Shivam Agarwal",
+  role: "Founder, Deckster",
+  linkedin: "https://www.linkedin.com/in/shivam1504/",
+  photo: "/images/founder-shivam-cutout.webp" as string | undefined,
+  press: [
+    {
+      outlet: "Storyboard18",
+      date: "29 Oct 2026",
+      title:
+        "From Madan Gowri to Varun Mayya, how creators from the South are rewriting the talent management playbook",
+      url: "https://www.storyboard18.com/influencer-marketing/from-madan-gowri-to-varun-mayya-why-creators-from-the-south-are-rewriting-the-talent-management-playbook-113419.htm",
+    },
+    {
+      outlet: "Storyboard18",
+      date: "28 Oct 2026",
+      title:
+        "Regional creators earn up to 60% less than Hindi influencers despite comparable engagement",
+      url: "https://www.storyboard18.com/influencer-marketing/regional-creators-earn-up-to-60-less-than-hindi-influencers-despite-comparable-engagement-113494.htm",
+    },
+    {
+      outlet: "Storyboard18",
+      date: "26 Oct 2026",
+      title:
+        "India's influencer economy splits: small creators juggle rival brands, celebrities lock in exclusive deals",
+      url: "https://www.storyboard18.com/influencer-marketing/indias-influencer-economy-splits-small-creators-juggle-rival-brands-celebrities-lock-in-exclusive-deals-113365.htm",
+    },
+    {
+      outlet: "NDTV Profit · The Big Question",
+      date: "Panel",
+      title: "Can legacy brands truly crack the Gen Z code in 2026?",
+      url: "https://www.youtube.com/watch?v=XPcLUWpa3DE&t=665s",
+    },
+    {
+      outlet: "Moneycontrol",
+      date: "30 Sep 2022",
+      title:
+        "YouTube Shorts is sharing ad revenue. Will that mean more money for creators?",
+      url: "https://www.moneycontrol.com/news/trends/youtube-shorts-is-sharing-ad-revenue-will-that-mean-more-money-for-creators-9256061.html",
+    },
+    {
+      outlet: "Moneycontrol",
+      date: "22 Jun 2022",
+      title: "Here's what the new TDS rule means for social media influencers",
+      url: "https://www.moneycontrol.com/news/business/heres-what-the-new-tds-rule-means-for-social-media-influencers-8724431.html",
+    },
+  ],
+};
+
+const founderJsonLd = {
+  "@type": "Person",
+  "@id": `${SITE_URL}/about#shivam-agarwal`,
+  name: FOUNDER.name,
+  jobTitle: "Founder",
+  url: `${SITE_URL}/about`,
+  ...(FOUNDER.photo && { image: `${SITE_URL}${FOUNDER.photo}` }),
+  sameAs: [FOUNDER.linkedin],
+  worksFor: { "@id": `${SITE_URL}/#organization` },
+};
+
 // "Deckster Live" as the primary name separates us from other Decksters
 // (e.g. deckster.pro) in Google's entity matching and site-name display.
 const ENTITY_NAME = "Deckster Live";
@@ -98,6 +162,8 @@ export const organizationJsonLd = {
     addressCountry: "IN",
   },
   areaServed: "IN",
+  foundingDate: "2020",
+  founder: founderJsonLd,
   parentOrganization: {
     "@type": "Organization",
     name: "Talk Native Marketing Private Limited",

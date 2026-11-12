@@ -16,7 +16,7 @@ const values: readonly Value[] = [
     icon: BarChart3,
     title: "Data Over Guesswork",
     description:
-      "Every decision — matching, budget, targeting — is backed by real numbers, not assumptions.",
+      "Creators are chosen on audience quality, past performance and fit, not follower count or who's easiest to book.",
     bg: "var(--ink)",
     fg: "var(--paper)",
     accent: "var(--signal)",
@@ -25,7 +25,7 @@ const values: readonly Value[] = [
     icon: ShieldCheck,
     title: "Ownership, End to End",
     description:
-      "We don't hand off halfway. From planning to reporting, we stay accountable for the outcome.",
+      "One team from the first brief to the final report. If something slips, it's ours to fix, not a handoff to blame.",
     bg: "var(--green-dark)",
     fg: "var(--paper)",
     accent: "var(--signal)",
@@ -34,7 +34,7 @@ const values: readonly Value[] = [
     icon: Eye,
     title: "Transparency, Always",
     description:
-      "Clear reporting, honest timelines, and no black-box decisions — brands see exactly what's happening and why.",
+      "Live reports pulled from the platforms, honest timelines and clear costs. You see what we see.",
     bg: "var(--slate)",
     fg: "var(--paper)",
     accent: "var(--signal)",
@@ -43,7 +43,7 @@ const values: readonly Value[] = [
     icon: Target,
     title: "Relevance Over Reach",
     description:
-      "The right audience matters more than the biggest one. We match for fit first.",
+      "A creator your customer trusts beats a big name they scroll past. We match for fit first.",
     bg: "var(--green-peacock)",
     fg: "var(--paper)",
     accent: "var(--signal)",
@@ -52,7 +52,7 @@ const values: readonly Value[] = [
     icon: TrendingUp,
     title: "Built to Scale With You",
     description:
-      "Whether it's one campaign or fifty, the same rigor applies — nothing is a one-off.",
+      "One seeding drop or a year-long program, the same rigour applies. Nothing we run is a one-off.",
     bg: "var(--signal)",
     fg: "var(--ink)",
     accent: "var(--green-dark)",

@@ -21,12 +21,15 @@ export function AboutHero() {
           <p className="eyebrow">About Deckster</p>
 
           <h1 className="font-display mt-5 text-[clamp(2.1rem,6vw,3.85rem)] leading-[1.06] font-semibold">
-            A place built for how brands actually grow today
+            We put brands in front of the creators their customers already
+            trust
           </h1>
 
-          <p className="mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-slate md:text-lg">
-            Not an agency. Not a tool alone. A place where strategy, technology
-            and creators come together to get brands seen, trusted, and chosen.
+          <p className="mx-auto mt-6 max-w-2xl text-[15px] leading-relaxed text-slate md:text-lg">
+            Deckster is an influencer and creator marketing agency for Indian
+            brands. We pick creators with data, run every campaign end to end,
+            and report the results live, so you can see what&rsquo;s working
+            while it&rsquo;s still running.
           </p>
         </div>
       </div>

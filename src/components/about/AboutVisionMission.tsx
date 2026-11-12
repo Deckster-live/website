@@ -43,9 +43,9 @@ const panels: readonly Panel[] = [
     icon: Eye,
     index: "01",
     label: "Our Vision",
-    title: "A world matched by data, not guesswork",
+    title: "Every brand matched with the right voices",
     description:
-      "A world where every brand — regardless of size or budget — can find and work with the right voices, backed by data instead of guesswork.",
+      "Any brand, at any size or budget, should be able to find the creators its customers already listen to, and know exactly why those creators were the right choice.",
     kicker: "Where we're headed",
     fill: "linear-gradient(to top, var(--signal), var(--green-darkest) 62%, var(--ink))",
     fg: "var(--paper)",
@@ -60,9 +60,9 @@ const panels: readonly Panel[] = [
     icon: Compass,
     index: "02",
     label: "Our Mission",
-    title: "Influencer-led growth, made dependable",
+    title: "Make creator marketing as dependable as any other channel",
     description:
-      "To make influencer-led growth simple, measurable and accessible — by combining technology, human expertise and a wide creator network into one dependable place for brands to grow through.",
+      "We combine creator data, a hands-on team and live reporting so creator campaigns can be planned, run and measured with the same confidence as search or performance ads.",
     kicker: "What we do every day",
     fill: "linear-gradient(to bottom, color-mix(in oklab, var(--signal) 14%, var(--paper)), var(--mist))",
     fg: "var(--ink)",
@@ -77,12 +77,12 @@ const panels: readonly Panel[] = [
 
 export function AboutVisionMission() {
   return (
-    <Section id="vision-mission" className="pt-10 md:pt-14 lg:pt-16">
+    <Section id="vision-mission">
       <SectionHead
         align="center"
         eyebrow="What drives us"
-        title="Where we're headed, and the work that gets us there"
-        copy="One is the world we're building toward. The other is what we do about it, campaign after campaign."
+        title="Where we're headed, and how we get there"
+        copy="The vision keeps us honest. The mission is the work, campaign after campaign."
       />
 
       <div className={`${HEAD_GAP} lg:mt-20`}>

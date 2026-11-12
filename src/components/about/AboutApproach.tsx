@@ -9,8 +9,14 @@ export function AboutApproach() {
           <SectionHead
             eyebrow="How we operate"
             title="Every campaign runs as a system"
-            copy="We treat every campaign as a system, not a one-time push — built on filtering for the right platform, the right category, the right audience, and the right budget before a single piece of content goes live. From positioning and targeting to execution and optimisation, every decision has a purpose and a place within the larger strategy. That same structure runs quietly behind everything we do, creating a repeatable process that removes guesswork and keeps performance consistent — so results are driven by strategy, not accident."
+            copy="Before a single post goes live, every brief runs through the same seven filters: platform, category, audience data and quality, content quality, logistics, past campaign performance and budget fit."
           />
+          <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-slate md:text-base">
+            Then one team handles negotiation, content approvals, publishing
+            and paid amplification, and you follow the results in a live
+            report pulled from the platforms, not pasted into a deck. The
+            outcome is a process you can repeat, not a campaign you hope works.
+          </p>
         </div>
         <div className="relative aspect-1120/958 w-full overflow-hidden rounded-2xl">
           <Image

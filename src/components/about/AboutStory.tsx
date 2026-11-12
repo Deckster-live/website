@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Section, SectionHead } from "@/components/ui/primitives";
+import { INVOICE_URL } from "@/lib/invoice";
 
 function TeamScreen() {
   return (
@@ -37,17 +38,29 @@ export function AboutStory() {
       <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16">
         <div>
           <SectionHead
-            eyebrow="About the company"
-            title="Who we are"
-            copy="Deckster is a technology-driven place for brands to plan, launch and scale influencer-led campaigns — without stitching together five different tools or teams to do it. We bring creators, data and execution into one place, so brands spend less time managing the process and more time seeing results."
+            eyebrow="Our story"
+            title="Built in 2020 to take the guesswork out of creator marketing"
+            copy="Too many creator campaigns still run on spreadsheets, screenshot reports and gut feel. Deckster started with a simple idea: a brand should know why each creator was picked, what the campaign is doing while it runs, and what it delivered at the end."
           />
 
           <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-slate md:text-base">
-            We work across categories, budgets and formats — from a single
-            seeding campaign to a full-funnel launch — with the same principle
-            underneath everything: match brands with the right voices, back it
-            with real data, and stay accountable for the outcome, start to
-            finish.
+            So we built one team that does it all: creator selection backed by
+            data, negotiation, content approvals, amplification and live
+            reporting. Today we run creator campaigns for brands like Rare
+            Rabbit, Swisse, BlissClub, Mahina and Policybazaar UAE, from a
+            single seeding drop to a full-funnel launch.
+          </p>
+
+          <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-slate md:text-base">
+            And because creators are half of every deal, we build for them
+            too.{" "}
+            <a
+              href={INVOICE_URL}
+              className="font-medium text-ink underline-offset-4 hover:text-green-dark hover:underline"
+            >
+              Deckster Invoice
+            </a>{" "}
+            is our free GST invoicing app for creators and talent managers.
           </p>
         </div>
 
