@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { jsonLd, pageMetadata, SITE_URL } from "@/lib/site";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   caseStudies,
@@ -144,6 +145,33 @@ export default async function CaseStudyPage({
             reportUrl={study.report_url}
           />
           {study.learning && <CaseStudyLearning learning={study.learning} />}
+
+          {/* Links every study to the others, so none depends on the homepage carousel to be found. */}
+          <nav aria-labelledby="more-case-studies">
+            <h2
+              id="more-case-studies"
+              className="font-display text-2xl font-semibold"
+            >
+              More case studies
+            </h2>
+            <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+              {caseStudies
+                .filter((c) => c.slug !== study.slug)
+                .map((c) => (
+                  <li key={c.slug}>
+                    <Link
+                      href={`/case-studies/${c.slug}`}
+                      className="block rounded-2xl border border-line p-4 transition-colors hover:bg-mist"
+                    >
+                      <span className="block font-medium">{c.brand}</span>
+                      <span className="mt-1 block text-sm text-slate">
+                        {c.usp_metric} {c.usp}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+            </ul>
+          </nav>
         </div>
       </div>
     </>

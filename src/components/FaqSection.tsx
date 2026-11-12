@@ -3,13 +3,11 @@
 import { useState } from "react";
 import { FAQS } from "@/data/faqs";
 import { HashLink } from "@/components/ui/HashLink";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Plus } from "lucide-react";
 import { HEAD_GAP, Section, SectionHead } from "@/components/ui/primitives";
 
 export function FaqSection() {
   const [open, setOpen] = useState(0);
-  const reduced = useReducedMotion() ?? false;
 
   return (
     <Section id="faq" className="py-0!">
@@ -62,29 +60,25 @@ export function FaqSection() {
                 </button>
               </h3>
 
-              <AnimatePresence initial={false}>
-                {isOpen && (
-                  <motion.div
-                    key="answer"
-                    id={`faq-answer-${index}`}
-                    role="region"
-                    aria-labelledby={`faq-question-${index}`}
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={
-                      reduced
-                        ? { duration: 0 }
-                        : { duration: 0.34, ease: [0.16, 1, 0.3, 1] }
-                    }
-                    className="overflow-hidden"
-                  >
-                    <p className="px-5 pb-5 text-[14.5px] leading-relaxed text-slate sm:px-7 sm:pb-6 sm:text-[15px] sm:pr-20">
-                      {faq.a}
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {/* Every answer stays in the HTML (crawlers and AI engines read
+                  it); closed ones collapse to 0fr and are made inert. */}
+              <div
+                id={`faq-answer-${index}`}
+                role="region"
+                aria-labelledby={`faq-question-${index}`}
+                inert={!isOpen}
+                className={`grid transition-[grid-template-rows,opacity] duration-[340ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
+                  isOpen
+                    ? "grid-rows-[1fr] opacity-100"
+                    : "grid-rows-[0fr] opacity-0"
+                }`}
+              >
+                <div className="overflow-hidden">
+                  <p className="px-5 pb-5 text-[14.5px] leading-relaxed text-slate sm:px-7 sm:pb-6 sm:text-[15px] sm:pr-20">
+                    {faq.a}
+                  </p>
+                </div>
+              </div>
             </li>
           );
         })}

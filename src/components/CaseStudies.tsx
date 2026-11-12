@@ -352,6 +352,24 @@ export function CaseStudies() {
               </AnimatePresence>
             </div>
           </div>
+
+          {/* The carousel only renders the active card, so these plain links
+              are what lets crawlers (and readers) reach every case study. */}
+          <nav
+            aria-label="All case studies"
+            className="mt-5 flex shrink-0 flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-slate"
+          >
+            <span>Read the full case studies:</span>
+            {caseStudies.map((c) => (
+              <Link
+                key={c.slug}
+                href={`/case-studies/${c.slug}`}
+                className="font-medium text-ink underline-offset-4 hover:underline"
+              >
+                {c.brand}
+              </Link>
+            ))}
+          </nav>
         </div>
       </div>
     </section>

@@ -18,7 +18,7 @@ export const privacyPolicy: LegalPageContent = {
   title: "Privacy Policy",
   intro:
     "What we collect when you visit deckster.live or send us a brief, why we collect it, and the choices you have.",
-  lastUpdated: "24 October 2026",
+  lastUpdated: "12 November 2026",
   html: `
     <h2>1. Overview</h2>
     <p>deckster.live is owned and operated by Talk Native Marketing Private Limited, a private limited company incorporated in India with its registered office in Rudrapur, Uttarakhand (&ldquo;Talk Native Marketing&rdquo;). Deckster is a brand of Talk Native Marketing, and Talk Native Marketing is its parent company.</p>
@@ -41,8 +41,8 @@ export const privacyPolicy: LegalPageContent = {
     </ul>
 
     <h2>4. Cookies &amp; Similar Technologies</h2>
-    <p>deckster.live currently uses only the essential, functional cookies needed to make the site work (for example, remembering your interface preferences). We do not currently run advertising or third-party tracking cookies.</p>
-    <p>If that changes &mdash; for example, if we add analytics tools to better understand site usage &mdash; we&rsquo;ll update this policy and, where required, ask for your consent. Most browsers let you block or delete cookies through their settings if you&rsquo;d rather not have them at all.</p>
+    <p>deckster.live uses the functional cookies needed to make the site work (for example, remembering your interface preferences) and Google Analytics, which sets cookies to measure how the site is used: pages visited, approximate location and device type. We use these reports in aggregate and do not run advertising cookies.</p>
+    <p>If we add other tracking tools, we&rsquo;ll update this policy and, where required, ask for your consent. Most browsers let you block or delete cookies through their settings if you&rsquo;d rather not have them at all.</p>
 
     <h2>5. Third-Party Links &amp; Services</h2>
     <p>Our site links out to third-party platforms &mdash; Instagram, LinkedIn, and the individual creator reels featured in our case studies &mdash; and may embed content from them. Once you follow one of those links, you&rsquo;re on someone else&rsquo;s platform and subject to their own privacy policy, not ours. We&rsquo;d encourage you to review those before sharing any information there.</p>

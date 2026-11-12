@@ -30,7 +30,9 @@ export function CountUp({
   className,
   style,
 }: CountUpProps) {
-  const value = useMotionValue(0);
+  // Starts at the final value so the static HTML (what crawlers read) shows
+  // real numbers, not "0"; the effect below resets to 0 before counting.
+  const value = useMotionValue(to);
   const text = useTransform(value, format);
 
   useEffect(() => {
