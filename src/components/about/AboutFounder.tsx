@@ -23,7 +23,11 @@ const OUTLETS: {
     url: FOUNDER.press[4].url,
     logo: { src: "/images/press/moneycontrol.webp", width: 286, height: 60, className: "h-5" },
   },
-  { name: "NDTV Profit", url: FOUNDER.press[3].url },
+  {
+    name: "NDTV Profit",
+    url: FOUNDER.press[3].url,
+    logo: { src: "/images/press/ndtv-profit.webp", width: 220, height: 120, className: "h-9" },
+  },
 ];
 
 /**
