@@ -126,7 +126,7 @@ export default function ContactPage() {
       <div className="px-5 pt-12 md:px-8 md:pt-16">
         <div className="mx-auto grid max-w-310 gap-5 md:grid-cols-3 md:gap-0">
           <ContactCard
-            icon={<Phone className="h-5 w-5" strokeWidth={1.75} />}
+            icon={<Phone className="h-5 w-5 text-white" strokeWidth={1.75} />}
             title={PHONE_NUMBER}
             copy="Talk to the team about a brief, a budget or a campaign that's already live."
             href={PHONE_HREF}
@@ -141,7 +141,7 @@ export default function ContactPage() {
             action="Write to us"
           />
           <ContactCard
-            icon={<MapPin className="h-5 w-5" strokeWidth={1.75} />}
+            icon={<MapPin className="h-5 w-5 text-white" strokeWidth={1.75} />}
             title={`${ADDRESS.locality}, ${ADDRESS.region}`}
             copy={
               <>
