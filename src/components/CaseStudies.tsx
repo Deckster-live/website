@@ -369,6 +369,12 @@ export function CaseStudies() {
                 {c.brand}
               </Link>
             ))}
+            <Link
+              href="/case-studies"
+              className="font-medium text-green-dark underline-offset-4 hover:underline"
+            >
+              All case studies →
+            </Link>
           </nav>
         </div>
       </div>

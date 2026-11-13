@@ -1,14 +1,14 @@
-# Old-site URLs that Google still crawls (they 404 today). Read by Netlify and Cloudflare Pages.
-/about-us       /about    301
-/contact        /         301
-/contact/       /         301
-/services       /         301
-/services/      /         301
-/platform       /         301
-/platform/      /         301
-/work           /         301
-/work/          /         301
-/insights       /         301
-/insights/      /         301
-/creators/*     /         301
-/content/*      /         301
+# Old-site URLs that Google still crawls. Read by Cloudflare's static assets.
+# Each points at the closest real page; a blanket redirect to the homepage
+# reads as a soft 404. Old URLs with no equivalent page are left to 404.
+# /index.html and trailing slashes (/contact/) are redirected by Cloudflare's
+# default html_handling, so they need no rule here.
+/about-us       /about          301
+/work           /case-studies   301
+/careers/openings  /careers#openings  301
+/work/          /case-studies   301
+# Until the /services pages exist (Phase 2.3). Then repoint to /services.
+/services       /               301
+/services/      /               301
+# Removed: /platform, /insights, /content/* and /creators/* now return 404.
+# /creators/* comes back as curated category pages in Phase 3.9.

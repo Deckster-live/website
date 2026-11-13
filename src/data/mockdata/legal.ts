@@ -18,10 +18,10 @@ export const privacyPolicy: LegalPageContent = {
   title: "Privacy Policy",
   intro:
     "What we collect when you visit deckster.live or send us a brief, why we collect it, and the choices you have.",
-  lastUpdated: "12 November 2026",
+  lastUpdated: "13 November 2026",
   html: `
     <h2>1. Overview</h2>
-    <p>deckster.live is owned and operated by Talk Native Marketing Private Limited, a private limited company incorporated in India with its registered office in Rudrapur, Uttarakhand (&ldquo;Talk Native Marketing&rdquo;). Deckster is a brand of Talk Native Marketing, and Talk Native Marketing is its parent company.</p>
+    <p>deckster.live is owned and operated by Talk Native Marketing Private Limited, a private limited company incorporated in India with its registered office in Gurugram, Haryana (&ldquo;Talk Native Marketing&rdquo;). Deckster is a brand of Talk Native Marketing, and Talk Native Marketing is its parent company.</p>
     <p>In this Privacy Policy, &ldquo;Talk Native Marketing&rdquo;, &ldquo;Deckster&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; and &ldquo;our&rdquo; all refer to Talk Native Marketing Private Limited, including when it operates under the Deckster name. Talk Native Marketing decides how and why your personal information is processed through deckster.live and is responsible for it as the data fiduciary under applicable law, including India&rsquo;s Digital Personal Data Protection Act, 2023.</p>
     <p>deckster.live helps brands plan, launch and track creator marketing campaigns. This Privacy Policy explains what information we collect when you visit the site or submit a brief, how we use it, and the choices you have.</p>
     <p>By using deckster.live, you agree to the collection and use of information in line with this policy. If you don&rsquo;t agree, please don&rsquo;t use the site.</p>
@@ -74,7 +74,7 @@ export const privacyPolicy: LegalPageContent = {
 
     <h2>12. Contact Us</h2>
     <p>Questions about this policy or how your information is handled? Reach us at <a href="mailto:hello@deckster.live">hello@deckster.live</a>.</p>
-    <p>Deckster is operated by:<br /><strong>Talk Native Marketing Private Limited</strong> &middot; GSTIN 05AAHCT9528J1ZW &middot; Rudrapur, Uttarakhand &ndash; 263153<br /><a href="mailto:hello@deckster.live">hello@deckster.live</a></p>
+    <p>Deckster is operated by:<br /><strong>Talk Native Marketing Private Limited</strong> &middot; GSTIN 05AAHCT9528J1ZW &middot; P3C121, Princeton Estate, DLF City Phase V, Gurugram, Haryana &ndash; 122002<br /><a href="mailto:hello@deckster.live">hello@deckster.live</a></p>
   `,
 };
 
@@ -83,10 +83,10 @@ export const termsOfService: LegalPageContent = {
   title: "Terms of Service",
   intro:
     "The terms that govern your use of deckster.live and any brief you send us through it.",
-  lastUpdated: "24 October 2026",
+  lastUpdated: "13 November 2026",
   html: `
     <h2>1. Acceptance of Terms</h2>
-    <p>deckster.live (the &ldquo;Site&rdquo;) is owned and operated by Talk Native Marketing Private Limited, a private limited company incorporated in India with its registered office in Rudrapur, Uttarakhand (&ldquo;Talk Native Marketing&rdquo;). Deckster is a brand of Talk Native Marketing, and Talk Native Marketing is its parent company.</p>
+    <p>deckster.live (the &ldquo;Site&rdquo;) is owned and operated by Talk Native Marketing Private Limited, a private limited company incorporated in India with its registered office in Gurugram, Haryana (&ldquo;Talk Native Marketing&rdquo;). Deckster is a brand of Talk Native Marketing, and Talk Native Marketing is its parent company.</p>
     <p>In these Terms of Service (&ldquo;Terms&rdquo;), &ldquo;Talk Native Marketing&rdquo;, &ldquo;Deckster&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; and &ldquo;our&rdquo; all refer to Talk Native Marketing Private Limited, including when it operates under the Deckster name. These Terms are an agreement between you and Talk Native Marketing, and govern your access to and use of the Site.</p>
     <p>By browsing the Site or submitting a brief through it, you agree to these Terms. If you don&rsquo;t agree, please don&rsquo;t use the Site.</p>
 
@@ -128,6 +128,6 @@ export const termsOfService: LegalPageContent = {
 
     <h2>12. Contact Us</h2>
     <p>Questions about these Terms? Reach us at <a href="mailto:hello@deckster.live">hello@deckster.live</a>.</p>
-    <p>Deckster is operated by:<br /><strong>Talk Native Marketing Private Limited</strong> &middot; GSTIN 05AAHCT9528J1ZW &middot; Rudrapur, Uttarakhand &ndash; 263153<br /><a href="mailto:hello@deckster.live">hello@deckster.live</a></p>
+    <p>Deckster is operated by:<br /><strong>Talk Native Marketing Private Limited</strong> &middot; GSTIN 05AAHCT9528J1ZW &middot; P3C121, Princeton Estate, DLF City Phase V, Gurugram, Haryana &ndash; 122002<br /><a href="mailto:hello@deckster.live">hello@deckster.live</a></p>
   `,
 };

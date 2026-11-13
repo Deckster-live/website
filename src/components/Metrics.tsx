@@ -1,10 +1,11 @@
 import { HEAD_GAP, Section } from "@/components/ui/primitives";
+import { STATS } from "@/lib/stats";
 
 const stats = [
-  { label: "Reach", value: "1B+", sub: "Audience size" },
-  { label: "Scale", value: "300+", sub: "Campaigns executed" },
-  { label: "Network", value: "15K+", sub: "Creators activated" },
-  { label: "Trust", value: "50+", sub: "Brand partners" },
+  { label: "Reach", value: STATS.reach, sub: "Audience size" },
+  { label: "Scale", value: STATS.campaigns, sub: "Campaigns executed" },
+  { label: "Network", value: STATS.creatorsActivated, sub: "Creators activated" },
+  { label: "Trust", value: STATS.brands, sub: "Brand partners" },
 ] as const;
 
 export function Metrics() {

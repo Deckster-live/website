@@ -26,6 +26,11 @@ export interface CareerRole {
   open: boolean;
   /** ISO date — when the role was posted, for sorting/display. */
   postedOn: string;
+  /**
+   * ISO date the listing expires for Google for Jobs (JobPosting `validThrough`).
+   * Keep it about 60 days ahead and roll it forward while the role stays open.
+   */
+  validThrough: string;
 }
 
 export const careerRoles: CareerRole[] = [
@@ -40,6 +45,7 @@ export const careerRoles: CareerRole[] = [
       "Own creator outreach and campaign coordination end to end, from shortlisting to content tracking.",
     open: true,
     postedOn: "2026-08-18",
+    validThrough: "2027-01-12",
     jd: `
       <h2>About the role</h2>
       <p>You'll run the day-to-day of live campaigns — finding the right creators, getting them briefed and onboarded, and making sure content ships on time and on brief. It's a hands-on role for someone who wants to learn how creator campaigns actually get built, not just planned.</p>
@@ -79,6 +85,7 @@ export const careerRoles: CareerRole[] = [
       "Bring new brands onto Deckster — from first outreach to closing the brief.",
     open: true,
     postedOn: "2026-08-25",
+    validThrough: "2027-01-12",
     jd: `
       <h2>About the role</h2>
       <p>You'll be the first Deckster conversation most brands have. This role owns the top of the funnel — finding the right brands to talk to, getting a meeting on the calendar, and carrying that conversation through to a signed brief.</p>
@@ -118,6 +125,7 @@ export const careerRoles: CareerRole[] = [
       "Lead a portfolio of brand accounts and the creator strategy behind each campaign.",
     open: true,
     postedOn: "2026-09-02",
+    validThrough: "2027-01-12",
     jd: `
       <h2>About the role</h2>
       <p>You'll own a portfolio of brand relationships end to end — the strategy, the creator mix, the numbers, and the team running it day to day. This is a senior individual-contributor role with real client and P&amp;L ownership, not a step removed from the work.</p>

@@ -19,7 +19,7 @@ export async function generateMetadata({
   if (!role) return {};
 
   return pageMetadata({
-    title: role.name,
+    title: `${role.name} (${role.location}, India): Careers`,
     description: role.summary,
     path: `/careers/${role.slug}`,
   });
@@ -50,9 +50,16 @@ export default async function RolePage({
     title: role.name,
     description: role.jd.trim(),
     datePosted: role.postedOn,
+    validThrough: role.validThrough,
+    identifier: {
+      "@type": "PropertyValue",
+      name: SITE_NAME,
+      value: role.slug,
+    },
     employmentType: EMPLOYMENT_TYPE[role.type],
     hiringOrganization: {
       "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
       name: SITE_NAME,
       sameAs: SITE_URL,
       logo: `${SITE_URL}/icon.png`,
@@ -65,8 +72,22 @@ export default async function RolePage({
     url: `${SITE_URL}/careers/${role.slug}`,
   };
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Careers", item: `${SITE_URL}/careers` },
+      { "@type": "ListItem", position: 3, name: role.name, item: `${SITE_URL}/careers/${role.slug}` },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd(breadcrumbJsonLd)}
+      />
       {role.open && (
         <script
           type="application/ld+json"
@@ -76,7 +97,7 @@ export default async function RolePage({
       <section className="px-5 pt-32 pb-10 md:px-8 md:pt-42 md:pb-14">
         <div className="mx-auto max-w-3xl">
           <Link
-            href="/careers/openings"
+            href="/careers#openings"
             className="inline-flex items-center gap-1.5 text-sm font-medium text-slate transition-colors hover:text-ink"
           >
             <ArrowLeft className="h-4 w-4" strokeWidth={2} />

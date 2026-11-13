@@ -5,12 +5,13 @@
 ## Pages
 
 - [Home](https://deckster.live/): what Deckster does, use cases, results, how we work, FAQ and a brief form
-- [About](https://deckster.live/about): the team and our approach
-- [Careers](https://deckster.live/careers): life at Deckster and open roles
-- [All openings](https://deckster.live/careers/openings)
+- [About](https://deckster.live/about): our story, founder Shivam Agarwal and how we work
+- [Contact](https://deckster.live/contact): send a brief, email or call
+- [Careers](https://deckster.live/careers): life at Deckster and every open role
 
 ## Case studies
 
+- [All case studies](https://deckster.live/case-studies)
 - [Rare Rabbit](https://deckster.live/case-studies/rare-rabbit)
 - [Policy Bazaar – UAE](https://deckster.live/case-studies/policybazaar-uae)
 - [BlissClub](https://deckster.live/case-studies/blissclub)
@@ -21,6 +22,7 @@
 
 - Email: hello@deckster.live
 - WhatsApp: https://wa.me/919650361888
+- Office: Talk Native Marketing Private Limited, P3C121, Princeton Estate, DLF City Phase V, Gurugram, Haryana 122002
 
 ## Legal
 

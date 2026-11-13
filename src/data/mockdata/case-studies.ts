@@ -147,6 +147,8 @@ export interface CaseStudy {
   platforms?: string[];
   /** Public Deckster Suite report backing every number on this page. */
   report_url?: string;
+  /** ISO date the study was published (e.g. "2026-11-13"); sets the Article schema date. */
+  published?: string;
 
   // --- Variable sections for the case study's own page ---
   content: CaseStudyBlock[];

@@ -1,19 +1,28 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { ArrowUpRight, Check, ChevronDown, Mail } from "lucide-react";
-import { HashLink } from "@/components/ui/HashLink";
+import { ArrowUpRight, Check, ChevronDown } from "lucide-react";
+import {
+  IconBrandInstagram,
+  IconBrandLinkedin,
+  IconBrandWhatsapp,
+} from "@tabler/icons-react";
+import { BUDGETS, GOALS } from "@/components/ContactSection";
 import { Section } from "@/components/ui/primitives";
+import { trackEvent } from "@/lib/analytics";
+import { EMAIL_ADDRESS, EMAIL_HREF, WHATSAPP_HREF } from "@/lib/contact";
+import { submitBrief } from "@/lib/googleSheets";
+import { SOCIAL_PROFILES } from "@/lib/site";
 
-const BUDGETS = [
-  "Under ₹5L",
-  "₹5L – ₹15L",
-  "₹15L – ₹50L",
-  "₹50L and up",
-  "Not sure yet",
+const FIELD_ORDER = [
+  "name",
+  "brand",
+  "email",
+  "phone",
+  "goal",
+  "budget",
+  "details",
 ] as const;
-
-const FIELD_ORDER = ["name", "brand", "email", "budget", "goal"] as const;
 
 type FieldName = (typeof FIELD_ORDER)[number];
 type Enquiry = Record<FieldName, string>;
@@ -22,60 +31,44 @@ const EMPTY: Enquiry = {
   name: "",
   brand: "",
   email: "",
-  budget: "",
+  phone: "",
   goal: "",
+  budget: "",
+  details: "",
 };
+
+const OPTIONAL: readonly FieldName[] = ["phone", "details"];
+
+const SOCIALS = [
+  { icon: IconBrandInstagram, label: "Instagram", href: SOCIAL_PROFILES[0] },
+  { icon: IconBrandLinkedin, label: "LinkedIn", href: SOCIAL_PROFILES[1] },
+  { icon: IconBrandWhatsapp, label: "WhatsApp", href: WHATSAPP_HREF },
+] as const;
 
 const isEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
-/* -------------------------------------------------- */
-/* Hairline field                                     */
-/* -------------------------------------------------- */
+/** The shared option lists are sentence fragments; capitalise them for a dropdown. */
+const cap = (value: string) => value.charAt(0).toUpperCase() + value.slice(1);
 
-interface FieldProps {
-  label: string;
-  invalid: boolean;
-  className?: string;
-  children: React.ReactNode;
-}
+/** Rounded, bordered box; turns signal-green on focus and red when missing. */
+const boxClass = (invalid: boolean) =>
+  `w-full rounded-xl border bg-card px-4 py-3.5 text-[15px] text-ink outline-none transition-colors placeholder:text-slate/55 focus:border-green-dark focus:ring-3 focus:ring-signal/20 ${
+    invalid ? "border-destructive" : "border-line-strong"
+  }`;
 
-function Field({ label, invalid, className = "", children }: FieldProps) {
-  return (
-    <label className={`group block ${className}`}>
-      <span className="eyebrow block">{label}</span>
-
-      <span
-        className={`relative mt-2.5 block border-b transition-colors ${
-          invalid ? "border-destructive" : "border-line-strong"
-        }`}
-      >
-        {children}
-
-        {/* the hairline becomes signal on focus — the only accent in the field */}
-        <span
-          aria-hidden
-          className="pointer-events-none absolute -bottom-px left-0 h-[1.5px] w-full origin-left scale-x-0 bg-signal transition-transform duration-300 ease-out group-focus-within:scale-x-100"
-        />
-      </span>
-    </label>
-  );
-}
-
-const inputClass =
-  "w-full bg-transparent py-2.5 text-[15px] text-ink outline-none placeholder:text-slate/45";
-
-/* -------------------------------------------------- */
-/* Section                                            */
-/* -------------------------------------------------- */
-
+/**
+ * Brief form for /contact. It posts to the same Google Sheet, with the same
+ * columns and option values, as the homepage's ContactSection.
+ */
 export function ContactSectionForm() {
   const [enquiry, setEnquiry] = useState<Enquiry>(EMPTY);
   const [attempted, setAttempted] = useState(false);
+  const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
 
   const fields = useRef(new Map<FieldName, HTMLElement>());
 
-  const register = (name: FieldName, node: HTMLElement | null) => {
+  const register = (name: FieldName) => (node: HTMLElement | null) => {
     if (node) fields.current.set(name, node);
     else fields.current.delete(name);
   };
@@ -89,14 +82,15 @@ export function ContactSectionForm() {
     ) =>
       setEnquiry((previous) => ({ ...previous, [name]: event.target.value }));
 
-  const isMissing = (name: FieldName) =>
-    name === "email"
-      ? !isEmail(enquiry.email.trim())
-      : enquiry[name].trim().length === 0;
+  const isMissing = (name: FieldName) => {
+    if (OPTIONAL.includes(name)) return false;
+    if (name === "email") return !isEmail(enquiry.email.trim());
+    return enquiry[name].trim().length === 0;
+  };
 
   const invalid = (name: FieldName) => attempted && isMissing(name);
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setAttempted(true);
 
@@ -107,199 +101,177 @@ export function ContactSectionForm() {
       return;
     }
 
-    const body = [
-      "Hi Deckster,",
-      "",
-      `Name: ${enquiry.name}`,
-      `Brand: ${enquiry.brand}`,
-      `Email: ${enquiry.email}`,
-      `Budget: ${enquiry.budget}`,
-      "",
-      "What we're looking to achieve:",
-      enquiry.goal,
-    ].join("\n");
+    setSending(true);
 
-    window.location.assign(
-      `mailto:hello@deckster.live?subject=${encodeURIComponent(
-        `Enquiry from ${enquiry.brand.trim()}`,
-      )}&body=${encodeURIComponent(body)}`,
-    );
+    try {
+      // Same columns as the homepage brief, so both land in one sheet.
+      await submitBrief({
+        Name: enquiry.name,
+        Brand: enquiry.brand,
+        Goal: enquiry.goal,
+        Range: enquiry.budget,
+        Email: enquiry.email,
+        Phone: enquiry.phone,
+        AdditionalRequirement: enquiry.details,
+      });
+      trackEvent("generate_lead", {
+        form: "brief_fields",
+        page: window.location.pathname,
+        budget: enquiry.budget,
+      });
+    } finally {
+      setSending(false);
+    }
 
     setSent(true);
   };
 
-  return (
-    <Section id="cta" className="pt-0! pb-24! md:pb-32!">
-      <div
-        className="glow-field relative rounded-4xl py-4 md:py-8"
-        style={{
-          ["--glow-field-image" as string]:
-            "radial-gradient(circle clamp(14rem, 42vw, 28rem) at 50% 10%, color-mix(in oklab, var(--signal) 16%, transparent) 0%, transparent 72%)",
-        }}
+  /** Text input with a screen-reader label; the placeholder is the visible label. */
+  const input = (
+    name: FieldName,
+    label: string,
+    props: React.InputHTMLAttributes<HTMLInputElement> = {},
+  ) => (
+    <label className="block">
+      <span className="sr-only">{label}</span>
+      <input
+        ref={register(name)}
+        value={enquiry[name]}
+        onChange={update(name)}
+        placeholder={label}
+        aria-invalid={invalid(name) || undefined}
+        className={boxClass(invalid(name))}
+        {...props}
+      />
+    </label>
+  );
+
+  const select = (
+    name: FieldName,
+    label: string,
+    options: readonly string[],
+  ) => (
+    <label className="relative block">
+      <span className="sr-only">{label}</span>
+      <select
+        ref={register(name)}
+        value={enquiry[name]}
+        onChange={update(name)}
+        aria-invalid={invalid(name) || undefined}
+        className={`${boxClass(invalid(name))} cursor-pointer appearance-none pr-10 ${
+          enquiry[name] ? "" : "text-slate/55"
+        }`}
       >
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="eyebrow">Let&rsquo;s work together</p>
+        <option value="">{label}</option>
+        {options.map((option) => (
+          <option key={option} value={option} className="text-ink">
+            {cap(option)}
+          </option>
+        ))}
+      </select>
+      <ChevronDown
+        aria-hidden
+        className="pointer-events-none absolute top-1/2 right-4 h-4 w-4 -translate-y-1/2 text-slate"
+        strokeWidth={1.75}
+      />
+    </label>
+  );
 
-          <h2 className="font-display mt-4 text-[clamp(1.85rem,4.6vw,3.15rem)] leading-[1.06] font-semibold">
-            Let&rsquo;s build your next campaign
-          </h2>
+  return (
+    <Section id="cta">
+      <div className="mx-auto max-w-2xl text-center">
+        <h2 className="font-display text-[clamp(1.85rem,4.6vw,3rem)] leading-[1.06] font-semibold">
+          Get in touch
+        </h2>
+        <p className="mx-auto mt-4 max-w-lg text-[15px] leading-relaxed text-slate md:text-base">
+          Share the goal and the budget. We&rsquo;ll come back with a creator
+          shortlist, a plan and an honest view of what that budget can do.
+        </p>
+      </div>
 
-          <p className="mx-auto mt-5 max-w-lg text-[15px] leading-relaxed text-slate md:text-base">
-            Tell us the goal. We&rsquo;ll bring the reach, the right voices, and
-            the results to match.
+      {sent ? (
+        <div className="mx-auto mt-12 max-w-xl text-center" role="status">
+          <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-signal/15">
+            <Check className="h-5 w-5 text-green-dark" strokeWidth={2.5} />
+          </span>
+          <p className="font-display mt-5 text-[clamp(1.3rem,2.6vw,1.7rem)] leading-snug font-semibold">
+            Thanks, your brief is with us.
+          </p>
+          <p className="mt-3 text-[15px] leading-relaxed text-slate">
+            We&rsquo;ll come back with a creator shortlist and a plan. Anything
+            to add? Write to{" "}
+            <a
+              href={EMAIL_HREF}
+              className="text-ink underline decoration-signal underline-offset-4"
+            >
+              {EMAIL_ADDRESS}
+            </a>
+            .
           </p>
         </div>
-
-        {sent ? (
-          <div className="mx-auto mt-14 max-w-xl text-center">
-            <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-signal/15">
-              <Check className="h-5 w-5 text-green-dark" strokeWidth={2.5} />
-            </span>
-
-            <p className="font-display mt-5 text-[clamp(1.3rem,2.6vw,1.7rem)] leading-snug font-semibold">
-              Thanks — your enquiry is on its way.
-            </p>
-
-            <p className="mt-3 text-[15px] leading-relaxed text-slate">
-              We&rsquo;ve opened your mail client with the details filled in. If
-              nothing happened, send it straight to{" "}
-              <a
-                href="mailto:hello@deckster.live"
-                className="text-ink underline decoration-signal underline-offset-4"
-              >
-                hello@deckster.live
-              </a>
-              .
-            </p>
-
-            <button
-              type="button"
-              onClick={() => setSent(false)}
-              className="mt-7 text-sm text-slate underline decoration-line-strong underline-offset-4 transition-colors hover:text-ink hover:decoration-signal"
-            >
-              Edit the details
-            </button>
+      ) : (
+        <form
+          onSubmit={handleSubmit}
+          noValidate
+          className="mx-auto mt-10 max-w-3xl md:mt-12"
+        >
+          <div className="grid gap-4 sm:grid-cols-2">
+            {input("name", "Name", { autoComplete: "name" })}
+            {input("brand", "Brand", { autoComplete: "organization" })}
+            {input("email", "Email", { type: "email", autoComplete: "email" })}
+            {input("phone", "Phone (optional)", {
+              type: "tel",
+              autoComplete: "tel",
+            })}
+            {select("goal", "What's the goal?", GOALS)}
+            {select("budget", "Budget range", BUDGETS)}
+            <label className="block sm:col-span-2">
+              <span className="sr-only">Anything else (optional)</span>
+              <textarea
+                ref={register("details")}
+                value={enquiry.details}
+                onChange={update("details")}
+                rows={5}
+                placeholder="Anything else? Timelines, platforms, creators you like (optional)"
+                className={`${boxClass(false)} resize-y leading-relaxed`}
+              />
+            </label>
           </div>
-        ) : (
-          <form
-            onSubmit={handleSubmit}
-            noValidate
-            className="mx-auto mt-14 max-w-3xl md:mt-16"
+
+          <div className="mt-7 flex flex-col items-center gap-3">
+            <button
+              type="submit"
+              disabled={sending}
+              className="group inline-flex items-center justify-center gap-1.5 rounded-full bg-ink px-8 py-3.5 text-sm font-medium text-paper transition-colors hover:bg-green-dark disabled:opacity-60"
+            >
+              {sending ? "Sending…" : "Send brief"}
+              <ArrowUpRight
+                className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                strokeWidth={2}
+              />
+            </button>
+            {attempted && FIELD_ORDER.some(isMissing) && (
+              <p className="text-[13px] text-destructive" role="alert">
+                A few fields still need filling in.
+              </p>
+            )}
+          </div>
+        </form>
+      )}
+
+      <div className="mt-10 flex items-center justify-center gap-3">
+        {SOCIALS.map((s) => (
+          <a
+            key={s.label}
+            href={s.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={s.label}
+            className="grid h-10 w-10 place-items-center rounded-full bg-green-dark text-paper transition-colors hover:bg-ink"
           >
-            <div className="grid gap-x-10 gap-y-9 sm:grid-cols-2">
-              <Field label="Name" invalid={invalid("name")}>
-                <input
-                  ref={(node) => register("name", node)}
-                  value={enquiry.name}
-                  onChange={update("name")}
-                  placeholder="Your full name"
-                  autoComplete="name"
-                  className={inputClass}
-                />
-              </Field>
-
-              <Field label="Brand" invalid={invalid("brand")}>
-                <input
-                  ref={(node) => register("brand", node)}
-                  value={enquiry.brand}
-                  onChange={update("brand")}
-                  placeholder="Company or label"
-                  autoComplete="organization"
-                  className={inputClass}
-                />
-              </Field>
-
-              <Field label="Email" invalid={invalid("email")}>
-                <input
-                  ref={(node) => register("email", node)}
-                  type="email"
-                  value={enquiry.email}
-                  onChange={update("email")}
-                  placeholder="you@brand.com"
-                  autoComplete="email"
-                  className={inputClass}
-                />
-              </Field>
-
-              <Field label="Budget" invalid={invalid("budget")}>
-                <select
-                  ref={(node) => register("budget", node)}
-                  value={enquiry.budget}
-                  onChange={update("budget")}
-                  className={`${inputClass} cursor-pointer appearance-none pr-7 ${
-                    enquiry.budget ? "" : "text-slate/45"
-                  }`}
-                >
-                  <option value="">Pick a range</option>
-                  {BUDGETS.map((budget) => (
-                    <option key={budget} value={budget} className="text-ink">
-                      {budget}
-                    </option>
-                  ))}
-                </select>
-
-                <ChevronDown
-                  aria-hidden
-                  className="pointer-events-none absolute top-1/2 right-0 h-4 w-4 -translate-y-1/2 text-slate"
-                  strokeWidth={1.75}
-                />
-              </Field>
-
-              <Field
-                label="What are you looking to achieve?"
-                invalid={invalid("goal")}
-                className="sm:col-span-2"
-              >
-                <textarea
-                  ref={(node) => register("goal", node)}
-                  value={enquiry.goal}
-                  onChange={update("goal")}
-                  rows={3}
-                  placeholder="A launch, a always-on funnel, a store opening — whatever the goal, tell us in a line or two."
-                  className={`${inputClass} resize-none leading-relaxed`}
-                />
-              </Field>
-            </div>
-
-            <div className="mt-11 flex flex-col gap-6 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
-              <div className="flex flex-row items-center gap-2.5 sm:gap-3">
-                <button
-                  type="submit"
-                  className="group inline-flex shrink-0 items-center justify-center gap-1.5 rounded-full bg-ink px-6 py-3 text-sm font-medium whitespace-nowrap text-paper transition-colors hover:bg-green-dark"
-                >
-                  Get in Touch
-                  <ArrowUpRight
-                    className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    strokeWidth={2}
-                  />
-                </button>
-
-                <HashLink
-                  href="/#how-we-work"
-                  className="inline-flex shrink-0 items-center justify-center rounded-full border border-line-strong px-6 py-3 text-sm font-medium whitespace-nowrap transition-colors hover:bg-mist"
-                >
-                  Book a Call
-                </HashLink>
-              </div>
-
-              <div className="text-[13px] text-slate">
-                {attempted && FIELD_ORDER.some(isMissing) ? (
-                  <span className="text-destructive">
-                    A few fields still need filling in.
-                  </span>
-                ) : (
-                  <a
-                    href="mailto:hello@deckster.live"
-                    className="inline-flex items-center gap-2 transition-colors hover:text-ink"
-                  >
-                    <Mail className="h-4 w-4" strokeWidth={1.75} />
-                    Or just email hello@deckster.live
-                  </a>
-                )}
-              </div>
-            </div>
-          </form>
-        )}
+            <s.icon className="h-5 w-5" strokeWidth={1.5} />
+          </a>
+        ))}
       </div>
     </Section>
   );

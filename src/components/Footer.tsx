@@ -9,7 +9,9 @@ import {
   IconPhone,
 } from "@tabler/icons-react";
 import {
+  ADDRESS_LINE,
   EMAIL_ADDRESS,
+  LEGAL_NAME,
   EMAIL_HREF,
   PHONE_HREF,
   PHONE_NUMBER,
@@ -27,7 +29,7 @@ const columns = [
     heading: "Explore",
     links: [
       { label: "Overview", href: "/#top" },
-      { label: "Case studies", href: "/#case-studies" },
+      { label: "Case studies", href: "/case-studies" },
       { label: "Use cases", href: "/#use-cases" },
       { label: "Why Deckster", href: "/#why-us" },
       { label: "How we do this", href: "/#solutions" },
@@ -57,6 +59,7 @@ const columns = [
     links: [
       { label: "About", href: "/about" },
       { label: "Careers", href: "/careers" },
+      { label: "Contact", href: "/contact" },
       { label: "Start a brief", href: "/#cta" },
       // { label: "Book a 20-min call", href: "/#cta" },
     ],
@@ -191,7 +194,9 @@ export function Footer() {
             style={{ borderColor: "var(--footer-mint-line)" }}
             className="mt-14 flex flex-col gap-3 border-t pt-6 text-[12.5px] text-ink/70 sm:flex-row sm:items-center sm:justify-between"
           >
-            <p>© {new Date().getFullYear()} deckster.live</p>
+            <p>
+              © {new Date().getFullYear()} deckster.live · {LEGAL_NAME}
+            </p>
             <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5">
               {legal.map((l, i) => (
                 <span key={l.label} className="flex items-center gap-2.5">

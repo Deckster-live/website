@@ -20,8 +20,10 @@ import {
   WHATSAPP_HREF,
 } from "@/lib/contact";
 import { submitBrief } from "@/lib/googleSheets";
+import { trackEvent } from "@/lib/analytics";
 
-const GOALS = [
+/** Shared with ContactSectionForm so both forms send the Sheet the same values. */
+export const GOALS = [
   "acquire new customers",
   "launch a product",
   "build the brand",
@@ -31,7 +33,7 @@ const GOALS = [
   "open a new store",
 ] as const;
 
-const BUDGETS = [
+export const BUDGETS = [
   "under ₹5L",
   "₹5L – ₹15L",
   "₹15L – ₹50L",
@@ -327,6 +329,12 @@ export function ContactSection() {
         Email: brief.email,
         Phone: brief.phone,
         AdditionalRequirement: brief.additional,
+      });
+      // GA4 conversion: mark "generate_lead" as a key event in GA4 to count briefs.
+      trackEvent("generate_lead", {
+        form: "brief",
+        page: window.location.pathname,
+        budget: brief.range,
       });
     } finally {
       setSending(false);

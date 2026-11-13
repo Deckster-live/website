@@ -1,4 +1,5 @@
 "use client";
+import { STATS } from "@/lib/stats";
 
 import { useRef } from "react";
 import {
@@ -53,9 +54,9 @@ const reasons: readonly Reason[] = [
     description:
       "Nano voices for authentic reach, macro names for scale — our roster spans every category, price tier and city, so the right creator is never far away.",
     stats: [
-      { value: "60K+", label: "Creators" },
-      { value: "15+", label: "Languages" },
-      { value: "10+", label: "Categories" },
+      { value: STATS.creatorNetwork, label: "Creators" },
+      { value: STATS.languages, label: "Languages" },
+      { value: STATS.categories, label: "Categories" },
     ],
     bg: "var(--green-darkest)",
     fg: "var(--paper)",
@@ -111,7 +112,7 @@ const reasons: readonly Reason[] = [
     badge: "Track record",
     title: "A track record that speaks",
     description:
-      "50+ brands trusted us to deliver — from fast-growing D2C labels to household names. Most don't just come back once; repeat campaigns now make up the majority of what we run.",
+      `${STATS.brands} brands trusted us to deliver — from fast-growing D2C labels to household names. Most don't just come back once; repeat campaigns now make up the majority of what we run.`,
     bg: "var(--green-peacock)",
     fg: "var(--paper)",
     accent: "var(--ink)",

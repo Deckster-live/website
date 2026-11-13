@@ -1,10 +1,11 @@
 import { HEAD_GAP, Section } from "@/components/ui/primitives";
+import { STATS } from "@/lib/stats";
 
 const stats = [
-  { value: "150+", label: "Brands" },
-  { value: "1,000+", label: "Campaigns" },
-  { value: "60,000+", label: "Creators" },
-  { value: "15+", label: "Languages" },
+  { value: STATS.brands, label: "Brands" },
+  { value: STATS.campaigns, label: "Campaigns" },
+  { value: STATS.creatorNetwork, label: "Creators in our network" },
+  { value: STATS.languages, label: "Languages" },
 ] as const;
 
 export function AboutImpact() {

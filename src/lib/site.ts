@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { EMAIL_HREF, PHONE_HREF } from "@/lib/contact";
+import { ADDRESS, EMAIL_HREF, LEGAL_NAME, PHONE_HREF } from "@/lib/contact";
 
 /** Canonical origin — every canonical URL, OG URL and sitemap entry hangs off this. */
 export const SITE_URL = "https://deckster.live";
@@ -153,20 +153,21 @@ export const organizationJsonLd = {
   description: SITE_DESCRIPTION,
   email: EMAIL_HREF.replace("mailto:", ""),
   telephone: PHONE_HREF.replace("tel:", ""),
-  // Registered office, as published in the privacy policy and terms.
+  // Registered office, as published in the footer, privacy policy and terms.
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Rudrapur",
-    addressRegion: "Uttarakhand",
-    postalCode: "263153",
-    addressCountry: "IN",
+    streetAddress: ADDRESS.street,
+    addressLocality: ADDRESS.locality,
+    addressRegion: ADDRESS.region,
+    postalCode: ADDRESS.postalCode,
+    addressCountry: ADDRESS.country,
   },
   areaServed: "IN",
   foundingDate: "2020",
   founder: founderJsonLd,
   parentOrganization: {
     "@type": "Organization",
-    name: "Talk Native Marketing Private Limited",
+    name: LEGAL_NAME,
   },
   sameAs: SOCIAL_PROFILES,
 };

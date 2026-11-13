@@ -1,17 +1,8 @@
-import Image from "next/image";
-
 export function AboutHero() {
   return (
     <section id="top" className="relative isolate overflow-hidden">
       <div aria-hidden className="absolute inset-0 -z-10">
-        <Image
-          src="/images/green-bg.webp"
-          alt=""
-          fill
-          preload
-          sizes="100vw"
-          className="object-cover"
-        />
+        <div className="absolute inset-0 bg-[url(/images/green-bg.webp)] bg-cover bg-center" />
         <div className="absolute inset-0 bg-paper/45" />
         <div className="absolute inset-x-0 bottom-0 h-2/5 bg-linear-to-b from-transparent to-paper" />
       </div>

@@ -271,7 +271,7 @@ export function Hero() {
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute top-[-18%] left-1/2 h-180 w-500 -translate-x-1/2 rounded-full opacity-70"
+        className="pointer-events-none absolute -top-40 left-1/2 h-180 w-500 -translate-x-1/2 rounded-full opacity-70"
         style={{ background: "var(--glow-signal)", filter: "blur(20px)" }}
       />
       <div className="relative mx-auto max-w-500">
@@ -279,7 +279,7 @@ export function Hero() {
           <h1 className="animate-rise-lcp mt-16 text-[clamp(2rem,7vw,4rem)] leading-none font-bold">
             Reach your customers through creators they already trust.
           </h1>
-          <p className="animate-rise mx-auto mt-4 max-w-2xl text-[15px] leading-normal text-slate md:text-[17px]">
+          <p className="animate-rise-lcp mx-auto mt-4 max-w-2xl text-[15px] leading-normal text-slate md:text-[17px]">
             Deckster is the place where brands find the right voices — matched
             by data, not guesswork — where every campaign is planned, executed,
             tracked under one roof. We bring it all together, from the first

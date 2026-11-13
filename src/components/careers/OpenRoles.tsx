@@ -9,7 +9,7 @@ interface OpenRolesProps {
   eyebrow?: string;
   title?: string;
   copy?: string;
-  /** "h1" when the list is the page itself (/careers/openings). */
+  /** "h1" when the list is the page itself. */
   headingAs?: "h1" | "h2";
 }
 
@@ -84,7 +84,7 @@ export function OpenRoles({
       {hasMore && (
         <div className="mt-8 text-center">
           <Link
-            href="/careers/openings"
+            href="/careers#openings"
             className="group inline-flex items-center gap-1.5 text-sm font-medium text-ink"
           >
             <span className="relative">

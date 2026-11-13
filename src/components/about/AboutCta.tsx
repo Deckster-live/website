@@ -17,7 +17,7 @@ export function AboutCta() {
         </p>
         <div className="mt-9 flex flex-row items-center justify-center gap-2.5 sm:gap-3">
           <Link
-            href="/#cta"
+            href="/contact"
             className="inline-flex w-auto shrink-0 items-center justify-center gap-1.5 rounded-full bg-paper px-4 py-3 text-sm font-medium whitespace-nowrap text-ink transition-opacity hover:opacity-85 sm:px-6"
           >
             Start a brief

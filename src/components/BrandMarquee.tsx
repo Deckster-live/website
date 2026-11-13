@@ -2,19 +2,22 @@ import Image from "next/image";
 import { brands, type Brand } from "@/components/brands";
 
 
-function Tile({ brand }: { brand: Brand }) {
+function Tile({ brand, hidden }: { brand: Brand; hidden?: boolean }) {
   return (
-    <span className="flex h-20 w-44 shrink-0 items-center justify-center rounded-xl px-6 py-5 md:h-24 md:w-52 md:px-7 md:py-6">
+    <span
+      aria-hidden={hidden || undefined}
+      className="flex h-20 w-44 shrink-0 items-center justify-center rounded-xl px-6 py-5 md:h-24 md:w-52 md:px-7 md:py-6"
+    >
       <span
         className="relative block h-full w-full"
         style={brand.scale ? { transform: `scale(${brand.scale})` } : undefined}
       >
         <Image
           src={brand.src}
-          alt={brand.name}
+          alt={hidden ? "" : brand.name}
           fill
           sizes="208px"
-          loading="eager"
+          loading="lazy"
           className={`object-contain object-center${brand.invert ? " invert" : ""}`}
         />
       </span>
@@ -30,7 +33,11 @@ function Row({ items, reverse }: { items: Brand[]; reverse?: boolean }) {
         className={`flex w-max gap-4 md:gap-6 ${reverse ? "animate-marquee-reverse" : "animate-marquee"}`}
       >
         {doubled.map((brand, i) => (
-          <Tile key={`${brand.name}-${i}`} brand={brand} />
+          <Tile
+            key={`${brand.name}-${i}`}
+            brand={brand}
+            hidden={i >= items.length}
+          />
         ))}
       </div>
     </div>

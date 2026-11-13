@@ -23,7 +23,7 @@ export function CareerHero() {
       </div>
       <div className="animate-rise mx-auto max-w-4xl text-center">
         <h1 className="font-display mt-6 text-[clamp(2.1rem,6vw,3.85rem)] leading-[1.06] font-semibold">
-          Help brands grow, on a team that&rsquo;s growing too
+          Careers at Deckster: help brands grow through creators
         </h1>
 
         <p className="mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-slate md:text-lg">

@@ -71,7 +71,7 @@ export default async function ApplyPage({
               </p>
               <div className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
                 <Link
-                  href="/careers/openings"
+                  href="/careers#openings"
                   className="text-sm font-medium text-ink underline decoration-line-strong underline-offset-4 hover:decoration-signal"
                 >
                   See all openings

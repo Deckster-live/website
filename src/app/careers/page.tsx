@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/site";
+import { jsonLd, pageMetadata, SITE_URL } from "@/lib/site";
 import { ArrowUpRight } from "lucide-react";
 import { CareerHero } from "@/components/careers/CareerHero";
 import { WhyWorkWithUs } from "@/components/careers/WhyWorkWithUs";
@@ -7,18 +7,30 @@ import { OpenRoles } from "@/components/careers/OpenRoles";
 import { Section } from "@/components/ui/primitives";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Careers",
+  title: "Careers at Deckster: Remote Influencer Marketing Jobs in India",
   description:
-    "Open roles at Deckster — join a small, fast-moving team building the way brands run creator marketing.",
+    "Remote influencer marketing and business development jobs at Deckster. See every open role, read the full job description and apply directly.",
   path: "/careers",
 });
 
 export default function CareersPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+            { "@type": "ListItem", position: 2, name: "Careers", item: `${SITE_URL}/careers` },
+          ],
+        })}
+      />
       <CareerHero />
       <WhyWorkWithUs />
-      <OpenRoles limit={3} />
+      {/* Every open role lives here; /careers/openings now redirects to this list. */}
+      <OpenRoles />
 
       <Section className="pt-0! pb-24! md:pb-32!">
         <div className="glow-field relative overflow-hidden rounded-4xl bg-ink px-5 py-16 text-center sm:px-10 md:py-24">

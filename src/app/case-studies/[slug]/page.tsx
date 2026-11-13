@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { jsonLd, pageMetadata, SITE_URL } from "@/lib/site";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -59,7 +58,9 @@ export default async function CaseStudyPage({
       headline: `${study.brand}: ${study.usp_metric} ${study.usp}`,
       description: study.description,
       url,
-      image: `${SITE_URL}${study.brand_logo}`,
+      // A campaign still: logos are too small for article rich results.
+      image: `${SITE_URL}${study.reels[0]?.cover ?? study.brand_logo}`,
+      ...(study.published && { datePublished: study.published }),
       mainEntityOfPage: url,
       // The client brand the campaign was for.
       about: { "@type": "Brand", name: study.brand },
@@ -71,7 +72,8 @@ export default async function CaseStudyPage({
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-        { "@type": "ListItem", position: 2, name: `${study.brand} Case Study`, item: url },
+        { "@type": "ListItem", position: 2, name: "Case Studies", item: `${SITE_URL}/case-studies` },
+        { "@type": "ListItem", position: 3, name: `${study.brand} Case Study`, item: url },
       ],
     },
   ];
@@ -84,14 +86,8 @@ export default async function CaseStudyPage({
       />
       <section className="relative isolate overflow-hidden px-5 pt-32 pb-14 md:px-8 md:pt-42 md:pb-16">
         <div aria-hidden className="absolute inset-0 -z-10">
-          <Image
-            src="/images/wave-bg.webp"
-            alt=""
-            fill
-            preload
-            sizes="100vw"
-            className="object-cover"
-          />
+          {/* CSS background, so the headline (not this picture) is the LCP element. */}
+          <div className="absolute inset-0 bg-[url(/images/wave-bg.webp)] bg-cover bg-center" />
           <div className="absolute inset-0 bg-paper/65" />
           <div className="absolute inset-x-0 bottom-0 h-2/5 bg-linear-to-b from-transparent to-paper" />
         </div>
@@ -117,6 +113,7 @@ export default async function CaseStudyPage({
           />
 
           <h1 className="font-display mt-6 text-[clamp(1.75rem,5vw,2.75rem)] leading-[1.1] font-semibold">
+            {study.brand}:{" "}
             <span className="text-green-dark">{study.usp_metric}</span>{" "}
             {study.usp}
           </h1>
@@ -171,6 +168,12 @@ export default async function CaseStudyPage({
                   </li>
                 ))}
             </ul>
+            <Link
+              href="/case-studies"
+              className="mt-5 inline-block text-[15px] font-medium text-green-dark hover:text-ink"
+            >
+              See all case studies →
+            </Link>
           </nav>
         </div>
       </div>

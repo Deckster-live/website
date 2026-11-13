@@ -9,7 +9,7 @@ import Link from "next/link";
 const links = [
   { label: "Use cases", href: "/#use-cases" },
   { label: "How we work", href: "/#solutions" },
-  { label: "Case Studies", href: "/#case-studies" },
+  { label: "Case Studies", href: "/case-studies" },
   { label: "About", href: "/about" },
   // { label: "Careers", href: "/careers" },
 ] as const;

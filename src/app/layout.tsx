@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Libre_Baskerville, Space_Grotesk, Syne } from "next/font/google";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import Script from "next/script";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -13,6 +13,8 @@ import {
   SITE_URL,
   websiteJsonLd,
 } from "@/lib/site";
+
+const GA_ID = "G-84J1HKB8X9";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -73,7 +75,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main className="flex flex-1 flex-col">{children}</main>
         <Footer />
       </body>
-      <GoogleAnalytics gaId="G-84J1HKB8X9" />
+      {/* Google Analytics: the tiny gtag queue is set up straight away so no
+          event is lost; the ~180 KB library loads only once the browser is idle. */}
+      <Script id="ga-init" strategy="afterInteractive">
+        {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config','${GA_ID}');`}
+      </Script>
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+        strategy="lazyOnload"
+      />
     </html>
   );
 }
