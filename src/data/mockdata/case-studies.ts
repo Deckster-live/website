@@ -479,8 +479,8 @@ export const caseStudies: CaseStudy[] = [
     platforms: ["Instagram"],
     reels: [
       {
-        cover: "/images/case_studies/swisse/reel1.webp",
-        link: "https://www.instagram.com/reel/DUDhNirjyh7/",
+        cover: "/images/case_studies/swisse/reel9.webp",
+        link: "https://www.instagram.com/reel/DVL5Oj4kdEF/",
       },
       {
         cover: "/images/case_studies/swisse/reel2.webp",
