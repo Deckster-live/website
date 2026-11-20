@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion, type Transition } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion, type Transition } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { HEAD_GAP, SECTION_Y, SectionHead } from "@/components/ui/primitives";
 import {
@@ -185,25 +185,16 @@ export function CaseStudies() {
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState(1);
   const [paused, setPaused] = useState(false);
-  const [reducedMotion, setReducedMotion] = useState(false);
-  const [runId, setRunId] = useState(0);
+  // The visitor's "reduce motion" setting, kept up to date by framer-motion.
+  const reducedMotion = useReducedMotion() ?? false;
 
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined);
   const remainingRef = useRef(ROTATE_MS);
   const startedAtRef = useRef(0);
 
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
-
   // A tab change (auto-advance or manual click) always gives a fresh 5s window.
   useEffect(() => {
     remainingRef.current = ROTATE_MS;
-    setRunId((r) => r + 1);
   }, [active]);
 
   // Hover/focus pause preserves the remaining time instead of resetting it.
