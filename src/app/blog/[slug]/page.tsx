@@ -89,40 +89,25 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
       <article className="px-5 pt-30 pb-20 md:px-8 md:pt-38 md:pb-28">
         <div className="mx-auto max-w-310">
-          {/* --- Header: back link, category, title, subtitle, byline --- */}
-          <header className="mx-auto max-w-4xl text-center">
-            <Link
-              href="/blog"
-              className="inline-flex items-center gap-1.5 text-[14px] font-medium text-slate transition-colors hover:text-ink"
-            >
-              <ArrowLeft className="h-4 w-4" strokeWidth={2} />
-              All Blog Posts
-            </Link>
-            {post.category && <p className="eyebrow mt-8 text-green-dark!">{post.category.title}</p>}
+          {/* --- Back link (left), then the centred header: category, title, subtitle --- */}
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-1.5 text-[14px] font-medium text-slate transition-colors hover:text-ink"
+          >
+            <ArrowLeft className="h-4 w-4" strokeWidth={2} />
+            All Blog Posts
+          </Link>
+          <header className="mx-auto mt-8 max-w-6xl text-center">
+            {post.category && <p className="eyebrow text-green-dark!">{post.category.title}</p>}
             <h1 className="font-display mt-4 text-[clamp(2rem,5.2vw,3.4rem)] leading-[1.08] font-semibold text-ink">
               {post.title}
             </h1>
             {post.subtitle && (
-              <p className="mx-auto mt-5 max-w-2xl text-[16px] leading-relaxed text-slate md:text-lg">
+              <p className="mx-auto mt-5 max-w-3xl text-[16px] leading-relaxed text-slate md:text-lg">
                 {post.subtitle}
               </p>
             )}
           </header>
-
-          <div className="mx-auto mt-10 flex max-w-310 flex-wrap items-center justify-between gap-4 border-t border-line pt-6">
-            <div className="flex items-center gap-3">
-              <AuthorAvatar author={post.author} size={44} />
-              <div className="text-left">
-                <p className="text-[15px] font-medium text-ink">{post.author.name}</p>
-                {post.author.role && <p className="text-[13.5px] text-slate">{post.author.role}</p>}
-              </div>
-            </div>
-            <p className="text-[14px] text-slate">
-              <time dateTime={post.published}>{formatDate(post.published)}</time>
-              <span aria-hidden className="mx-2 text-line-strong">|</span>
-              {post.reading_minutes} min read
-            </p>
-          </div>
 
           {/* --- Cover: the CMS's 1600x700 hero size, the page's main image --- */}
           {/* eslint-disable-next-line @next/next/no-img-element -- static export: already sized by the CMS */}
@@ -132,8 +117,27 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             width={1600}
             height={700}
             fetchPriority="high"
-            className="mt-6 aspect-16/7 w-full rounded-[1.75rem] object-cover"
+            className="mt-10 aspect-16/7 w-full rounded-[1.75rem] object-cover"
           />
+
+          {/* --- Byline under the cover: one compact line --- */}
+          <div className="mt-5 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 text-[13.5px] text-slate">
+            <div className="flex items-center gap-2.5">
+              <AuthorAvatar author={post.author} size={32} />
+              <span className="font-medium text-ink">{post.author.name}</span>
+              {post.author.role && (
+                <>
+                  <span aria-hidden className="text-line-strong">|</span>
+                  <span>{post.author.role}</span>
+                </>
+              )}
+            </div>
+            <p>
+              <time dateTime={post.published}>{formatDate(post.published)}</time>
+              <span aria-hidden className="mx-2 text-line-strong">|</span>
+              {post.reading_minutes} min read
+            </p>
+          </div>
 
           {/* --- Body (8 columns) and the corner that stays in view (4 columns) --- */}
           <div className="mt-12 grid gap-12 lg:mt-16 lg:grid-cols-12 lg:gap-16">
@@ -160,7 +164,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             {/* On phones this sits under the body. */}
             <aside className="lg:col-span-4">
               <div className="space-y-8 lg:sticky lg:top-28">
-                {toc.length > 0 && <TableOfContents items={toc} />}
+                {/* Desktop only: on phones the corner sits under the body, where a contents list is no use. */}
+                {toc.length > 0 && (
+                  <div className="hidden lg:block">
+                    <TableOfContents items={toc} />
+                  </div>
+                )}
                 <ShareButtons url={url} title={post.title} />
 
                 {/* Fixed promo, the same on every post. */}
