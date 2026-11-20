@@ -81,9 +81,10 @@ export function CaseStudyOverview({ overview }: { overview: string }) {
   return (
     <section>
       <SectionHeading icon={Compass}>Overview</SectionHeading>
-      <p className="mt-4 border-l-2 border-signal pl-5 text-[15.5px] leading-relaxed text-ink md:text-[17px]">
-        {overview}
-      </p>
+      <p
+        className="case-point mt-4 border-l-2 border-signal pl-5 text-[15.5px] leading-relaxed text-ink md:text-[17px]"
+        dangerouslySetInnerHTML={{ __html: overview }}
+      />
     </section>
   );
 }

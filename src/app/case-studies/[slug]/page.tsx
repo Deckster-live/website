@@ -31,10 +31,12 @@ export async function generateMetadata({
   const study = getCaseStudyBySlug(slug);
   if (!study) return {};
 
+  // The SEO tab in the CMS wins; otherwise lead with the headline number so the snippet shows the result.
   return pageMetadata({
-    title: `${study.brand} Influencer Marketing Case Study`,
-    // Lead with the headline number so the snippet shows the result.
-    description: `${study.usp_metric} ${study.usp}. ${study.description}`,
+    title: study.meta_title ?? `${study.brand} Influencer Marketing Case Study`,
+    description:
+      study.meta_description ??
+      `${study.usp_metric} ${study.usp}. ${study.description}`,
     path: `/case-studies/${study.slug}`,
     type: "article",
   });
@@ -61,10 +63,19 @@ export default async function CaseStudyPage({
       // A campaign still: logos are too small for article rich results.
       image: `${SITE_URL}${study.reels[0]?.cover ?? study.brand_logo}`,
       ...(study.published && { datePublished: study.published }),
+      ...(study.modified && { dateModified: study.modified }),
       mainEntityOfPage: url,
       // The client brand the campaign was for.
       about: { "@type": "Brand", name: study.brand },
-      author: { "@id": `${SITE_URL}/#organization` },
+      // The campaign leads named in the CMS, or Deckster itself when none is set.
+      author: study.leads.length
+        ? study.leads.map((lead) => ({
+            "@type": "Person",
+            name: lead.name,
+            ...(lead.role && { jobTitle: lead.role }),
+            worksFor: { "@id": `${SITE_URL}/#organization` },
+          }))
+        : { "@id": `${SITE_URL}/#organization` },
       publisher: { "@id": `${SITE_URL}/#organization` },
     },
     {

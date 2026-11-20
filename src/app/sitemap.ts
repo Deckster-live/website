@@ -17,9 +17,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/about", 0.7, "monthly"),
     page("/contact", 0.7, "monthly"),
     page("/case-studies", 0.8, "weekly"),
-    ...caseStudies.map((study) =>
-      page(`/case-studies/${study.slug}`, 0.8, "monthly"),
-    ),
+    ...caseStudies.map((study) => ({
+      ...page(`/case-studies/${study.slug}`, 0.8, "monthly"),
+      ...(study.modified && { lastModified: study.modified }),
+    })),
     page("/careers", 0.6, "weekly"),
     // Apply pages are noindex, so only the JD pages are listed.
     ...getOpenRoles().map((role) => ({

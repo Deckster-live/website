@@ -13,6 +13,9 @@ import {
 
 const ROTATE_MS = 5000;
 
+/** The carousel shows the studies ticked "Show on homepage" in the CMS, in their homepage order. */
+const homepageStudies = caseStudies.filter((c) => c.show_on_homepage);
+
 const pillSpring: Transition = { type: "spring", stiffness: 380, damping: 30 };
 const cardSpring: Transition = {
   type: "spring",
@@ -222,7 +225,7 @@ export function CaseStudies() {
     startedAtRef.current = Date.now();
     timeoutRef.current = setTimeout(() => {
       setDirection(1);
-      setActive((i) => (i + 1) % caseStudies.length);
+      setActive((i) => (i + 1) % homepageStudies.length);
     }, remainingRef.current);
 
     return () => {
@@ -230,8 +233,8 @@ export function CaseStudies() {
     };
   }, [active, paused, reducedMotion]);
 
-  const study = caseStudies[active];
-  const tabCount = caseStudies.length;
+  const study = homepageStudies[active];
+  const tabCount = homepageStudies.length;
 
   const handleFocusOut = (e: React.FocusEvent<HTMLDivElement>) => {
     if (!e.currentTarget.contains(e.relatedTarget as Node)) {
@@ -269,7 +272,7 @@ export function CaseStudies() {
           {/* Tabs */}
           <div className="shrink-0 rounded-2xl border border-line bg-mist/60 p-1.5 sm:rounded-full">
             <div className="flex items-stretch gap-1">
-              {caseStudies.map((c, i) => {
+              {homepageStudies.map((c, i) => {
                 const isActive = i === active;
                 return (
                   <motion.button

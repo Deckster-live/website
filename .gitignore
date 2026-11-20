@@ -20,6 +20,10 @@
 # production
 /build
 
+# content pulled from the CMS by scripts/fetch-content.mjs before each build
+/src/data/generated/
+/public/media/
+
 # misc
 .DS_Store
 *.pem
