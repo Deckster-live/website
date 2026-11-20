@@ -14,7 +14,12 @@ const links = [
   // { label: "Careers", href: "/careers" },
 ] as const;
 
-export function Navbar() {
+/** `hasBlog`: show the Blog link (only once a post is published). Passed from the layout so the posts
+ * themselves stay out of this client component's bundle. */
+export function Navbar({ hasBlog }: { hasBlog: boolean }) {
+  const items = hasBlog
+    ? [...links.slice(0, 3), { label: "Blog", href: "/blog" }, ...links.slice(3)]
+    : links;
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -66,7 +71,7 @@ export function Navbar() {
           className="hidden items-center gap-6 lg:flex xl:gap-8"
           aria-label="Main navigation"
         >
-          {links.map(({ label, href }) => (
+          {items.map(({ label, href }) => (
             <HashLink
               key={href}
               href={href}
@@ -112,7 +117,7 @@ export function Navbar() {
             className="mx-auto flex max-w-6xl flex-col px-4 py-2 sm:px-5 md:px-8"
             aria-label="Mobile navigation"
           >
-            {links.map(({ label, href }) => (
+            {items.map(({ label, href }) => (
               <HashLink
                 key={href}
                 href={href}

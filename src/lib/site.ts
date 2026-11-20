@@ -29,6 +29,8 @@ interface PageMetaInput {
   path: string;
   type?: "website" | "article";
   noindex?: boolean;
+  /** Link-preview image for this page (a blog post's cover); defaults to the site's share image. */
+  image?: typeof SHARE_IMAGE;
 }
 
 /**
@@ -43,6 +45,7 @@ export function pageMetadata({
   path,
   type = "website",
   noindex,
+  image = SHARE_IMAGE,
 }: PageMetaInput): Metadata {
   const fullTitle = `${title} · ${SITE_NAME}`;
   return {
@@ -56,13 +59,13 @@ export function pageMetadata({
       url: path,
       title: fullTitle,
       description,
-      images: [SHARE_IMAGE],
+      images: [image],
     },
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
       description,
-      images: [SHARE_IMAGE.url],
+      images: [image.url],
     },
     ...(noindex && { robots: { index: false, follow: true } }),
   };

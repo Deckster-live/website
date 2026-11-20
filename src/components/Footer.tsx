@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { posts } from "@/data/blog";
 import { HashLink } from "@/components/ui/HashLink";
 import {
   IconBrandInstagram,
@@ -30,6 +31,7 @@ const columns = [
     links: [
       { label: "Overview", href: "/#top" },
       { label: "Case studies", href: "/case-studies" },
+      ...(posts.length ? [{ label: "Blog", href: "/blog" }] : []), // once a post exists
       { label: "Use cases", href: "/#use-cases" },
       { label: "Why Deckster", href: "/#why-us" },
       { label: "How we do this", href: "/#solutions" },

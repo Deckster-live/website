@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { posts } from "@/data/blog";
 import { caseStudies } from "@/data/mockdata/case-studies";
 import { getOpenRoles } from "@/data/mockdata/careers";
 import { SITE_URL } from "@/lib/site";
@@ -20,6 +21,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...caseStudies.map((study) => ({
       ...page(`/case-studies/${study.slug}`, 0.8, "monthly"),
       ...(study.modified && { lastModified: study.modified }),
+    })),
+    // The blog is listed once it has a post.
+    ...(posts.length ? [page("/blog", 0.8, "weekly")] : []),
+    ...posts.map((post) => ({
+      ...page(`/blog/${post.slug}`, 0.7, "monthly"),
+      lastModified: post.modified,
     })),
     page("/careers", 0.6, "weekly"),
     // Apply pages are noindex, so only the JD pages are listed.

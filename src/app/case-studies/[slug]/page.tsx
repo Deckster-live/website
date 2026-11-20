@@ -51,7 +51,7 @@ export default async function CaseStudyPage({
   const study = getCaseStudyBySlug(slug);
   if (!study) notFound();
 
-  const theme = THEMES[study.theme];
+  const theme = THEMES[study.theme ?? "ink"]; // studies off the homepage may have no theme
   const url = `${SITE_URL}/case-studies/${study.slug}`;
   const structuredData = [
     {

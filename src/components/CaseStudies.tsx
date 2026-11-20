@@ -37,7 +37,7 @@ const cardVariants = {
 };
 
 function CardPanel({ study }: { study: CaseStudy }) {
-  const theme = THEMES[study.theme];
+  const theme = THEMES[study.theme ?? "ink"]; // the CMS requires one for homepage studies
 
   return (
     <div

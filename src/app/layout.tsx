@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { posts } from "@/data/blog";
 import {
   jsonLd,
   organizationJsonLd,
@@ -71,7 +72,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           type="application/ld+json"
           dangerouslySetInnerHTML={jsonLd([organizationJsonLd, websiteJsonLd])}
         />
-        <Navbar />
+        <Navbar hasBlog={posts.length > 0} />
         <main className="flex flex-1 flex-col">{children}</main>
         <Footer />
       </body>

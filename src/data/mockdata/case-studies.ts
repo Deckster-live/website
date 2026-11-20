@@ -136,7 +136,8 @@ export interface CaseStudy {
   /** Every creative from the campaign. The homepage card shows the first
    * two; the case study's own page shows them all. */
   reels: CaseStudyReel[];
-  theme: ThemeName;
+  /** Colour of the homepage carousel card; set in the CMS only for studies shown there. */
+  theme?: ThemeName;
 
   // --- Fixed sections for the case study's own page ---
   /** One or two sentences framing the brief. Inline HTML like the points. */

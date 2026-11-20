@@ -459,6 +459,174 @@ body {
   }
 }
 
+/* Blog post body (HTML from the CMS, see scripts/fetch-content.mjs). Built from the site's own tokens, since
+   the project has no typography plugin. */
+@utility prose-deckster {
+  color: color-mix(in oklab, var(--ink) 85%, transparent);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+
+  & > * + * {
+    margin-top: 1.25rem;
+  }
+
+  & h2,
+  & h3,
+  & h4 {
+    font-family: var(--font-display);
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.2;
+    scroll-margin-top: 7rem; /* clear the fixed navbar when jumping from the table of contents */
+  }
+
+  & h2 {
+    font-size: 1.75rem;
+    margin-top: 3rem;
+  }
+
+  & h3 {
+    font-size: 1.3rem;
+    margin-top: 2.25rem;
+  }
+
+  & h4 {
+    font-size: 1.1rem;
+    margin-top: 1.75rem;
+  }
+
+  & > :first-child {
+    margin-top: 0;
+  }
+
+  & strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  & a {
+    color: var(--green-dark);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: color-mix(in oklab, var(--green-dark) 40%, transparent);
+  }
+
+  & a:hover {
+    text-decoration-color: var(--green-dark);
+  }
+
+  & code {
+    font-size: 0.9em;
+    background: var(--mist);
+    border-radius: 0.3rem;
+    padding: 0.1em 0.35em;
+  }
+
+  & ul,
+  & ol {
+    padding-left: 1.4rem;
+  }
+
+  & ul {
+    list-style: disc;
+  }
+
+  & ol {
+    list-style: decimal;
+  }
+
+  & li + li,
+  & li > ul,
+  & li > ol {
+    margin-top: 0.5rem;
+  }
+
+  & li::marker {
+    color: var(--green-dark);
+  }
+
+  /* Lexical puts a nested list in its own item: hide that item's bullet. */
+  & li:has(> ul:only-child),
+  & li:has(> ol:only-child) {
+    list-style: none;
+  }
+
+  & ul.checklist {
+    list-style: none;
+    padding-left: 0.25rem;
+  }
+
+  & ul.checklist > li::before {
+    content: "☐";
+    margin-right: 0.6rem;
+    color: var(--slate);
+  }
+
+  & ul.checklist > li[data-checked="true"]::before {
+    content: "☑";
+    color: var(--green-dark);
+  }
+
+  & blockquote {
+    border-left: 3px solid var(--signal);
+    padding: 0.25rem 0 0.25rem 1.25rem;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  & hr {
+    border: 0;
+    border-top: 1px solid var(--line-strong);
+    margin: 2.5rem 0;
+  }
+
+  & figure img {
+    width: 100%;
+    height: auto;
+    border-radius: 1.25rem;
+  }
+
+  /* Wide tables scroll sideways inside the column instead of the page. */
+  & .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+  }
+
+  & table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  & th,
+  & td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--line);
+  }
+
+  & tr:last-child > * {
+    border-bottom: 0;
+  }
+
+  & th {
+    color: var(--ink);
+    font-weight: 600;
+    background: var(--mist);
+  }
+
+  /* Cells hold paragraphs; no extra space inside them. */
+  & th p,
+  & td p {
+    margin: 0;
+  }
+}
+
 /* Case study bullets — the phrase or number carrying the point is marked up
    with <strong> and highlighted in green rather than just bolded. */
 @utility case-point {

@@ -1,3 +1,4 @@
+import { posts } from "@/data/blog";
 import { caseStudies } from "@/data/mockdata/case-studies";
 import { SITE_URL } from "@/lib/site";
 
@@ -9,6 +10,10 @@ export function GET() {
   const studies = caseStudies
     .map((study) => `- [${study.brand}](${SITE_URL}/case-studies/${study.slug})`)
     .join("\n");
+  // Listed once the blog has a post.
+  const blog = posts.length
+    ? `\n## Blog\n\n- [All posts](${SITE_URL}/blog)\n${posts.map((p) => `- [${p.title}](${SITE_URL}/blog/${p.slug})`).join("\n")}\n`
+    : "";
 
   const body = `# Deckster
 
@@ -25,7 +30,7 @@ export function GET() {
 
 - [All case studies](${SITE_URL}/case-studies)
 ${studies}
-
+${blog}
 ## Contact
 
 - Email: hello@deckster.live
